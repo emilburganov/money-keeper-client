@@ -1,11 +1,12 @@
+import Button from "@/components/UI/Button/Button";
+import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container";
 import {Context} from "@/main";
-import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 import {
     Box,
-    Button,
     Flex,
     FormControl,
+    FormErrorMessage,
     FormLabel,
     Heading,
     Input,
@@ -15,24 +16,60 @@ import {
     Stack,
     useColorModeValue,
 } from "@chakra-ui/react";
+import {yupResolver} from "@hookform/resolvers/yup";
 import {FC, useContext, useState} from "react";
+import {useForm} from "react-hook-form";
 import {Link as RouterLink} from "react-router-dom";
+import * as Yup from "yup";
+
+type RegisterForm = {
+    name: string;
+    email: string;
+    password: string;
+    passwordConfirmation: string;
+};
 
 const Register: FC = () => {
+    const validationSchema = Yup.object().shape({
+        name: Yup.string()
+            .required("The name field is required.")
+            .min(3, "The name field must be at least 8 characters.")
+            .max(60, "The name field must not be greater than 100 characters."),
+        email: Yup.string()
+            .required("The email field is required.")
+            .email("The email field must be a valid email address."),
+        password: Yup.string()
+            .required("The password field is required.")
+            .min(8, "The password field must be at least 8 characters.")
+            .max(100, "The password field must not be greater than 100 characters."),
+        passwordConfirmation: Yup.string()
+            .required("The password confirmation field is required.")
+            .oneOf([Yup.ref("password"), null], "The password confirmation field must match password."),
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm<RegisterForm>({
+        resolver: yupResolver(validationSchema),
+    });
+
     const {store} = useContext(Context);
-    const [showPassword, setShowPassword] = useState(false);
-    const [showPasswordConfirmation, setShowPasswordConfirmation] = useState(false);
-    const [credentials, setCredentials] = useState({
+    const [isLoading, setLoading] = useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false);
+    const [credentials, setCredentials] = useState<RegisterForm>({
         name: "",
         email: "",
         password: "",
         passwordConfirmation: "",
     });
 
-    const register = async (event) => {
-        event.preventDefault();
-
+    const onSubmit = async (): Promise<void> => {
+        setLoading(true);
         await store.register(credentials);
+        setLoading(false);
     };
 
     return (
@@ -52,103 +89,114 @@ const Register: FC = () => {
                     </Heading>
                 </Stack>
                 <Box
+                    onSubmit={handleSubmit(onSubmit)}
+                    as={"form"}
                     rounded={"lg"}
                     bg={useColorModeValue("white", "gray.700")}
                     boxShadow={"lg"}
                     p={8}
                 >
                     <Stack spacing={4}>
-
-                        <FormControl id="name" isRequired>
+                        <FormControl isInvalid={!!errors.name?.message}>
                             <FormLabel>Name</FormLabel>
                             <Input
+                                {...register("name")}
                                 value={credentials.name}
                                 onChange={(event) =>
                                     setCredentials({...credentials, name: event.target.value})}
                                 type="text"
+                                focusBorderColor={"green.400"}
                             />
+                            {errors.name &&
+                                <FormErrorMessage>
+                                    {errors.name?.message}
+                                </FormErrorMessage>
+                            }
                         </FormControl>
 
-                        <FormControl id="email" isRequired>
+                        <FormControl isInvalid={!!errors.email?.message}>
                             <FormLabel>E-mail</FormLabel>
                             <Input
+                                {...register("email")}
                                 value={credentials.email}
                                 onChange={(event) =>
                                     setCredentials({...credentials, email: event.target.value})}
-                                type="email"
+                                type="text"
+                                focusBorderColor={"green.400"}
                             />
+                            {errors.email &&
+                                <FormErrorMessage>
+                                    {errors.email?.message}
+                                </FormErrorMessage>
+                            }
                         </FormControl>
 
-                        <FormControl id="password" isRequired>
+                        <FormControl isInvalid={!!errors.password?.message}>
                             <FormLabel>Password</FormLabel>
                             <InputGroup>
                                 <Input
+                                    {...register("password")}
                                     value={credentials.password}
                                     onChange={(event) =>
                                         setCredentials({...credentials, password: event.target.value})}
                                     type={showPassword ? "text" : "password"}
+                                    focusBorderColor={"green.400"}
                                 />
                                 <InputRightElement h={"full"}>
-                                    <Button
-                                        variant={"ghost"}
-                                        onClick={() => setShowPassword((showPassword) => !showPassword)}
-                                    >
-                                        {showPassword ? <ViewIcon/> : <ViewOffIcon/>}
-                                    </Button>
+                                    <HideButton
+                                        show={showPassword}
+                                        setShow={setShowPassword}
+                                    />
                                 </InputRightElement>
                             </InputGroup>
+                            {errors.password &&
+                                <FormErrorMessage>
+                                    {errors.password?.message}
+                                </FormErrorMessage>
+                            }
                         </FormControl>
 
-                        <FormControl id="password_confirmation" isRequired>
+                        <FormControl isInvalid={!!errors.passwordConfirmation?.message}>
                             <FormLabel>Password Confirmation</FormLabel>
                             <InputGroup>
                                 <Input
+                                    {...register("passwordConfirmation")}
                                     value={credentials.passwordConfirmation}
                                     onChange={(event) =>
                                         setCredentials({...credentials, passwordConfirmation: event.target.value})}
                                     type={showPasswordConfirmation ? "text" : "password"}
+                                    focusBorderColor={"green.400"}
                                 />
                                 <InputRightElement h={"full"}>
-                                    <Button
-                                        variant={"ghost"}
-                                        onClick={() =>
-                                            setShowPasswordConfirmation((showPasswordConfirmation) =>
-                                                !showPasswordConfirmation)}
-                                    >
-                                        {showPasswordConfirmation ? <ViewIcon/> : <ViewOffIcon/>}
-                                    </Button>
+                                    <HideButton
+                                        show={showPasswordConfirmation}
+                                        setShow={setShowPasswordConfirmation}
+                                    />
                                 </InputRightElement>
                             </InputGroup>
+                            {errors.passwordConfirmation &&
+                                <FormErrorMessage>
+                                    {errors.passwordConfirmation?.message}
+                                </FormErrorMessage>
+                            }
                         </FormControl>
 
                         <Stack spacing={10} pt={2}>
-                            <Button
-                                onClick={register}
-                                loadingText="Submitting"
-                                size="lg"
-                                bg={"green.400"}
-                                color={"white"}
-                                _hover={{
-                                    bg: "green.500",
-                                }}
-                            >
+                            <Button isLoading={isLoading} type="submit">
                                 Register
                             </Button>
                         </Stack>
 
-                        <Stack pt={6}>
-                            <Flex gap={1} align={"center"}>
-                                Already have an account?
-                                <Link
-                                    as={RouterLink}
-                                    to="/login"
-                                    color={"green.400"}
-                                >
-                                    Login
-                                </Link>
-                            </Flex>
-                        </Stack>
-
+                        <Flex pt={6} gap={1} align={"center"}>
+                            Already have an account?
+                            <Link
+                                as={RouterLink}
+                                to="/login"
+                                color={"green.400"}
+                            >
+                                Login
+                            </Link>
+                        </Flex>
                     </Stack>
                 </Box>
             </Stack>

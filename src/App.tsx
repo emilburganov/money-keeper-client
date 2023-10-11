@@ -1,6 +1,6 @@
-import {FC} from "react";
-import {ChakraProvider} from "@chakra-ui/react";
 import AppRouter from "@/router/AppRouter";
+import {ChakraProvider} from "@chakra-ui/react";
+import {FC} from "react";
 import {BrowserRouter} from "react-router-dom";
 import "./styles/App.css";
 

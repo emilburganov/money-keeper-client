@@ -26,7 +26,6 @@ class RootStore {
     async login(credentials) {
         try {
             const response = await AuthService.login(credentials);
-            console.log(response);
             localStorage.setItem("token", response.data.data.access_token);
             this.setAuth(true);
         } catch (error) {
