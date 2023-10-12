@@ -1,6 +1,6 @@
-import axios from "axios";
 import {API_URL} from "@/constants";
-import {AuthResponse} from "@/models/response/AuthResponse";
+import {AuthResponse} from "@/models/response";
+import axios from "axios";
 
 const $api = axios.create({
     withCredentials: true,
@@ -17,19 +17,17 @@ $api.interceptors.response.use((config) => {
 }, async (error) => {
     const originalRequest = error.config;
 
-    if (error.response.status == 401 && error.config && !error.config._isRetry) {
+    if (error.response.status == 401 && error.config && !error.config._isRetry && localStorage.getItem("token")) {
         originalRequest._isRetry = true;
 
-        try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/refresh`, {
-                withCredentials: true
-            });
-            localStorage.setItem("token", response.data.access_token);
+        const response = await axios.post<AuthResponse>(`${API_URL}/refresh`, {
+            withCredentials: true,
+            token: localStorage.getItem("token"),
+        });
 
-            return $api.request(originalRequest);
-        } catch {
-            console.log("Unauthorized");
-        }
+        localStorage.setItem("token", response.data.data.access_token);
+
+        return $api.request(originalRequest);
     }
 
     throw error;

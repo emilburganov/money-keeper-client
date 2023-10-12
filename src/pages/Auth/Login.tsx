@@ -1,7 +1,8 @@
 import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container";
-import {Context} from "@/main";
+import {useStores} from "@/hooks/useStores";
+
 import {
     Box,
     Flex,
@@ -18,7 +19,7 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {FC, useContext, useState} from "react";
+import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link as RouterLink} from "react-router-dom";
 import * as Yup from "yup";
@@ -44,7 +45,7 @@ const Login: FC = () => {
         resolver: yupResolver(validationSchema),
     });
 
-    const {store} = useContext(Context);
+    const {authStore} = useStores();
     const [isLoading, setLoading] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [credentials, setCredentials] = useState<LoginForm>({
@@ -54,7 +55,7 @@ const Login: FC = () => {
 
     const onSubmit = async (): Promise<void> => {
         setLoading(true);
-        await store.login(credentials);
+        await authStore.login(credentials);
         setLoading(false);
     };
 
@@ -86,8 +87,8 @@ const Login: FC = () => {
                             <Input
                                 {...register("email")}
                                 onChange={(event) =>
-                                    setCredentials({...credentials, password: event.target.value})}
-                                value={credentials.password}
+                                    setCredentials({...credentials, email: event.target.value})}
+                                value={credentials.email}
                                 type="text"
                                 focusBorderColor={"green.400"}
                             />

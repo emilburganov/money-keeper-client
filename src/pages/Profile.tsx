@@ -1,22 +1,34 @@
-import {Context} from "@/main";
-import {Button} from "@chakra-ui/react";
-import {useContext} from "react";
+import Button from "@/components/UI/Button/Button";
+import {useStores} from "@/hooks/useStores";
+import {observer} from "mobx-react-lite";
+import {useEffect, useState} from "react";
 
-const Profile = () => {
-    const {store} = useContext(Context);
+const Profile = observer(() => {
+    const {authStore} = useStores();
+    const [isLoading, setLoading] = useState<boolean>(false);
 
-    const logout = async() => {
-        await store.logout();
-    }
+    const logout = async (): Promise<void> => {
+        setLoading(true);
+        await authStore.logout();
+        setLoading(false);
+    };
+
+    const getUser = async (): Promise<void> => {
+        await authStore.me();
+    };
+
+    useEffect(() => {
+        getUser();
+    }, []);
 
     return (
         <div>
-            Profile
-            <Button onClick={logout}>
+            <p>{JSON.stringify(authStore.user, null, 2)}</p>
+            <Button isLoading={isLoading} onClick={logout}>
                 Logout
             </Button>
         </div>
     );
-};
+});
 
 export default Profile;

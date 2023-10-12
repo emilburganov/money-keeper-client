@@ -1,14 +1,17 @@
 import Login from "@/pages/Auth/Login";
 import Register from "@/pages/Auth/Register";
-import Home from '@/pages/Home.jsx';
-import Profile from '@/pages/Profile.jsx';
+import Home from "@/pages/Home";
+import Profile from "@/pages/Profile.jsx";
 
 export const publicRoutes = [
-    {path: '/', element: <Home/>},
-    {path: '/login', element: <Login/>},
-    {path: '/register', element: <Register/>},
-]
+    {path: "/", element: <Home/>},
+];
 
-export const privateRoutes = [
-    {path: '/profile', element: <Profile/>},
-]
+export const guestRoutes = [
+    {path: "/login", element: <Login/>},
+    {path: "/register", element: <Register/>},
+];
+
+export const authRoutes = [
+    {path: "/profile", element: <Profile/>},
+];

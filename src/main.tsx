@@ -1,20 +1,13 @@
-import {createContext} from "react";
+import {createStandaloneToast} from "@chakra-ui/react";
 import {createRoot} from "react-dom/client";
 import App from "./App.tsx";
-import RootStore from "./store/RootStore";
+import {StoreProvider} from "./providers/StoreProvider";
 
-interface State {
-    store: RootStore,
-}
-
-export const store = new RootStore();
-
-export const Context = createContext<State>({
-    store,
-});
+const {ToastContainer} = createStandaloneToast();
 
 createRoot(document.getElementById("root")!).render(
-    <Context.Provider value={{store}}>
+    <StoreProvider>
         <App/>
-    </Context.Provider>,
+        <ToastContainer/>
+    </StoreProvider>,
 );

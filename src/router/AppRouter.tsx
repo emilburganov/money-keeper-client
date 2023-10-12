@@ -1,38 +1,38 @@
-import {Context} from "@/main";
+import {useStores} from "@/hooks/useStores";
 import Home from "@/pages/Home";
-import Profile from "@/pages/Profile";
 import {observer} from "mobx-react-lite";
-import {FC, useContext} from "react";
+import {FC} from "react";
 import {Route, Routes} from "react-router-dom";
-import {privateRoutes, publicRoutes} from "./Routes";
+import {authRoutes, guestRoutes, publicRoutes} from "./Routes";
 
 const AppRouter: FC = observer(() => {
-    const {store} = useContext(Context);
+    const {authStore} = useStores();
 
     return (
         <Routes>
-            {store.isAuth
+            {authStore.isAuth
                 ?
-                <>
-                    {privateRoutes.map((route) =>
-                        <Route
-                            {...route}
-                            key={route.path}
-                        />,
-                    )}
-                    <Route path="*" element={<Profile/>}/>
-                </>
+                authRoutes.map((route) =>
+                    <Route
+                        {...route}
+                        key={route.path}
+                    />,
+                )
                 :
-                <>
-                    {publicRoutes.map((route) =>
-                        <Route
-                            {...route}
-                            key={route.path}
-                        />,
-                    )}
-                    <Route path="*" element={<Home/>}/>
-                </>
+                guestRoutes.map((route) =>
+                    <Route
+                        {...route}
+                        key={route.path}
+                    />,
+                )
             }
+            {publicRoutes.map((route) =>
+                <Route
+                    {...route}
+                    key={route.path}
+                />,
+            )}
+            <Route path="*" element={<Home/>}/>
         </Routes>
     );
 });
