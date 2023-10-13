@@ -1,7 +1,12 @@
 import {Button as ChakraButton}  from "@chakra-ui/button";
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 
-const HideButton = ({show, setShow}) => {
+interface HideButtonProps {
+    show: boolean,
+    setShow: void,
+}
+
+const HideButton = ({show, setShow}: HideButtonProps) => {
     return (
         <ChakraButton
             onClick={() => setShow((show) => !show)}

@@ -1,8 +1,8 @@
 import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
-import Container from "@/components/UI/Container";
+import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
-
+import {useNavigate} from 'react-router-dom';
 import {
     Box,
     Flex,
@@ -46,6 +46,7 @@ const Login: FC = () => {
     });
 
     const {authStore} = useStores();
+    const navigate = useNavigate();
     const [isLoading, setLoading] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [credentials, setCredentials] = useState<LoginForm>({
@@ -53,9 +54,10 @@ const Login: FC = () => {
         password: "",
     });
 
-    const onSubmit = async (): Promise<void> => {
+    const login = async (): Promise<void> => {
         setLoading(true);
         await authStore.login(credentials);
+        navigate('/profile');
         setLoading(false);
     };
 
@@ -74,7 +76,7 @@ const Login: FC = () => {
                     Login
                 </Heading>
                 <Box
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit(login)}
                     as={"form"}
                     rounded={"lg"}
                     bg={useColorModeValue("white", "gray.700")}

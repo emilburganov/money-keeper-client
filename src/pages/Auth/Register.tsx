@@ -1,6 +1,6 @@
 import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
-import Container from "@/components/UI/Container";
+import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
 import {
     Box,
@@ -21,6 +21,7 @@ import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
 import {Link as RouterLink} from "react-router-dom";
 import * as Yup from "yup";
+import {useNavigate} from "react-router-dom";
 
 type RegisterForm = {
     name: string;
@@ -56,6 +57,7 @@ const Register: FC = () => {
     });
 
     const {authStore} = useStores();
+    const navigate = useNavigate();
     const [isLoading, setLoading] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false);
@@ -69,6 +71,7 @@ const Register: FC = () => {
     const onSubmit = async (): Promise<void> => {
         setLoading(true);
         await authStore.register(credentials);
+        navigate('/profile');
         setLoading(false);
     };
 

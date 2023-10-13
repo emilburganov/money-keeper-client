@@ -9,12 +9,8 @@ interface ButtonProps {
 const Button = ({children, ...props}: ButtonProps) => {
     return (
         <ChakraButton
-            size="lg"
-            bg={"green.400"}
-            color={"white-900"}
-            _hover={{
-                bg: "green.500",
-            }}
+            fontSize={"sm"}
+            variant={"link"}
             {...props}
         >
             {children}
