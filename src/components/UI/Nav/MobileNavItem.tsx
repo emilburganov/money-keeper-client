@@ -1,4 +1,4 @@
-import {Box, Stack, Text, useColorModeValue, useDisclosure} from "@chakra-ui/react";
+import {Box, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
 
 interface MobileNavItemProps {
