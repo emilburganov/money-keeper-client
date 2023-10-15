@@ -19,9 +19,8 @@ import {
 import {yupResolver} from "@hookform/resolvers/yup";
 import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
-import {useNavigate} from "react-router-dom";
 
 type RegisterForm = {
     name: string;
@@ -70,8 +69,12 @@ const Register: FC = () => {
 
     const onSubmit = async (): Promise<void> => {
         setLoading(true);
-        await authStore.register(credentials);
-        navigate('/profile');
+
+        const response = await authStore.register(credentials);
+        if (response) {
+            navigate("/profile");
+        }
+
         setLoading(false);
     };
 
@@ -97,9 +100,10 @@ const Register: FC = () => {
                     rounded={"lg"}
                     bg={useColorModeValue("white", "gray.700")}
                     boxShadow={"lg"}
-                    p={8}
+                    p={6}
                 >
                     <Stack spacing={4}>
+
                         <FormControl isInvalid={!!errors.name?.message}>
                             <FormLabel>Name</FormLabel>
                             <Input
@@ -185,7 +189,11 @@ const Register: FC = () => {
                         </FormControl>
 
                         <Stack spacing={10} pt={2}>
-                            <Button isLoading={isLoading} type="submit">
+                            <Button
+                                isLoading={isLoading}
+                                type="submit"
+                                size="lg"
+                            >
                                 Register
                             </Button>
                         </Stack>
@@ -200,6 +208,7 @@ const Register: FC = () => {
                                 Login
                             </Link>
                         </Flex>
+
                     </Stack>
                 </Box>
             </Stack>

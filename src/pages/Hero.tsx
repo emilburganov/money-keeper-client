@@ -1,5 +1,7 @@
+import Button from "@/components/UI/Button/Button";
 import Container from "@/components/UI/Container/Container";
 import {Box, Flex, Heading, Stack, Text} from "@chakra-ui/react";
+import {Link} from "react-router-dom";
 
 const Hero = () => {
     return (
@@ -20,11 +22,30 @@ const Hero = () => {
                     fontSize={{base: "2xl", sm: "4xl", md: "6xl"}}
                     lineHeight={"110%"}
                 >
-                    This is a <br/>
+                    Financial control <br/>
                     <Text as={"span"} color={"green.400"}>
-                        home page!
+                        made easy
                     </Text>
                 </Heading>
+                <Text color={"gray.500"}>
+                    Control your expenses and income with our application.
+                </Text>
+                <Stack
+                    direction={"column"}
+                    spacing={3}
+                    align={"center"}
+                    alignSelf={"center"}
+                    position={"relative"}
+                >
+                    <Button
+                        as={Link}
+                        to="/register"
+                        rounded={"full"}
+                        px={6}
+                    >
+                        Get Started
+                    </Button>
+                </Stack>
             </Stack>
         </Container>
     );

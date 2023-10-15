@@ -1,22 +1,29 @@
 import SocialButton from "@/components/UI/Button/SocialButton";
 import Logo from "@/components/UI/Logo/Logo";
-import {Box, Container, Stack, Text, useColorModeValue} from "@chakra-ui/react";
+import {Box, Flex, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {FaInstagram, FaTwitter, FaYoutube} from "react-icons/fa";
 
 const Footer = () => {
     return (
         <Box
-            bg={useColorModeValue("gray.50", "gray.900")}
-            color={useColorModeValue("gray.700", "gray.200")}
+            borderTop={1}
+            borderStyle={"solid"}
+            borderColor={useColorModeValue("gray.200", "gray.900")}
         >
-            <Container
-                as={Stack}
-                maxW={"6xl"}
-                py={4}
+            <Flex
+                bg={useColorModeValue("white", "gray.800")}
+                color={useColorModeValue("gray.600", "white")}
+                minH={"60px"}
+                py={{base: 4, md: 2}}
+                px={{base: 4}}
+
                 direction={{base: "column", md: "row"}}
                 spacing={4}
                 justify={{base: "center", md: "space-between"}}
                 align={{base: "center", md: "center"}}
+                maxW={"container.xl"}
+                margin={"auto"}
+                gap={4}
             >
                 <Logo/>
                 <Text align={"center"}>
@@ -33,7 +40,7 @@ const Footer = () => {
                         <FaInstagram/>
                     </SocialButton>
                 </Stack>
-            </Container>
+            </Flex>
         </Box>
     );
 };

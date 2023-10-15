@@ -1,5 +1,5 @@
 import {API_URL} from "@/constants";
-import {AuthResponse} from "@/models/response";
+import {TokenResponse} from "@/models/response/TokenResponse";
 import axios from "axios";
 
 const $api = axios.create({
@@ -20,12 +20,12 @@ $api.interceptors.response.use((config) => {
     if (error.response.status == 401 && error.config && !error.config._isRetry && localStorage.getItem("token")) {
         originalRequest._isRetry = true;
 
-        const response = await axios.post<AuthResponse>(`${API_URL}/refresh`, {
+        const response = await axios.post<TokenResponse>(`${API_URL}/refresh`, {
             withCredentials: true,
             token: localStorage.getItem("token"),
         });
 
-        localStorage.setItem("token", response.data.data.access_token);
+        localStorage.setItem("token", response.data.access_token);
 
         return $api.request(originalRequest);
     }

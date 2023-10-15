@@ -1,37 +1,13 @@
-import Button from "@/components/UI/Button/Button";
-import {useStores} from "@/hooks/useStores";
-import {observer} from "mobx-react-lite";
-import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import ProfileCard from "@/components/Profile/ProfileCard";
+import Container from "@/components/UI/Container/Container";
+import {Flex} from "@chakra-ui/react";
 
-const Profile = observer(() => {
-    const {authStore} = useStores();
-    const navigate = useNavigate();
-    const [isLoading, setLoading] = useState<boolean>(false);
-
-    const logout = async (): Promise<void> => {
-        setLoading(true);
-        await authStore.logout();
-        navigate("/login");
-        setLoading(false);
-    };
-
-    const getUser = async (): Promise<void> => {
-        await authStore.me();
-    };
-
-    useEffect(() => {
-        getUser();
-    }, []);
-
+const Profile = () => {
     return (
-        <div>
-            <p>{JSON.stringify(authStore.user, null, 2)}</p>
-            <Button isLoading={isLoading} onClick={logout}>
-                Logout
-            </Button>
-        </div>
+        <Container as={Flex} justify={"center"}>
+            <ProfileCard/>
+        </Container>
     );
-});
+};
 
 export default Profile;

@@ -24,21 +24,23 @@ class AuthStore {
     async login(credentials) {
         try {
             const response = await AuthService.login(credentials);
-            localStorage.setItem("token", response.data?.data?.access_token);
+            localStorage.setItem("token", response.data.access_token);
             this.setAuth(true);
 
             toast({
-                title: "Successfully login.",
-                description: "You have successfully login into your account.",
+                title: "Successful login.",
+                description: "You have successful login into your account.",
                 status: "success",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom-left",
             });
+
+            return response;
         } catch (error) {
             toast({
                 title: "Authentication error.",
-                description: error.response.data?.error.message,
+                description: error.response.data?.message,
                 status: "error",
                 duration: 5000,
                 isClosable: true,
@@ -50,66 +52,47 @@ class AuthStore {
     async register(credentials) {
         try {
             const response = await AuthService.register(credentials);
-            localStorage.setItem("token", response.data?.data?.access_token);
+            localStorage.setItem("token", response.data?.access_token);
             this.setAuth(true);
 
             toast({
-                title: "Successfully registered.",
-                description: "You have successfully registered your account.",
+                title: "Successful registered.",
+                description: "You have successful registered your account.",
                 status: "success",
                 duration: 5000,
                 isClosable: true,
                 position: "bottom-left",
             });
-        } catch (error) {
-            const responseError = error.response.data?.error;
 
-            if (responseError?.errors) {
-                Object.values(responseError.errors).forEach((error) => {
-                    toast({
-                        title: "Authentication error.",
-                        description: error[0],
-                        status: "error",
-                        duration: 5000,
-                        isClosable: true,
-                        position: "bottom-left",
-                    });
-                });
-            } else if (responseError.message) {
+            return response;
+        } catch (error) {
+            const errors = error.response.data?.errors;
+            const message = error.response.data?.message;
+
+            Object.values(errors).forEach((error) => {
                 toast({
-                    title: "Authentication error.",
-                    description: error.message,
+                    title: message,
+                    description: error[0],
                     status: "error",
                     duration: 5000,
                     isClosable: true,
                     position: "bottom-left",
                 });
-            }
+            });
         }
     }
 
     async logout() {
-        try {
-            await AuthService.logout();
-            this.setAuth(false);
-        } catch (error) {
-            toast({
-                title: "Error.",
-                description: "Something went wrong.",
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-                position: "bottom-left",
-            });
-        } finally {
-            localStorage.removeItem("token");
-        }
+        await AuthService.logout();
+        this.setAuth(false);
+
+        localStorage.removeItem("token");
     }
 
     async me() {
         try {
             const response = await AuthService.me();
-            this.setUser(response.data?.data);
+            this.setUser(response.data);
         } catch (error) {
             toast({
                 title: "Error.",

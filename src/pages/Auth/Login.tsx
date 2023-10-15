@@ -2,7 +2,6 @@ import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
-import {useNavigate} from 'react-router-dom';
 import {
     Box,
     Flex,
@@ -21,7 +20,7 @@ import {
 import {yupResolver} from "@hookform/resolvers/yup";
 import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
-import {Link as RouterLink} from "react-router-dom";
+import {Link as RouterLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 
 type LoginForm = {
@@ -56,8 +55,12 @@ const Login: FC = () => {
 
     const login = async (): Promise<void> => {
         setLoading(true);
-        await authStore.login(credentials);
-        navigate('/profile');
+
+        const response = await authStore.login(credentials);
+        if (response) {
+            navigate("/profile");
+        }
+
         setLoading(false);
     };
 
@@ -84,6 +87,7 @@ const Login: FC = () => {
                     p={6}
                 >
                     <Stack spacing={4}>
+
                         <FormControl isInvalid={!!errors.email?.message}>
                             <FormLabel>E-mail</FormLabel>
                             <Input
@@ -127,7 +131,11 @@ const Login: FC = () => {
                         </FormControl>
 
                         <Stack spacing={10} pt={2}>
-                            <Button type="submit" isLoading={isLoading}>
+                            <Button
+                                isLoading={isLoading}
+                                type="submit"
+                                size="lg"
+                            >
                                 Login
                             </Button>
                         </Stack>
@@ -144,6 +152,7 @@ const Login: FC = () => {
                                 Register
                             </Link>
                         </Flex>
+
                     </Stack>
                 </Box>
             </Stack>

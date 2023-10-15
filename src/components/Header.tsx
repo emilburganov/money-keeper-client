@@ -10,7 +10,6 @@ import {Box, Collapse, Flex, IconButton, Stack, useColorModeValue, useDisclosure
 import {observer} from "mobx-react-lite";
 import {Link, useNavigate} from "react-router-dom";
 
-
 const Header = observer(() => {
     const {isOpen, onToggle} = useDisclosure();
     const {authStore} = useStores();
@@ -18,21 +17,25 @@ const Header = observer(() => {
 
     const logout = async () => {
         await authStore.logout();
-        navigate("/profile");
+        navigate("/login");
     };
 
     return (
-        <Box>
+        <Box
+            borderBottom={1}
+            borderStyle={"solid"}
+            borderColor={useColorModeValue("gray.200", "gray.900")}
+        >
             <Flex
                 bg={useColorModeValue("white", "gray.800")}
                 color={useColorModeValue("gray.600", "white")}
                 minH={"60px"}
-                py={{base: 2}}
+                py={{base: 4, md: 2}}
                 px={{base: 4}}
-                borderBottom={1}
-                borderStyle={"solid"}
-                borderColor={useColorModeValue("gray.200", "gray.900")}
+
                 align={"center"}
+                maxW={"container.xl"}
+                margin={"auto"}
             >
                 <Flex
                     flex={{base: 1, md: "auto"}}
@@ -49,7 +52,7 @@ const Header = observer(() => {
                 <Flex
                     flex={{base: 1}}
                     align={"center"}
-                    justify={{base: "end", md: "start"}}
+                    justify={{base: "center", md: "start"}}
                 >
                     <Logo/>
                     <Flex display={{base: "none", md: "flex"}} ml={10}>
@@ -96,8 +99,9 @@ const Header = observer(() => {
                     <ThemeButton/>
                 </Stack>
             </Flex>
+
             <Collapse in={isOpen} animateOpacity>
-                <MobileNav/>
+                <MobileNav onToggle={onToggle}/>
             </Collapse>
         </Box>
     );

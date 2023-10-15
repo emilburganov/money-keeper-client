@@ -1,9 +1,10 @@
 import {useStores} from "@/hooks/useStores";
+import Hero from "@/pages/Hero";
 import Home from "@/pages/Home";
 import {observer} from "mobx-react-lite";
 import {FC} from "react";
 import {Route, Routes} from "react-router-dom";
-import {authRoutes, guestRoutes, publicRoutes} from "./Routes";
+import {privateRoutes, publicRoutes} from "./Routes";
 
 const AppRouter: FC = observer(() => {
     const {authStore} = useStores();
@@ -12,27 +13,26 @@ const AppRouter: FC = observer(() => {
         <Routes>
             {authStore.isAuth
                 ?
-                authRoutes.map((route) =>
-                    <Route
-                        {...route}
-                        key={route.path}
-                    />,
-                )
+                <>
+                    {privateRoutes.map((route) =>
+                        <Route
+                            {...route}
+                            key={route.path}
+                        />,
+                    )}
+                    <Route path="*" element={<Home/>}></Route>
+                </>
                 :
-                guestRoutes.map((route) =>
-                    <Route
-                        {...route}
-                        key={route.path}
-                    />,
-                )
+                <>
+                    {publicRoutes.map((route) =>
+                        <Route
+                            {...route}
+                            key={route.path}
+                        />,
+                    )}
+                    <Route path="*" element={<Hero/>}></Route>
+                </>
             }
-            {publicRoutes.map((route) =>
-                <Route
-                    {...route}
-                    key={route.path}
-                />,
-            )}
-            <Route path="*" element={<Home/>}/>
         </Routes>
     );
 });

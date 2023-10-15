@@ -1,13 +1,18 @@
-import {NavItem} from "@/components/UI/Nav/DesktopNav";
 import {Box, Stack, Text, useColorModeValue, useDisclosure} from "@chakra-ui/react";
 import {Link} from "react-router-dom";
 
-const MobileNavItem = ({label, href}: NavItem) => {
-    const {onToggle} = useDisclosure();
+interface MobileNavItemProps {
+    label: string,
+    href?: string,
+    onClick?: void,
+    onToggle: void,
+}
 
+const MobileNavItem = ({label, href, onClick, onToggle}: MobileNavItemProps) => {
     return (
         <Stack spacing={4} onClick={onToggle}>
             <Box
+                onClick={onClick}
                 py={2}
                 as={Link}
                 to={href}
