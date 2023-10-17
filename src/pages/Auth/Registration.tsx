@@ -105,7 +105,7 @@ const Registration: FC = () => {
         setLoading(false);
     };
 
-    useTranslationTrigger(t, handleSubmit(registration));
+    // useTranslationTrigger(t, handleSubmit(registration));
 
     return (
         <Container>
@@ -235,7 +235,12 @@ const Registration: FC = () => {
                             </Button>
                         </Stack>
 
-                        <Flex pt={6} gap={1} align={"center"}>
+                        <Flex
+                            pt={6}
+                            align={"center"}
+                            wrap={"wrap"}
+                            gap={1}
+                        >
                             {t("pages.register.form.redirect")}
                             <Link
                                 as={RouterLink}

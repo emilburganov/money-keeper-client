@@ -2,7 +2,6 @@ import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
-import {useTranslationTrigger} from "@/hooks/useTranslationTrigger";
 import {
     Box,
     Flex,
@@ -71,7 +70,7 @@ const Login: FC = () => {
         setLoading(false);
     };
 
-    useTranslationTrigger(t, handleSubmit(login));
+    // useTranslationTrigger(t, handleSubmit(login));
 
     return (
         <Container>
@@ -153,13 +152,18 @@ const Login: FC = () => {
                             </Button>
                         </Stack>
 
-                        <Flex pt={6} gap={1} align={"center"}>
+                        <Flex
+                            pt={6}
+                            align={"center"}
+                            wrap={"wrap"}
+                            gap={1}
+                        >
                             <Text>
                                 {t("pages.login.form.redirect")}
                             </Text>
                             <Link
                                 as={RouterLink}
-                                to="/register"
+                                to="/registration"
                                 color={"green.400"}
                             >
                                 {t("pages.register.form.button")}

@@ -42,8 +42,8 @@ const LanguageSwitch = () => {
                                 {languagesIcons[i18n.language]}
                             </Flex>
                         </PopoverTrigger>
-                        <PopoverContent w="fit-content" _focus={{boxShadow: "none"}}>
-                            <PopoverArrow/>
+                        <PopoverContent marginRight={4} w="fit-content" _focus={{boxShadow: "none"}}>
+                            <PopoverArrow marginLeft={2}/>
                             <PopoverBody p={2}>
                                 <Stack align={"baseline"} onClick={onClose}>
                                     <Button
