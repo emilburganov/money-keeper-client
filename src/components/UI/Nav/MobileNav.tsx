@@ -27,7 +27,7 @@ const MobileNav = observer(({onToggle}: void) => {
                 :
                 <>
                     <MobileNavItem onToggle={onToggle} label="Login" href="/login"/>
-                    <MobileNavItem onToggle={onToggle} label="Register" href="/register"/>
+                    <MobileNavItem onToggle={onToggle} label="Registration" href="/registration"/>
                 </>
             }
         </Stack>

@@ -5,7 +5,7 @@ const ThemeButton = () => {
     const {colorMode, toggleColorMode} = useColorMode();
 
     return (
-        <ChakraButton onClick={toggleColorMode}>
+        <ChakraButton w={6} onClick={toggleColorMode}>
             {colorMode === "light" ? <MoonIcon/> : <SunIcon/>}
         </ChakraButton>
     );

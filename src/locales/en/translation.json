@@ -1,0 +1,48 @@
+{
+  "header": {
+    "buttons": {
+      "auth": {
+        "login": "Login",
+        "register": "Registration",
+        "logout": "Logout"
+      },
+      "lang": {
+        "ru": "Russian",
+        "en": "English"
+      }
+    }
+  },
+  "pages": {
+    "login": {
+      "form": {
+        "title": "Login",
+        "fields": {
+          "email": "E-mail",
+          "password": "Password"
+        },
+        "button": "Login",
+        "redirect": "Don't have an account?"
+      }
+    },
+    "register": {
+      "form": {
+        "title": "Registration",
+        "fields": {
+          "name": "Name",
+          "email": "E-mail",
+          "password": "Password",
+          "passwordConfirmation": "Password Confirmation"
+        },
+        "button": "Register",
+        "redirect": "Already have an account?"
+      }
+    }
+  },
+  "validation": {
+    "required": "The {{field}} field is required.",
+    "max": "The {{field}} field must not be greater than {{max}} characters.",
+    "min": "The {{field}} field must be at least {{min}} characters.",
+    "email": "The {{email}} field must be a valid email address.",
+    "oneOf": "The {{firstField}} field must match {{secondField}}."
+  }
+}

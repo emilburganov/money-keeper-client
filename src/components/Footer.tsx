@@ -1,9 +1,13 @@
 import SocialButton from "@/components/UI/Button/SocialButton";
 import Logo from "@/components/UI/Logo/Logo";
 import {Box, Flex, Stack, Text, useColorModeValue} from "@chakra-ui/react";
+import {useTranslation} from "react-i18next";
 import {FaInstagram, FaTwitter, FaYoutube} from "react-icons/fa";
 
+
 const Footer = () => {
+
+
     return (
         <Box
             borderTop={1}

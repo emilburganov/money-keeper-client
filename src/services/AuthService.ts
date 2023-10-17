@@ -12,8 +12,8 @@ export default class AuthService {
         });
     }
 
-    static async register(credentials): Promise<AxiosResponse<TokenResponse>> {
-        return $api.post<TokenResponse>("auth/register", {
+    static async registration(credentials): Promise<AxiosResponse<TokenResponse>> {
+        return $api.post<TokenResponse>("auth/registration", {
             name: credentials.name,
             email: credentials.email,
             password: credentials.password,

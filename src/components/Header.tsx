@@ -4,16 +4,19 @@ import ThemeButton from "@/components/UI/Button/ThemeButton";
 import Logo from "@/components/UI/Logo/Logo";
 import DesktopNav from "@/components/UI/Nav/DesktopNav";
 import MobileNav from "@/components/UI/Nav/MobileNav";
+import LanguageSwitch from "@/components/UI/Switch/LanguageSwitch";
 import {useStores} from "@/hooks/useStores";
 import {CloseIcon, HamburgerIcon} from "@chakra-ui/icons";
 import {Box, Collapse, Flex, IconButton, Stack, useColorModeValue, useDisclosure} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
+import {useTranslation} from "react-i18next";
 import {Link, useNavigate} from "react-router-dom";
 
 const Header = observer(() => {
     const {isOpen, onToggle} = useDisclosure();
     const {authStore} = useStores();
     const navigate = useNavigate();
+    const {t} = useTranslation()
 
     const logout = async () => {
         await authStore.logout();
@@ -32,13 +35,12 @@ const Header = observer(() => {
                 minH={"60px"}
                 py={{base: 4, md: 2}}
                 px={{base: 4}}
-
                 align={"center"}
+                justify={"space-between"}
                 maxW={"container.xl"}
                 margin={"auto"}
             >
                 <Flex
-                    flex={{base: 1, md: "auto"}}
                     ml={{base: -2}}
                     display={{base: "flex", md: "none"}}
                 >
@@ -50,7 +52,6 @@ const Header = observer(() => {
                     />
                 </Flex>
                 <Flex
-                    flex={{base: 1}}
                     align={"center"}
                     justify={{base: "center", md: "start"}}
                 >
@@ -60,11 +61,10 @@ const Header = observer(() => {
                     </Flex>
                 </Flex>
                 <Stack
-                    flex={{base: 1, md: 0}}
                     justify={"flex-end"}
                     align={"center"}
                     direction={"row"}
-                    spacing={6}
+                    spacing={3}
                     g={6}
                 >
                     {authStore.isAuth ?
@@ -74,7 +74,8 @@ const Header = observer(() => {
                             size={"md"}
                             display={{base: "none", md: "flex"}}
                         >
-                            Logout
+                            {t("header.buttons.auth.logout")}
+
                         </Button>
                         :
                         <>
@@ -83,20 +84,21 @@ const Header = observer(() => {
                                 to="/login"
                                 display={{base: "none", md: "flex"}}
                             >
-                                Login
+                                {t("header.buttons.auth.login")}
                             </LinkButton>
                             <Button
                                 as={Link}
-                                to="/register"
+                                to="/registration"
                                 fontSize={"sm"}
                                 size={"md"}
                                 display={{base: "none", md: "flex"}}
                             >
-                                Register
+                                {t("header.buttons.auth.register")}
                             </Button>
                         </>
                     }
                     <ThemeButton/>
+                    <LanguageSwitch onToggle={onToggle}/>
                 </Stack>
             </Flex>
 

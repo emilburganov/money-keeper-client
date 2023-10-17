@@ -2,6 +2,9 @@ import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
+import {useYupResolver} from "@/hooks/useYupResolver";
+import {useTranslationTrigger} from "@/hooks/useTranslationTrigger";
+import {useRegistrationValidationSchema} from "@/pages/Auth/Schemas/useRegistrationValidationSchema";
 import {
     Box,
     Flex,
@@ -16,45 +19,21 @@ import {
     Stack,
     useColorModeValue,
 } from "@chakra-ui/react";
-import {yupResolver} from "@hookform/resolvers/yup";
 import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
+import {useTranslation} from "react-i18next";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 
-type RegisterForm = {
+interface RegisterForm {
     name: string;
     email: string;
     password: string;
     passwordConfirmation: string;
-};
+}
 
-const Register: FC = () => {
-    const validationSchema = Yup.object().shape({
-        name: Yup.string()
-            .required("The name field is required.")
-            .min(3, "The name field must be at least 8 characters.")
-            .max(60, "The name field must not be greater than 100 characters."),
-        email: Yup.string()
-            .required("The email field is required.")
-            .email("The email field must be a valid email address."),
-        password: Yup.string()
-            .required("The password field is required.")
-            .min(8, "The password field must be at least 8 characters.")
-            .max(100, "The password field must not be greater than 100 characters."),
-        passwordConfirmation: Yup.string()
-            .required("The password confirmation field is required.")
-            .oneOf([Yup.ref("password"), null], "The password confirmation field must match password."),
-    });
-
-    const {
-        register,
-        handleSubmit,
-        formState: {errors},
-    } = useForm<RegisterForm>({
-        resolver: yupResolver(validationSchema),
-    });
-
+const Registration: FC = () => {
+    const {t} = useTranslation();
     const {authStore} = useStores();
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState<boolean>(false);
@@ -67,7 +46,55 @@ const Register: FC = () => {
         passwordConfirmation: "",
     });
 
-    const onSubmit = async (): Promise<void> => {
+    const validationSchema = Yup.object().shape({
+        name: Yup.string()
+            .required(() => t("validation.required", {
+                field: t("pages.register.form.fields.name"),
+            }))
+            .min(3, () => t("validation.min", {
+                field: t("pages.register.form.fields.name"),
+                min: 3,
+            }))
+            .max(60, () => t("validation.max", {
+                field: t("pages.register.form.fields.name"),
+                max: 60,
+            })),
+        email: Yup.string()
+            .required(() => t("validation.required", {
+                field: t("pages.register.form.fields.email"),
+            }))
+            .email(() => t("validation.email")),
+        password: Yup.string()
+            .required(() => t("validation.required", {
+                field: t("pages.register.form.fields.password"),
+            }))
+            .min(8, () => t("validation.min", {
+                field: t("pages.register.form.fields.password"),
+                min: 8,
+            }))
+            .max(100, () => t("validation.max", {
+                field: t("pages.register.form.fields.password"),
+                max: 100,
+            })),
+        passwordConfirmation: Yup.string()
+            .required(() => t("validation.required", {
+                field: t("pages.register.form.fields.passwordConfirmation"),
+            }))
+            .oneOf([Yup.ref("password"), null], () => t("validation.oneOf", {
+                firstField: t("pages.register.form.fields.passwordConfirmation"),
+                secondField: t("pages.register.form.fields.password"),
+            })),
+    });
+
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm<RegisterForm>({
+        resolver: useYupResolver(() => validationSchema),
+    });
+
+    const registration = async (): Promise<void> => {
         setLoading(true);
 
         const response = await authStore.register(credentials);
@@ -77,6 +104,8 @@ const Register: FC = () => {
 
         setLoading(false);
     };
+
+    useTranslationTrigger(t, handleSubmit(registration));
 
     return (
         <Container>
@@ -91,11 +120,11 @@ const Register: FC = () => {
             >
                 <Stack align={"center"}>
                     <Heading fontSize={"4xl"} textAlign={"center"}>
-                        Register
+                        {t("pages.register.form.title")}
                     </Heading>
                 </Stack>
                 <Box
-                    onSubmit={handleSubmit(onSubmit)}
+                    onSubmit={handleSubmit(registration)}
                     as={"form"}
                     rounded={"lg"}
                     bg={useColorModeValue("white", "gray.700")}
@@ -105,7 +134,9 @@ const Register: FC = () => {
                     <Stack spacing={4}>
 
                         <FormControl isInvalid={!!errors.name?.message}>
-                            <FormLabel>Name</FormLabel>
+                            <FormLabel>
+                                {t("pages.register.form.fields.name")}
+                            </FormLabel>
                             <Input
                                 {...register("name")}
                                 value={credentials.name}
@@ -122,7 +153,9 @@ const Register: FC = () => {
                         </FormControl>
 
                         <FormControl isInvalid={!!errors.email?.message}>
-                            <FormLabel>E-mail</FormLabel>
+                            <FormLabel>
+                                {t("pages.register.form.fields.email")}
+                            </FormLabel>
                             <Input
                                 {...register("email")}
                                 value={credentials.email}
@@ -139,7 +172,9 @@ const Register: FC = () => {
                         </FormControl>
 
                         <FormControl isInvalid={!!errors.password?.message}>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>
+                                {t("pages.register.form.fields.password")}
+                            </FormLabel>
                             <InputGroup>
                                 <Input
                                     {...register("password")}
@@ -164,7 +199,9 @@ const Register: FC = () => {
                         </FormControl>
 
                         <FormControl isInvalid={!!errors.passwordConfirmation?.message}>
-                            <FormLabel>Password Confirmation</FormLabel>
+                            <FormLabel>
+                                {t("pages.register.form.fields.passwordConfirmation")}
+                            </FormLabel>
                             <InputGroup>
                                 <Input
                                     {...register("passwordConfirmation")}
@@ -194,18 +231,18 @@ const Register: FC = () => {
                                 type="submit"
                                 size="lg"
                             >
-                                Register
+                                {t("pages.register.form.button")}
                             </Button>
                         </Stack>
 
                         <Flex pt={6} gap={1} align={"center"}>
-                            Already have an account?
+                            {t("pages.register.form.redirect")}
                             <Link
                                 as={RouterLink}
                                 to="/login"
                                 color={"green.400"}
                             >
-                                Login
+                                {t("pages.login.form.button")}
                             </Link>
                         </Flex>
 
@@ -216,4 +253,4 @@ const Register: FC = () => {
     );
 };
 
-export default Register;
+export default Registration;

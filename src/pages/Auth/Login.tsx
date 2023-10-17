@@ -2,6 +2,7 @@ import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
+import {useTranslationTrigger} from "@/hooks/useTranslationTrigger";
 import {
     Box,
     Flex,
@@ -20,20 +21,35 @@ import {
 import {yupResolver} from "@hookform/resolvers/yup";
 import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
+import {useTranslation} from "react-i18next";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 
-type LoginForm = {
+interface LoginForm {
     email: string;
     password: string;
-};
+}
 
 const Login: FC = () => {
+    const {t} = useTranslation();
+    const {authStore} = useStores();
+    const navigate = useNavigate();
+    const [isLoading, setLoading] = useState<boolean>(false);
+    const [showPassword, setShowPassword] = useState<boolean>(false);
+    const [credentials, setCredentials] = useState<LoginForm>({
+        email: "",
+        password: "",
+    });
+
     const validationSchema = Yup.object().shape({
         email: Yup.string()
-            .required("The email field is required."),
+            .required(() => t("validation.required", {
+                field: t("pages.login.form.fields.email"),
+            })),
         password: Yup.string()
-            .required("The password field is required."),
+            .required(() => t("validation.required", {
+                field: t("pages.login.form.fields.password"),
+            })),
     });
 
     const {
@@ -42,15 +58,6 @@ const Login: FC = () => {
         formState: {errors},
     } = useForm<LoginForm>({
         resolver: yupResolver(validationSchema),
-    });
-
-    const {authStore} = useStores();
-    const navigate = useNavigate();
-    const [isLoading, setLoading] = useState<boolean>(false);
-    const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [credentials, setCredentials] = useState<LoginForm>({
-        email: "",
-        password: "",
     });
 
     const login = async (): Promise<void> => {
@@ -64,6 +71,8 @@ const Login: FC = () => {
         setLoading(false);
     };
 
+    useTranslationTrigger(t, handleSubmit(login));
+
     return (
         <Container>
             <Stack
@@ -76,7 +85,7 @@ const Login: FC = () => {
                 py={6}
             >
                 <Heading align={"center"} fontSize={"4xl"} textAlign={"center"}>
-                    Login
+                    {t("pages.login.form.title")}
                 </Heading>
                 <Box
                     onSubmit={handleSubmit(login)}
@@ -89,7 +98,9 @@ const Login: FC = () => {
                     <Stack spacing={4}>
 
                         <FormControl isInvalid={!!errors.email?.message}>
-                            <FormLabel>E-mail</FormLabel>
+                            <FormLabel>
+                                {t("pages.login.form.fields.email")}
+                            </FormLabel>
                             <Input
                                 {...register("email")}
                                 onChange={(event) =>
@@ -106,7 +117,9 @@ const Login: FC = () => {
                         </FormControl>
 
                         <FormControl isInvalid={!!errors.password?.message}>
-                            <FormLabel>Password</FormLabel>
+                            <FormLabel>
+                                {t("pages.login.form.fields.password")}
+                            </FormLabel>
                             <InputGroup>
                                 <Input
                                     {...register("password")}
@@ -136,20 +149,20 @@ const Login: FC = () => {
                                 type="submit"
                                 size="lg"
                             >
-                                Login
+                                {t("pages.login.form.button")}
                             </Button>
                         </Stack>
 
                         <Flex pt={6} gap={1} align={"center"}>
                             <Text>
-                                Don't have an account?
+                                {t("pages.login.form.redirect")}
                             </Text>
                             <Link
                                 as={RouterLink}
                                 to="/register"
                                 color={"green.400"}
                             >
-                                Register
+                                {t("pages.register.form.button")}
                             </Link>
                         </Flex>
 

@@ -49,9 +49,9 @@ class AuthStore {
         }
     }
 
-    async register(credentials) {
+    async registration(credentials) {
         try {
-            const response = await AuthService.register(credentials);
+            const response = await AuthService.registration(credentials);
             localStorage.setItem("token", response.data?.access_token);
             this.setAuth(true);
 

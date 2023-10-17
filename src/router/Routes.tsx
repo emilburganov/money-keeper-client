@@ -1,5 +1,5 @@
 import Login from "@/pages/Auth/Login";
-import Register from "@/pages/Auth/Register";
+import Registration from "@/pages/Auth/Registration";
 import Hero from "@/pages/Hero";
 import Home from "@/pages/Home";
 import Profile from "@/pages/Profile.jsx";
@@ -7,7 +7,7 @@ import Profile from "@/pages/Profile.jsx";
 export const publicRoutes = [
     {path: "/", element: <Hero/>},
     {path: "/login", element: <Login/>},
-    {path: "/register", element: <Register/>},
+    {path: "/registration", element: <Registration/>},
 ];
 
 export const privateRoutes = [

@@ -20,14 +20,18 @@ $api.interceptors.response.use((config) => {
     if (error.response.status == 401 && error.config && !error.config._isRetry && localStorage.getItem("token")) {
         originalRequest._isRetry = true;
 
-        const response = await axios.post<TokenResponse>(`${API_URL}/refresh`, {
-            withCredentials: true,
-            token: localStorage.getItem("token"),
-        });
+        try {
+            const response = await axios.post<TokenResponse>(`${API_URL}/refresh`, {
+                withCredentials: true,
+                token: localStorage.getItem("token"),
+            });
 
-        localStorage.setItem("token", response.data.access_token);
+            localStorage.setItem("token", response.data.access_token);
 
-        return $api.request(originalRequest);
+            return $api.request(originalRequest);
+        } catch {
+            localStorage.removeItem("token");
+        }
     }
 
     throw error;
