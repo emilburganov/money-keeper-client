@@ -34,8 +34,6 @@ window.addEventListener("beforeunload", () => {
 });
 
 const App: FC = () => {
-    useLocalStorage("language", "en");
-
     return (
         <ChakraProvider theme={theme}>
             <BrowserRouter>
