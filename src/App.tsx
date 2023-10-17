@@ -3,6 +3,7 @@ import Header from "@/components/Header";
 import translationEN from "@/locales/en/translation.json";
 import translationRU from "@/locales/ru/translation.json";
 import AppRouter from "@/router/AppRouter";
+import theme from "@/utils/theme";
 import {ChakraProvider} from "@chakra-ui/react";
 import i18n from "i18next";
 import {FC} from "react";
@@ -21,17 +22,22 @@ const resources = {
 
 i18n.use(initReactI18next).init({
     resources,
-    lng: "en",
+    lng: localStorage.getItem("language"),
     fallbackLng: "en",
     interpolation: {
         escapeValue: false,
     },
 });
 
+window.addEventListener("beforeunload", () => {
+    localStorage.setItem("language", i18n.language);
+});
 
 const App: FC = () => {
+    useLocalStorage("language", "en");
+
     return (
-        <ChakraProvider>
+        <ChakraProvider theme={theme}>
             <BrowserRouter>
                 <Header/>
                 <AppRouter/>

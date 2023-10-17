@@ -39,7 +39,7 @@ const Hero = () => {
                 >
                     <Button
                         as={Link}
-                        to="/register"
+                        to="/registration"
                         rounded={"full"}
                         px={6}
                     >

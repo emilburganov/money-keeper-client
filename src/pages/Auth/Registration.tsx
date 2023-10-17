@@ -3,8 +3,6 @@ import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
 import {useYupResolver} from "@/hooks/useYupResolver";
-import {useTranslationTrigger} from "@/hooks/useTranslationTrigger";
-import {useRegistrationValidationSchema} from "@/pages/Auth/Schemas/useRegistrationValidationSchema";
 import {
     Box,
     Flex,
