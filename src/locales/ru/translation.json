@@ -3,14 +3,22 @@
     "buttons": {
       "auth": {
         "login": "Авторизация",
-        "register": "Регистрация",
+        "registration": "Регистрация",
         "logout": "Выйти"
       },
       "lang": {
         "ru": "Русский",
         "en": "Английский"
       }
+    },
+    "navigation": {
+      "home": "Главная",
+      "profile": "Личный кабинет",
+      "categories": "Категории"
     }
+  },
+  "footer": {
+    "copyright": "© 2023 MoneyKeeper. Все права защищены."
   },
   "pages": {
     "login": {
@@ -36,6 +44,23 @@
         "button": "Зарегистрироваться",
         "redirect": "У вас уже есть аккаунт?"
       }
+    },
+    "hero": {
+      "title": {
+        "main": "Контроль за финансами",
+        "highlighted": "стал проще"
+      },
+      "subtitle": "Контролируйте свои расходы и доходы с помощью нашего приложения.",
+      "button": "Начать"
+    },
+    "home": {
+      "title": {
+        "main": "Это",
+        "highlighted": "главная страница!"
+      }
+    },
+    "profile": {
+      "logout": "Выйти"
     }
   },
   "validation": {

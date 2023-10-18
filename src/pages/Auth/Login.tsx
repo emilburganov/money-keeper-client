@@ -2,6 +2,7 @@ import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
+import {useTranslationTrigger} from "@/hooks/useTranslationTrigger";
 import {
     Box,
     Flex,
@@ -70,7 +71,8 @@ const Login: FC = () => {
         setLoading(false);
     };
 
-    // useTranslationTrigger(t, handleSubmit(login));
+    const isInvalid = !!Object.entries(errors).length
+    useTranslationTrigger(t, handleSubmit(login), isInvalid);
 
     return (
         <Container>

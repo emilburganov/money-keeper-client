@@ -6,7 +6,7 @@ import {FaInstagram, FaTwitter, FaYoutube} from "react-icons/fa";
 
 
 const Footer = () => {
-
+    const {t} = useTranslation();
 
     return (
         <Box
@@ -31,7 +31,7 @@ const Footer = () => {
             >
                 <Logo/>
                 <Text align={"center"}>
-                    © 2023 MoneyKeeper. All rights reserved
+                    {t("footer.copyright")}
                 </Text>
                 <Stack direction={"row"} spacing={6}>
                     <SocialButton label={"Twitter"} href={"#"}>

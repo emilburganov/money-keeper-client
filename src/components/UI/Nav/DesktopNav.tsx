@@ -1,6 +1,8 @@
 import {useStores} from "@/hooks/useStores";
 import {Box, Popover, PopoverTrigger, Stack, useColorModeValue} from "@chakra-ui/react";
+import i18n from "i18next";
 import {observer} from "mobx-react-lite";
+import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 
 export interface NavItem {
@@ -8,24 +10,29 @@ export interface NavItem {
     href?: string;
 }
 
-export const PUBLIC_NAV_ITEMS: Array<NavItem> = [
-    {
-        label: "Home",
-        href: "/",
-    },
-];
-
-export const PRIVATE_NAV_ITEMS: Array<NavItem> = [
-    {
-        label: "Profile",
-        href: "/profile",
-    },
-];
-
 const DesktopNav = observer(() => {
     const linkColor = useColorModeValue("gray.600", "gray.200");
     const linkHoverColor = useColorModeValue("gray.800", "white");
+    const {t} = useTranslation();
     const {authStore} = useStores();
+
+    const PRIVATE_NAV_ITEMS: Array<NavItem> = [
+        {
+            label: t("header.navigation.profile"),
+            href: "/profile",
+        },
+        {
+            label: t("header.navigation.categories"),
+            href: "/categories",
+        },
+    ];
+
+    const PUBLIC_NAV_ITEMS: Array<NavItem> = [
+        {
+            label: t("header.navigation.home"),
+            href: "/",
+        },
+    ];
 
     return (
         <Stack direction={"row"} spacing={4}>

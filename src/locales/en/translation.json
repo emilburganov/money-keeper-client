@@ -3,14 +3,22 @@
     "buttons": {
       "auth": {
         "login": "Login",
-        "register": "Registration",
+        "registration": "Registration",
         "logout": "Logout"
       },
       "lang": {
         "ru": "Russian",
         "en": "English"
       }
+    },
+    "navigation": {
+      "home": "Home",
+      "profile": "Profile",
+      "categories": "Categories"
     }
+  },
+  "footer": {
+    "copyright": "© 2023 MoneyKeeper. All rights reserved."
   },
   "pages": {
     "login": {
@@ -36,6 +44,23 @@
         "button": "Register",
         "redirect": "Already have an account?"
       }
+    },
+    "hero": {
+      "title": {
+        "main": "Financial control",
+        "highlighted": "made easy"
+      },
+      "subtitle": "Control your expenses and income with our application.",
+      "button": "Get Started"
+    },
+    "home": {
+      "title": {
+        "main": "This is a",
+        "highlighted": "home page!"
+      }
+    },
+    "profile": {
+      "logout": "Logout"
     }
   },
   "validation": {

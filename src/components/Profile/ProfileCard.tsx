@@ -3,9 +3,11 @@ import {useStores} from "@/hooks/useStores";
 import {Avatar, Box, Center, Flex, Heading, Image, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";
+import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 
 const ProfileCard = observer(() => {
+    const {t} = useTranslation();
     const {authStore} = useStores();
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState<boolean>(false);
@@ -93,7 +95,7 @@ const ProfileCard = observer(() => {
                         size={"md"}
                         mt={8}
                     >
-                        Logout
+                        {t("pages.profile.logout")}
                     </Button>
                 </Box>
             </Box>

@@ -7,7 +7,7 @@ import MobileNav from "@/components/UI/Nav/MobileNav";
 import LanguageSwitch from "@/components/UI/Switch/LanguageSwitch";
 import {useStores} from "@/hooks/useStores";
 import {CloseIcon, HamburgerIcon} from "@chakra-ui/icons";
-import {Box, Collapse, Flex, IconButton, Stack, useColorModeValue, useDisclosure} from "@chakra-ui/react";
+import {Box, Collapse, Flex, Hide, IconButton, Stack, useColorModeValue, useDisclosure} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {useTranslation} from "react-i18next";
 import {Link, useNavigate} from "react-router-dom";
@@ -16,7 +16,7 @@ const Header = observer(() => {
     const {isOpen, onToggle} = useDisclosure();
     const {authStore} = useStores();
     const navigate = useNavigate();
-    const {t} = useTranslation()
+    const {t} = useTranslation();
 
     const logout = async () => {
         await authStore.logout();
@@ -93,11 +93,13 @@ const Header = observer(() => {
                                 size={"md"}
                                 display={{base: "none", md: "flex"}}
                             >
-                                {t("header.buttons.auth.register")}
+                                {t("header.buttons.auth.registration")}
                             </Button>
                         </>
                     }
-                    <ThemeButton/>
+                    <Hide below="sm">
+                        <ThemeButton/>
+                    </Hide>
                     <LanguageSwitch onToggle={onToggle}/>
                 </Stack>
             </Flex>

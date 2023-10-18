@@ -1,8 +1,8 @@
 import Container from "@/components/UI/Container/Container";
-import {Box, Flex, Heading, Stack, Text} from "@chakra-ui/react";
+import {Box, Flex, Heading, Stack} from "@chakra-ui/react";
 import {useTranslation} from "react-i18next";
 
-const Hero = () => {
+const Categories = () => {
     const {t} = useTranslation();
 
     return (
@@ -23,14 +23,11 @@ const Hero = () => {
                     fontSize={{base: "2xl", sm: "4xl", md: "6xl"}}
                     lineHeight={"110%"}
                 >
-                    {t("pages.home.title.main")} <br/>
-                    <Text as={"span"} color={"green.400"}>
-                        {t("pages.home.title.highlighted")}
-                    </Text>
+                    Categories
                 </Heading>
             </Stack>
         </Container>
     );
 };
 
-export default Hero;
+export default Categories;

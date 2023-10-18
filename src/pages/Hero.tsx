@@ -1,9 +1,12 @@
 import Button from "@/components/UI/Button/Button";
 import Container from "@/components/UI/Container/Container";
 import {Box, Flex, Heading, Stack, Text} from "@chakra-ui/react";
+import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 
 const Hero = () => {
+    const {t} = useTranslation();
+
     return (
         <Container
             as={Flex}
@@ -22,13 +25,13 @@ const Hero = () => {
                     fontSize={{base: "2xl", sm: "4xl", md: "6xl"}}
                     lineHeight={"110%"}
                 >
-                    Financial control <br/>
+                    {t("pages.hero.title.main")} <br/>
                     <Text as={"span"} color={"green.400"}>
-                        made easy
+                        {t("pages.hero.title.highlighted")}
                     </Text>
                 </Heading>
                 <Text color={"gray.500"}>
-                    Control your expenses and income with our application.
+                    {t("pages.hero.subtitle")}
                 </Text>
                 <Stack
                     direction={"column"}
@@ -43,7 +46,7 @@ const Hero = () => {
                         rounded={"full"}
                         px={6}
                     >
-                        Get Started
+                        {t("pages.hero.button")}
                     </Button>
                 </Stack>
             </Stack>

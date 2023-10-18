@@ -2,6 +2,7 @@ import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import {useStores} from "@/hooks/useStores";
+import {useTranslationTrigger} from "@/hooks/useTranslationTrigger";
 import {useYupResolver} from "@/hooks/useYupResolver";
 import {
     Box,
@@ -103,7 +104,8 @@ const Registration: FC = () => {
         setLoading(false);
     };
 
-    // useTranslationTrigger(t, handleSubmit(registration));
+    const isInvalid = !!Object.entries(errors).length
+    useTranslationTrigger(t, handleSubmit(registration), isInvalid);
 
     return (
         <Container>
