@@ -1,6 +1,9 @@
 import {IUser} from "@/models/IUser";
+import {LoginCredentials} from "@/pages/Auth/Login";
+import {RegistrationCredentials} from "@/pages/Auth/Registration";
 import AuthService from "@/services/AuthService";
 import {createStandaloneToast} from "@chakra-ui/react";
+import {AxiosError} from "axios";
 import {makeAutoObservable} from "mobx";
 
 const {toast} = createStandaloneToast();
@@ -21,7 +24,7 @@ class AuthStore {
         this.user = user;
     }
 
-    async login(credentials) {
+    async login(credentials: LoginCredentials) {
         try {
             const response = await AuthService.login(credentials);
             localStorage.setItem("token", response.data.access_token);
@@ -37,7 +40,29 @@ class AuthStore {
             });
 
             return response;
-        } catch (error) {
+        } catch (error: AxiosError) {
+            if (!error.response) {
+                return toast({
+                    title: "Network error.",
+                    description: "Check your internet connection and try again.",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-left",
+                });
+            }
+
+            if (error.response.status === 500) {
+                return toast({
+                    title: "Server error.",
+                    description: "Server side error, try again another time.",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-left",
+                });
+            }
+
             toast({
                 title: "Authentication error.",
                 description: error.response.data?.message,
@@ -49,7 +74,7 @@ class AuthStore {
         }
     }
 
-    async registration(credentials) {
+    async registration(credentials: RegistrationCredentials) {
         try {
             const response = await AuthService.registration(credentials);
             localStorage.setItem("token", response.data?.access_token);
@@ -65,7 +90,29 @@ class AuthStore {
             });
 
             return response;
-        } catch (error) {
+        } catch (error: AxiosError) {
+            if (!error.response) {
+                return toast({
+                    title: "Network error.",
+                    description: "Check your internet connection and try again.",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-left",
+                });
+            }
+
+            if (error.response.status === 500) {
+                return toast({
+                    title: "Server error.",
+                    description: "Server side error, try again another time.",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-left",
+                });
+            }
+
             const errors = error.response.data?.errors;
             const message = error.response.data?.message;
 
@@ -83,25 +130,29 @@ class AuthStore {
     }
 
     async logout() {
-        await AuthService.logout();
-        this.setAuth(false);
-
-        localStorage.removeItem("token");
+        try {
+            await AuthService.logout();
+        } finally {
+            this.setAuth(false);
+            localStorage.removeItem("token");
+        }
     }
 
     async me() {
         try {
             const response = await AuthService.me();
             this.setUser(response.data);
-        } catch (error) {
-            toast({
-                title: "Error.",
-                description: "Something went wrong.",
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-                position: "bottom-left",
-            });
+        } catch (error: AxiosError) {
+            if (!error.response) {
+                return toast({
+                    title: "Network error.",
+                    description: "Check your internet connection and try again.",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-left",
+                });
+            }
         }
     }
 }

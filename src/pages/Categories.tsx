@@ -3,11 +3,9 @@ import Container from "@/components/UI/Container/Container";
 import useStores from "@/hooks/useStores";
 import {SimpleGrid} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
-import {useEffect, useState} from "react";
-import {useTranslation} from "react-i18next";
+import {useEffect} from "react";
 
 const Categories = observer(() => {
-    const {t} = useTranslation();
     const {categoryStore, authStore} = useStores();
 
     useEffect(() => {

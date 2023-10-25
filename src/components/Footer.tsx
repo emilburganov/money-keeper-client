@@ -4,7 +4,6 @@ import {Box, Flex, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {useTranslation} from "react-i18next";
 import {FaInstagram, FaTwitter, FaYoutube} from "react-icons/fa";
 
-
 const Footer = () => {
     const {t} = useTranslation();
 

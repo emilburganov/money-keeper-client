@@ -24,7 +24,7 @@ import {useTranslation} from "react-i18next";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 
-interface RegisterForm {
+export interface RegistrationCredentials {
     name: string;
     email: string;
     password: string;
@@ -38,7 +38,7 @@ const Registration: FC = () => {
     const [isLoading, setLoading] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
     const [showPasswordConfirmation, setShowPasswordConfirmation] = useState<boolean>(false);
-    const [credentials, setCredentials] = useState<RegisterForm>({
+    const [credentials, setCredentials] = useState<RegistrationCredentials>({
         name: "",
         email: "",
         password: "",

@@ -37,9 +37,7 @@ class CategoryStore {
     async destroy(category: ICategory) {
         try {
             await CategoryService.destroy(this.rootStore.authStore.user, category);
-            this.setCategories((prevState: ICategory[]) => {
-                prevState.filter(_category => _category.id !== category.id)
-            });
+            this.setCategories(this.categories.filter(_category => _category.id !== category.id));
         } catch (error) {
             toast({
                 title: "Error during deletion.",

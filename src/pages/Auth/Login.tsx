@@ -25,7 +25,7 @@ import {useTranslation} from "react-i18next";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
 
-interface LoginForm {
+export interface LoginCredentials {
     email: string;
     password: string;
 }
@@ -36,7 +36,7 @@ const Login: FC = () => {
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState<boolean>(false);
     const [showPassword, setShowPassword] = useState<boolean>(false);
-    const [credentials, setCredentials] = useState<LoginForm>({
+    const [credentials, setCredentials] = useState<LoginCredentials>({
         email: "",
         password: "",
     });
