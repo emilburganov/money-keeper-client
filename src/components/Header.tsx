@@ -5,7 +5,7 @@ import Logo from "@/components/UI/Logo/Logo";
 import DesktopNav from "@/components/UI/Nav/DesktopNav";
 import MobileNav from "@/components/UI/Nav/MobileNav";
 import LanguageSwitch from "@/components/UI/Switch/LanguageSwitch";
-import {useStores} from "@/hooks/useStores";
+import useStores from "@/hooks/useStores";
 import {CloseIcon, HamburgerIcon} from "@chakra-ui/icons";
 import {Box, Collapse, Flex, Hide, IconButton, Stack, useColorModeValue, useDisclosure} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";

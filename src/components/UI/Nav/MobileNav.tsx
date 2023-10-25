@@ -1,6 +1,6 @@
 import {NavItem} from "@/components/UI/Nav/DesktopNav";
 import MobileNavItem from "@/components/UI/Nav/MobileNavItem";
-import {useStores} from "@/hooks/useStores";
+import useStores from "@/hooks/useStores";
 import {Stack, useColorModeValue} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {useTranslation} from "react-i18next";

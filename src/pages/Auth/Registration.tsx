@@ -1,9 +1,9 @@
 import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
-import {useStores} from "@/hooks/useStores";
-import {useTranslationTrigger} from "@/hooks/useTranslationTrigger";
-import {useYupResolver} from "@/hooks/useYupResolver";
+import useStores from "@/hooks/useStores";
+import useTranslationTrigger from "@/hooks/useTranslationTrigger";
+import useSchemaResolver from "@/hooks/useSchemaResolver";
 import {
     Box,
     Flex,
@@ -90,13 +90,13 @@ const Registration: FC = () => {
         handleSubmit,
         formState: {errors},
     } = useForm<RegisterForm>({
-        resolver: useYupResolver(() => validationSchema),
+        resolver: useSchemaResolver(() => validationSchema),
     });
 
     const registration = async (): Promise<void> => {
         setLoading(true);
 
-        const response = await authStore.register(credentials);
+        const response = await authStore.registration(credentials);
         if (response) {
             navigate("/profile");
         }

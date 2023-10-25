@@ -1,9 +1,17 @@
 import {useEffect} from "react";
 
-export const useTranslationTrigger = (translation, callback, isInvalid) => {
+interface useTranslationTriggerProps {
+    translation: void;
+    callback: void;
+    isInvalid: boolean;
+}
+
+const useTranslationTrigger = (translation, callback, isInvalid): useTranslationTriggerProps => {
     useEffect(() => {
         if (isInvalid) {
             setTimeout(callback, 0);
         }
     }, [translation]);
 };
+
+export default useTranslationTrigger;

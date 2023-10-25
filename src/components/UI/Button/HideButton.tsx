@@ -1,18 +1,19 @@
-import {Button as ChakraButton}  from "@chakra-ui/button";
+import {Button as ChakraButton} from "@chakra-ui/button";
 import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
+import {Dispatch, SetStateAction} from "react";
 
 interface HideButtonProps {
     show: boolean,
-    setShow: void,
+    setShow: Dispatch<SetStateAction<boolean>>,
 }
 
 const HideButton = ({show, setShow}: HideButtonProps) => {
     return (
         <ChakraButton
             onClick={() => setShow((show) => !show)}
-            variant={'ghost'}
+            variant={"ghost"}
             _hover={{
-                bg: 'transparent',
+                bg: "transparent",
             }}
         >
             {show ? <ViewIcon/> : <ViewOffIcon/>}

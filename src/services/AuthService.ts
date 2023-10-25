@@ -1,6 +1,6 @@
-import {MessageResponse} from "@/models/response/MessageResponse";
-import {TokenResponse} from "@/models/response/TokenResponse";
-import {UserResponse} from "@/models/response/UserResponse";
+import {MessageResponse} from "@/models/Response/MessageResponse";
+import {TokenResponse} from "@/models/Response/TokenResponse";
+import {UserResponse} from "@/models/Response/UserResponse";
 import {AxiosResponse} from "axios";
 import $api from "../http/index";
 

@@ -1,8 +1,9 @@
 import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
-import {useStores} from "@/hooks/useStores";
-import {useTranslationTrigger} from "@/hooks/useTranslationTrigger";
+import useSchemaResolver from "@/hooks/useSchemaResolver";
+import useStores from "@/hooks/useStores";
+import useTranslationTrigger from "@/hooks/useTranslationTrigger";
 import {
     Box,
     Flex,
@@ -18,7 +19,6 @@ import {
     Text,
     useColorModeValue,
 } from "@chakra-ui/react";
-import {yupResolver} from "@hookform/resolvers/yup";
 import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
@@ -57,7 +57,7 @@ const Login: FC = () => {
         handleSubmit,
         formState: {errors},
     } = useForm<LoginForm>({
-        resolver: yupResolver(validationSchema),
+        resolver: useSchemaResolver(() => validationSchema),
     });
 
     const login = async (): Promise<void> => {

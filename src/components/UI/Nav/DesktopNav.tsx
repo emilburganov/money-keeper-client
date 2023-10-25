@@ -1,6 +1,5 @@
-import {useStores} from "@/hooks/useStores";
+import useStores from "@/hooks/useStores";
 import {Box, Popover, PopoverTrigger, Stack, useColorModeValue} from "@chakra-ui/react";
-import i18n from "i18next";
 import {observer} from "mobx-react-lite";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
@@ -36,52 +35,55 @@ const DesktopNav = observer(() => {
 
     return (
         <Stack direction={"row"} spacing={4}>
-            {PUBLIC_NAV_ITEMS.map((navItem) => (
-                <Box key={navItem.label}>
-                    <Popover trigger={"hover"} placement={"bottom-start"}>
-                        <PopoverTrigger>
-                            <Box
-                                as={Link}
-                                to={navItem.href}
-                                p={2}
-                                href={navItem.href ?? "#"}
-                                fontSize={"sm"}
-                                fontWeight={500}
-                                color={linkColor}
-                                _hover={{
-                                    textDecoration: "none",
-                                    color: linkHoverColor,
-                                }}
-                            >
-                                {navItem.label}
-                            </Box>
-                        </PopoverTrigger>
-                    </Popover>
-                </Box>
-            ))}
-            {authStore.isAuth && PRIVATE_NAV_ITEMS.map((navItem) => (
-                <Box key={navItem.label}>
-                    <Popover trigger={"hover"} placement={"bottom-start"}>
-                        <PopoverTrigger>
-                            <Box
-                                as={Link}
-                                to={navItem.href}
-                                p={2}
-                                href={navItem.href ?? "#"}
-                                fontSize={"sm"}
-                                fontWeight={500}
-                                color={linkColor}
-                                _hover={{
-                                    textDecoration: "none",
-                                    color: linkHoverColor,
-                                }}
-                            >
-                                {navItem.label}
-                            </Box>
-                        </PopoverTrigger>
-                    </Popover>
-                </Box>
-            ))}
+            {authStore.isAuth ?
+                PRIVATE_NAV_ITEMS.map((navItem) => (
+                    <Box key={navItem.label}>
+                        <Popover trigger={"hover"} placement={"bottom-start"}>
+                            <PopoverTrigger>
+                                <Box
+                                    as={Link}
+                                    to={navItem.href}
+                                    p={2}
+                                    href={navItem.href ?? "#"}
+                                    fontSize={"sm"}
+                                    fontWeight={500}
+                                    color={linkColor}
+                                    _hover={{
+                                        textDecoration: "none",
+                                        color: linkHoverColor,
+                                    }}
+                                >
+                                    {navItem.label}
+                                </Box>
+                            </PopoverTrigger>
+                        </Popover>
+                    </Box>
+                ))
+                :
+                PUBLIC_NAV_ITEMS.map((navItem) => (
+                    <Box key={navItem.label}>
+                        <Popover trigger={"hover"} placement={"bottom-start"}>
+                            <PopoverTrigger>
+                                <Box
+                                    as={Link}
+                                    to={navItem.href}
+                                    p={2}
+                                    href={navItem.href ?? "#"}
+                                    fontSize={"sm"}
+                                    fontWeight={500}
+                                    color={linkColor}
+                                    _hover={{
+                                        textDecoration: "none",
+                                        color: linkHoverColor,
+                                    }}
+                                >
+                                    {navItem.label}
+                                </Box>
+                            </PopoverTrigger>
+                        </Popover>
+                    </Box>
+                ))
+            }
         </Stack>
     );
 });

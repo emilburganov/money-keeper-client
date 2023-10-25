@@ -1,5 +1,5 @@
 import Button from "@/components/UI/Button/Button";
-import {useStores} from "@/hooks/useStores";
+import useStores from "@/hooks/useStores";
 import {Avatar, Box, Center, Flex, Heading, Image, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {useEffect, useState} from "react";

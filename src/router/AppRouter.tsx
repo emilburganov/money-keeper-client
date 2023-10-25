@@ -1,6 +1,6 @@
-import {useStores} from "@/hooks/useStores";
-import Hero from "@/pages/Hero";
+import useStores from "@/hooks/useStores";
 import Home from "@/pages/Home";
+import Profile from "@/pages/Profile";
 import {observer} from "mobx-react-lite";
 import {FC} from "react";
 import {Route, Routes} from "react-router-dom";
@@ -20,7 +20,7 @@ const AppRouter: FC = observer(() => {
                             key={route.path}
                         />,
                     )}
-                    <Route path="*" element={<Home/>}></Route>
+                    <Route path="*" element={<Profile/>}></Route>
                 </>
                 :
                 <>
@@ -30,7 +30,7 @@ const AppRouter: FC = observer(() => {
                             key={route.path}
                         />,
                     )}
-                    <Route path="*" element={<Hero/>}></Route>
+                    <Route path="*" element={<Home/>}></Route>
                 </>
             }
         </Routes>

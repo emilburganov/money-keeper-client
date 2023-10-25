@@ -10,6 +10,7 @@ const Container: FC = ({children, ...props}: ContainerProps) => {
         <Box
             w={"full"}
             bg={useColorModeValue("gray.50", "gray.800")}
+            py={4}
         >
             <ChakraContainer
                 maxW={"container.xl"}

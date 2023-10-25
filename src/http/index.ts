@@ -1,5 +1,5 @@
 import {API_URL} from "@/constants";
-import {TokenResponse} from "@/models/response/TokenResponse";
+import {TokenResponse} from "@/models/Response/TokenResponse";
 import axios from "axios";
 
 const $api = axios.create({
@@ -17,7 +17,7 @@ $api.interceptors.response.use((config) => {
 }, async (error) => {
     const originalRequest = error.config;
 
-    if (error.response.status == 401 && error.config && !error.config._isRetry && localStorage.getItem("token")) {
+    if (error.response.status === 401 && error.config && !error.config._isRetry && localStorage.getItem("token")) {
         originalRequest._isRetry = true;
 
         try {
