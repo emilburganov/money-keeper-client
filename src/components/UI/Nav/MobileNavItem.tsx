@@ -1,10 +1,11 @@
 import {Box, Stack, Text, useColorModeValue} from "@chakra-ui/react";
+import {MouseEventHandler} from "react";
 import {Link} from "react-router-dom";
 
 interface MobileNavItemProps {
     label: string,
     href?: string,
-    onClick?: void,
+    onClick?: MouseEventHandler<HTMLDivElement> | undefined,
     onToggle: void,
 }
 

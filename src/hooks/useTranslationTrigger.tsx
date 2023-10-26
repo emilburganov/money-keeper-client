@@ -6,7 +6,7 @@ interface useTranslationTriggerProps {
     isInvalid: boolean;
 }
 
-const useTranslationTrigger = (translation, callback, isInvalid): useTranslationTriggerProps => {
+const useTranslationTrigger = (translation, callback, isInvalid: boolean): useTranslationTriggerProps => {
     useEffect(() => {
         if (isInvalid) {
             setTimeout(callback, 0);

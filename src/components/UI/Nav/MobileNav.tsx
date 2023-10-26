@@ -6,7 +6,7 @@ import {observer} from "mobx-react-lite";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 
-const MobileNav = observer(({onToggle}: void) => {
+const MobileNav = observer(({onToggle}: () => void) => {
     const {t} = useTranslation();
     const {authStore} = useStores();
     const navigate = useNavigate();

@@ -19,9 +19,7 @@ const Footer = () => {
                 minH={"60px"}
                 py={{base: 4, md: 2}}
                 px={{base: 4}}
-
                 direction={{base: "column", md: "row"}}
-                spacing={4}
                 justify={{base: "center", md: "space-between"}}
                 align={{base: "center", md: "center"}}
                 maxW={"container.xl"}

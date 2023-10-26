@@ -3,7 +3,8 @@ import {ReactNode} from "react";
 
 interface ButtonProps {
     children: ReactNode,
-    props?: any,
+
+    [props: string]: any;
 }
 
 const Button = ({children, ...props}: ButtonProps) => {

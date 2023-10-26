@@ -89,7 +89,7 @@ const Registration: FC = () => {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm<RegisterForm>({
+    } = useForm<RegistrationCredentials>({
         resolver: useSchemaResolver(() => validationSchema),
     });
 

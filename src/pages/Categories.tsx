@@ -1,6 +1,7 @@
 import CategoryCard from "@/components/Categories/CategoryCard";
 import Container from "@/components/UI/Container/Container";
 import useStores from "@/hooks/useStores";
+import {ICategory} from "@/models/ICategory";
 import {SimpleGrid} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {useEffect} from "react";
@@ -18,8 +19,11 @@ const Categories = observer(() => {
     return (
         <Container>
             <SimpleGrid minChildWidth="280px" spacing="20px">
-                {categoryStore.categories.map((category) =>
-                    <CategoryCard key={category.id} category={category}/>,
+                {categoryStore.categories.map((category: ICategory) =>
+                    <CategoryCard
+                        key={category.id}
+                        category={category}
+                    />,
                 )}
             </SimpleGrid>
         </Container>

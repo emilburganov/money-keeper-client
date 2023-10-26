@@ -1,11 +1,13 @@
-import {Box, Container as ChakraContainer, Flex, useColorModeValue} from "@chakra-ui/react";
+import {Box, Container as ChakraContainer, useColorModeValue} from "@chakra-ui/react";
 import {FC, ReactNode} from "react";
 
 interface ContainerProps {
     children: ReactNode,
+
+    [props: string]: any;
 }
 
-const Container: FC = ({children, ...props}: ContainerProps) => {
+const Container: FC<ContainerProps> = ({children, ...props}) => {
     return (
         <Box
             w={"full"}

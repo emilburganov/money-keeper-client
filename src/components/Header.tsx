@@ -61,6 +61,7 @@ const Header = observer(() => {
                     </Flex>
                 </Flex>
                 <Stack
+                    as={Flex}
                     justify={"flex-end"}
                     align={"center"}
                     direction={"row"}
@@ -75,7 +76,6 @@ const Header = observer(() => {
                             display={{base: "none", md: "flex"}}
                         >
                             {t("header.buttons.auth.logout")}
-
                         </Button>
                         :
                         <>
@@ -103,7 +103,6 @@ const Header = observer(() => {
                     <LanguageSwitch onToggle={onToggle}/>
                 </Stack>
             </Flex>
-
             <Collapse in={isOpen} animateOpacity>
                 <MobileNav onToggle={onToggle}/>
             </Collapse>

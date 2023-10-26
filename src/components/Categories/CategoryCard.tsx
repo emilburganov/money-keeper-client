@@ -12,7 +12,7 @@ interface CategoryCardProps {
     category: ICategory,
 }
 
-const CategoryCard = ({category}: CategoryCardProps): CategoryCardProps => {
+const CategoryCard = ({category}: CategoryCardProps) => {
     const {categoryStore} = useStores();
 
     const getCategoryBadgeColor = () => {

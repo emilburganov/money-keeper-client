@@ -8,7 +8,8 @@ import {
     PopoverBody,
     PopoverContent,
     PopoverTrigger,
-    Stack, useColorModeValue,
+    Stack,
+    useColorModeValue,
 } from "@chakra-ui/react";
 import {useTranslation} from "react-i18next";
 
@@ -18,10 +19,9 @@ const languagesIcons = {
 };
 
 const LanguageSwitch = () => {
-    const {i18n} = useTranslation();
-    const {t} = useTranslation()
+    const {t, i18n} = useTranslation();
 
-    const changeLanguage = (language) => {
+    const changeLanguage = (language: string) => {
         i18n.changeLanguage(language);
     };
 

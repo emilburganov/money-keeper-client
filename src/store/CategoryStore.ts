@@ -1,15 +1,17 @@
 import {ICategory} from "@/models/ICategory";
 import CategoryService from "@/services/CategoryService";
+import RootStore from "@/store/RootStore";
 import {createStandaloneToast} from "@chakra-ui/react";
+import {AxiosError} from "axios";
 import {makeAutoObservable} from "mobx";
 
 const {toast} = createStandaloneToast();
 
 class CategoryStore {
-    private rootStore;
-    categories = [] as ICategory;
+    private rootStore: RootStore ;
+    categories: ICategory[] = [];
 
-    constructor(rootStore) {
+    constructor(rootStore: RootStore) {
         makeAutoObservable(this);
         this.rootStore = rootStore;
     }
@@ -22,7 +24,11 @@ class CategoryStore {
         try {
             const response = await CategoryService.index(this.rootStore.authStore.user);
             this.setCategories(response.data);
-        } catch (error) {
+        } catch (error: unknown) {
+            if (!(error instanceof AxiosError)) {
+                throw error;
+            }
+
             toast({
                 title: "Error loading categories.",
                 description: "Check your internet connection or try again.",
@@ -38,7 +44,11 @@ class CategoryStore {
         try {
             await CategoryService.destroy(this.rootStore.authStore.user, category);
             this.setCategories(this.categories.filter(_category => _category.id !== category.id));
-        } catch (error) {
+        } catch (error: unknown) {
+            if (!(error instanceof AxiosError)) {
+                throw error;
+            }
+
             toast({
                 title: "Error during deletion.",
                 description: "Category does not exist.",

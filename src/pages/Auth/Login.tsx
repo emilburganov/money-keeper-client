@@ -56,7 +56,7 @@ const Login: FC = () => {
         register,
         handleSubmit,
         formState: {errors},
-    } = useForm<LoginForm>({
+    } = useForm<LoginCredentials>({
         resolver: useSchemaResolver(() => validationSchema),
     });
 

@@ -40,7 +40,11 @@ class AuthStore {
             });
 
             return response;
-        } catch (error: AxiosError) {
+        } catch (error: unknown) {
+            if (!(error instanceof AxiosError)) {
+                throw error;
+            }
+
             if (!error.response) {
                 return toast({
                     title: "Network error.",
@@ -90,7 +94,11 @@ class AuthStore {
             });
 
             return response;
-        } catch (error: AxiosError) {
+        } catch (error: unknown) {
+            if (!(error instanceof AxiosError)) {
+                throw error;
+            }
+
             if (!error.response) {
                 return toast({
                     title: "Network error.",
@@ -116,7 +124,8 @@ class AuthStore {
             const errors = error.response.data?.errors;
             const message = error.response.data?.message;
 
-            Object.values(errors).forEach((error) => {
+            Object.values(errors).forEach((error: string[]) => {
+                console.log(error);
                 toast({
                     title: message,
                     description: error[0],
@@ -142,7 +151,11 @@ class AuthStore {
         try {
             const response = await AuthService.me();
             this.setUser(response.data);
-        } catch (error: AxiosError) {
+        } catch (error: unknown) {
+            if (!(error instanceof AxiosError)) {
+                throw error;
+            }
+
             if (!error.response) {
                 return toast({
                     title: "Network error.",

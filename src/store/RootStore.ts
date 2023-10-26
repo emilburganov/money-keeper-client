@@ -1,6 +1,11 @@
 import CategoryStore from "@/store/CategoryStore";
 import AuthStore from './AuthStore';
 
+interface RootStore {
+    authStore: AuthStore;
+    categoryStore: CategoryStore;
+}
+
 class RootStore {
     authStore: AuthStore;
     categoryStore: CategoryStore;
