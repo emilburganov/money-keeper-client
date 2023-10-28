@@ -1,4 +1,4 @@
-import {StoreContext} from "@/context";
+import StoreContext from "@/context/StoreContext";
 import {RootStoreType} from "@/store/RootStore";
 import {useContext} from "react";
 

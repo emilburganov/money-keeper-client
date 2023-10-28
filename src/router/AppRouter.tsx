@@ -20,7 +20,7 @@ const AppRouter: FC = observer(() => {
                             key={route.path}
                         />,
                     )}
-                    <Route path="*" element={<Profile/>}></Route>
+                    <Route path="*" element={<Profile/>}/>
                 </>
                 :
                 <>
@@ -30,7 +30,7 @@ const AppRouter: FC = observer(() => {
                             key={route.path}
                         />,
                     )}
-                    <Route path="*" element={<Home/>}></Route>
+                    <Route path="*" element={<Home/>}/>
                 </>
             }
         </Routes>

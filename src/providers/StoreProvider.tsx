@@ -1,8 +1,8 @@
 import RootStore from "@/store/RootStore";
 import {ReactNode} from "react";
-import {StoreContext} from '@/context'
+import StoreContext from '@/context/StoreContext'
 
-export const StoreProvider = ({children}: { children: ReactNode }) => {
+const StoreProvider = ({children}: { children: ReactNode }) => {
     const store = new RootStore();
 
     return (
@@ -11,3 +11,6 @@ export const StoreProvider = ({children}: { children: ReactNode }) => {
         </StoreContext.Provider>
     );
 };
+
+
+export default StoreProvider;

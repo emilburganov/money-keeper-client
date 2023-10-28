@@ -7,6 +7,7 @@ const useUnload = (callback: () => void) => {
         const handleUnload = callbackRef.current;
 
         window.addEventListener("beforeunload", handleUnload);
+
         return () => {
             window.removeEventListener("beforeunload", handleUnload);
         };
