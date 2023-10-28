@@ -1,6 +1,6 @@
+import {LoginCredentials} from "@/models/Credentials/LoginCredentials";
+import {RegistrationCredentials} from "@/models/Credentials/RegistrationCredentials";
 import {IUser} from "@/models/IUser";
-import {LoginCredentials} from "@/pages/Auth/Login";
-import {RegistrationCredentials} from "@/pages/Auth/Registration";
 import AuthService from "@/services/AuthService";
 import {createStandaloneToast} from "@chakra-ui/react";
 import {AxiosError} from "axios";
@@ -121,11 +121,12 @@ class AuthStore {
                 });
             }
 
-            const errors = error.response.data?.errors;
+            const errors = error.response?.data?.errors;
             const message = error.response.data?.message;
 
+            console.log(error);
+
             Object.values(errors).forEach((error: string[]) => {
-                console.log(error);
                 toast({
                     title: message,
                     description: error[0],

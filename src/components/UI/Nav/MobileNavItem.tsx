@@ -1,22 +1,22 @@
 import {Box, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {MouseEventHandler} from "react";
-import {Link} from "react-router-dom";
+import {Link, To} from "react-router-dom";
 
 interface MobileNavItemProps {
-    label: string,
-    href?: string,
-    onClick?: MouseEventHandler<HTMLDivElement> | undefined,
-    onToggle: void,
+    label: string;
+    to?: To;
+    onClick?: MouseEventHandler<HTMLDivElement>;
+    onToggle: () => void;
 }
 
-const MobileNavItem = ({label, href, onClick, onToggle}: MobileNavItemProps) => {
+const MobileNavItem = ({label, to, onClick, onToggle}: MobileNavItemProps) => {
     return (
         <Stack spacing={4} onClick={onToggle}>
             <Box
                 onClick={onClick}
                 py={2}
                 as={Link}
-                to={href}
+                to={to}
                 justifyContent="space-between"
                 alignItems="center"
                 _hover={{

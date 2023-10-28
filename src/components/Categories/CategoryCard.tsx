@@ -15,7 +15,7 @@ interface CategoryCardProps {
 const CategoryCard = ({category}: CategoryCardProps) => {
     const {categoryStore} = useStores();
 
-    const getCategoryBadgeColor = () => {
+    const getCategoryBadgeColor = (): string => {
         return TypeColors[category.type_name];
     };
 

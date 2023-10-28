@@ -1,8 +1,8 @@
+import {LoginCredentials} from "@/models/Credentials/LoginCredentials";
+import {RegistrationCredentials} from "@/models/Credentials/RegistrationCredentials";
+import {IUser} from "@/models/IUser";
 import {MessageResponse} from "@/models/Response/MessageResponse";
 import {TokenResponse} from "@/models/Response/TokenResponse";
-import {UserResponse} from "@/models/Response/UserResponse";
-import {LoginCredentials} from "@/pages/Auth/Login";
-import {RegistrationCredentials} from "@/pages/Auth/Registration";
 import {AxiosResponse} from "axios";
 import $api from "../http/index";
 
@@ -27,7 +27,7 @@ export default class AuthService {
         return $api.post("auth/logout");
     }
 
-    static async me(): Promise<AxiosResponse<UserResponse>> {
+    static async me(): Promise<AxiosResponse<IUser>> {
         return $api.post("auth/me");
     }
 }

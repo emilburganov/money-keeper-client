@@ -6,7 +6,11 @@ import {observer} from "mobx-react-lite";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 
-const MobileNav = observer(({onToggle}: () => void) => {
+interface MobileNavProps {
+    onToggle: () => void;
+}
+
+const MobileNav = observer(({onToggle}: MobileNavProps) => {
     const {t} = useTranslation();
     const {authStore} = useStores();
     const navigate = useNavigate();
@@ -16,31 +20,41 @@ const MobileNav = observer(({onToggle}: () => void) => {
         navigate("/login");
     };
 
-    const PRIVATE_NAV_ITEMS: Array<NavItem> = [
+    const PRIVATE_NAV_ITEMS: NavItem[] = [
         {
             label: t("header.navigation.profile"),
-            href: "/profile",
+            to: "/profile",
         },
         {
             label: t("header.navigation.categories"),
-            href: "/categories",
+            to: "/categories",
         },
     ];
 
-    const PUBLIC_NAV_ITEMS: Array<NavItem> = [
+    const PUBLIC_NAV_ITEMS: NavItem[] = [
         {
             label: t("header.navigation.home"),
-            href: "/",
+            to: "/",
         },
     ];
 
     return (
         <Stack bg={useColorModeValue("white", "gray.800")} p={4} display={{md: "none"}}>
             {PUBLIC_NAV_ITEMS.map((navItem) => (
-                <MobileNavItem onToggle={onToggle} key={navItem.label} {...navItem}/>
+                <MobileNavItem
+                    key={navItem.label}
+                    to={navItem.to}
+                    onToggle={onToggle}
+                    label={navItem.label}
+                />
             ))}
             {authStore.isAuth && PRIVATE_NAV_ITEMS.map((navItem) => (
-                <MobileNavItem onToggle={onToggle} key={navItem.label} {...navItem}/>
+                <MobileNavItem
+                    key={navItem.label}
+                    to={navItem.to}
+                    onToggle={onToggle}
+                    label={navItem.label}
+                />
             ))}
             {authStore.isAuth ?
                 <MobileNavItem
@@ -53,12 +67,12 @@ const MobileNav = observer(({onToggle}: () => void) => {
                     <MobileNavItem
                         onToggle={onToggle}
                         label={t("header.buttons.auth.login")}
-                        href="/login"
+                        to="/login"
                     />
                     <MobileNavItem
                         onToggle={onToggle}
                         label={t("header.buttons.auth.registration")}
-                        href="/registration"
+                        to="/registration"
                     />
                 </>
             }

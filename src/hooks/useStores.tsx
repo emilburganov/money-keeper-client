@@ -1,8 +1,8 @@
 import {StoreContext} from "@/context";
-import RootStore from "@/store/RootStore";
+import {RootStoreType} from "@/store/RootStore";
 import {useContext} from "react";
 
-const useStores = (): RootStore => {
+const useStores = (): RootStoreType => {
     return useContext(StoreContext);
 };
 

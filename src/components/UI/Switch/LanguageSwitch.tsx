@@ -14,8 +14,8 @@ import {
 import {useTranslation} from "react-i18next";
 
 const languagesIcons = {
-    ru: <RussianFlagIcon/>,
-    en: <EnglishFlagIcon/>,
+    "ru": <RussianFlagIcon/>,
+    "en": <EnglishFlagIcon/>,
 };
 
 const LanguageSwitch = () => {

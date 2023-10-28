@@ -66,7 +66,6 @@ const Header = observer(() => {
                     align={"center"}
                     direction={"row"}
                     spacing={3}
-                    g={6}
                 >
                     {authStore.isAuth ?
                         <Button
@@ -100,7 +99,7 @@ const Header = observer(() => {
                     <Hide below="sm">
                         <ThemeButton/>
                     </Hide>
-                    <LanguageSwitch onToggle={onToggle}/>
+                    <LanguageSwitch/>
                 </Stack>
             </Flex>
             <Collapse in={isOpen} animateOpacity>

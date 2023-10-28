@@ -1,6 +1,6 @@
 import {useEffect, useRef} from "react";
 
-const useUnload = (callback: void) => {
+const useUnload = (callback: () => void) => {
     const callbackRef = useRef(callback);
 
     useEffect(() => {

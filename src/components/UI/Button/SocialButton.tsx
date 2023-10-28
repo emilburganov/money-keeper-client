@@ -2,9 +2,9 @@ import {chakra, useColorModeValue, VisuallyHidden} from "@chakra-ui/react";
 import {ReactNode} from "react";
 
 interface SocialButtonProps {
-    children: ReactNode
-    label: string
-    href: string
+    children: ReactNode;
+    label: string;
+    href: string;
 }
 
 const SocialButton = ({children, label, href}: SocialButtonProps) => {

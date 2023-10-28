@@ -2,8 +2,9 @@ import {Button as ChakraButton} from "@chakra-ui/react";
 import {ReactNode} from "react";
 
 interface ButtonProps {
-    children: ReactNode,
-    props?: any,
+    children: ReactNode;
+
+    [props: string]: any;
 }
 
 const Button = ({children, ...props}: ButtonProps) => {

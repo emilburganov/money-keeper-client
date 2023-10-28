@@ -1,12 +1,11 @@
+import {TFunction} from "i18next";
 import {useEffect} from "react";
 
-interface useTranslationTriggerProps {
-    translation: void;
-    callback: void;
-    isInvalid: boolean;
-}
-
-const useTranslationTrigger = (translation, callback, isInvalid: boolean): useTranslationTriggerProps => {
+const useTranslationTrigger = (
+    translation: TFunction,
+    callback: () => void,
+    isInvalid: boolean,
+) => {
     useEffect(() => {
         if (isInvalid) {
             setTimeout(callback, 0);

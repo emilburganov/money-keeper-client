@@ -3,8 +3,8 @@ import {ViewIcon, ViewOffIcon} from "@chakra-ui/icons";
 import {Dispatch, SetStateAction} from "react";
 
 interface HideButtonProps {
-    show: boolean,
-    setShow: Dispatch<SetStateAction<boolean>>,
+    show: boolean;
+    setShow: Dispatch<SetStateAction<boolean>>;
 }
 
 const HideButton = ({show, setShow}: HideButtonProps) => {

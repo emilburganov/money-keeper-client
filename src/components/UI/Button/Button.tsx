@@ -2,7 +2,7 @@ import {Button as ChakraButton} from "@chakra-ui/react";
 import {ReactNode} from "react";
 
 interface ButtonProps {
-    children: ReactNode,
+    children: ReactNode;
 
     [props: string]: any;
 }

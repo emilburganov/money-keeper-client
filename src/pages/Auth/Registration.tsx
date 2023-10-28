@@ -3,7 +3,7 @@ import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import useStores from "@/hooks/useStores";
 import useTranslationTrigger from "@/hooks/useTranslationTrigger";
-import useSchemaResolver from "@/hooks/useSchemaResolver";
+import {RegistrationCredentials} from "@/models/Credentials/RegistrationCredentials";
 import {
     Box,
     Flex,
@@ -18,18 +18,12 @@ import {
     Stack,
     useColorModeValue,
 } from "@chakra-ui/react";
+import {yupResolver} from "@hookform/resolvers/yup";
 import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
-
-export interface RegistrationCredentials {
-    name: string;
-    email: string;
-    password: string;
-    passwordConfirmation: string;
-}
 
 const Registration: FC = () => {
     const {t} = useTranslation();
@@ -79,7 +73,7 @@ const Registration: FC = () => {
             .required(() => t("validation.required", {
                 field: t("pages.register.form.fields.passwordConfirmation"),
             }))
-            .oneOf([Yup.ref("password"), null], () => t("validation.oneOf", {
+            .oneOf([Yup.ref("password")], () => t("validation.oneOf", {
                 firstField: t("pages.register.form.fields.passwordConfirmation"),
                 secondField: t("pages.register.form.fields.password"),
             })),
@@ -90,7 +84,7 @@ const Registration: FC = () => {
         handleSubmit,
         formState: {errors},
     } = useForm<RegistrationCredentials>({
-        resolver: useSchemaResolver(() => validationSchema),
+        resolver: yupResolver(validationSchema),
     });
 
     const registration = async (): Promise<void> => {
@@ -104,7 +98,7 @@ const Registration: FC = () => {
         setLoading(false);
     };
 
-    const isInvalid = !!Object.entries(errors).length
+    const isInvalid: boolean = !!Object.entries(errors).length;
     useTranslationTrigger(t, handleSubmit(registration), isInvalid);
 
     return (

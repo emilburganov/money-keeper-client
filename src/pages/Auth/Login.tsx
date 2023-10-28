@@ -1,9 +1,9 @@
 import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
-import useSchemaResolver from "@/hooks/useSchemaResolver";
 import useStores from "@/hooks/useStores";
 import useTranslationTrigger from "@/hooks/useTranslationTrigger";
+import {LoginCredentials} from "@/models/Credentials/LoginCredentials";
 import {
     Box,
     Flex,
@@ -19,16 +19,12 @@ import {
     Text,
     useColorModeValue,
 } from "@chakra-ui/react";
+import {yupResolver} from "@hookform/resolvers/yup";
 import {FC, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
 import * as Yup from "yup";
-
-export interface LoginCredentials {
-    email: string;
-    password: string;
-}
 
 const Login: FC = () => {
     const {t} = useTranslation();
@@ -57,7 +53,7 @@ const Login: FC = () => {
         handleSubmit,
         formState: {errors},
     } = useForm<LoginCredentials>({
-        resolver: useSchemaResolver(() => validationSchema),
+        resolver: yupResolver(validationSchema)
     });
 
     const login = async (): Promise<void> => {
@@ -71,7 +67,7 @@ const Login: FC = () => {
         setLoading(false);
     };
 
-    const isInvalid = !!Object.entries(errors).length
+    const isInvalid: boolean = !!Object.entries(errors).length;
     useTranslationTrigger(t, handleSubmit(login), isInvalid);
 
     return (
@@ -85,7 +81,7 @@ const Login: FC = () => {
                 mx={"auto"}
                 py={6}
             >
-                <Heading align={"center"} fontSize={"4xl"} textAlign={"center"}>
+                <Heading fontSize={"4xl"} textAlign={"center"}>
                     {t("pages.login.form.title")}
                 </Heading>
                 <Box
@@ -97,7 +93,6 @@ const Login: FC = () => {
                     p={6}
                 >
                     <Stack spacing={4}>
-
                         <FormControl isInvalid={!!errors.email?.message}>
                             <FormLabel>
                                 {t("pages.login.form.fields.email")}
@@ -116,7 +111,6 @@ const Login: FC = () => {
                                 </FormErrorMessage>
                             }
                         </FormControl>
-
                         <FormControl isInvalid={!!errors.password?.message}>
                             <FormLabel>
                                 {t("pages.login.form.fields.password")}
@@ -143,7 +137,6 @@ const Login: FC = () => {
                                 </FormErrorMessage>
                             }
                         </FormControl>
-
                         <Stack spacing={10} pt={2}>
                             <Button
                                 isLoading={isLoading}
@@ -153,7 +146,6 @@ const Login: FC = () => {
                                 {t("pages.login.form.button")}
                             </Button>
                         </Stack>
-
                         <Flex
                             pt={6}
                             align={"center"}
@@ -171,7 +163,6 @@ const Login: FC = () => {
                                 {t("pages.register.form.button")}
                             </Link>
                         </Flex>
-
                     </Stack>
                 </Box>
             </Stack>

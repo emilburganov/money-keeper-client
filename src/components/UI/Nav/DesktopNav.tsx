@@ -2,11 +2,11 @@ import useStores from "@/hooks/useStores";
 import {Box, Popover, PopoverTrigger, Stack, useColorModeValue} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {useTranslation} from "react-i18next";
-import {Link} from "react-router-dom";
+import {Link, To} from "react-router-dom";
 
 export interface NavItem {
     label: string;
-    href?: string;
+    to?: To;
 }
 
 const DesktopNav = observer(() => {
@@ -18,18 +18,18 @@ const DesktopNav = observer(() => {
     const PRIVATE_NAV_ITEMS: Array<NavItem> = [
         {
             label: t("header.navigation.profile"),
-            href: "/profile",
+            to: "/profile",
         },
         {
             label: t("header.navigation.categories"),
-            href: "/categories",
+            to: "/categories",
         },
     ];
 
     const PUBLIC_NAV_ITEMS: Array<NavItem> = [
         {
             label: t("header.navigation.home"),
-            href: "/",
+            to: "/",
         },
     ];
 
@@ -42,9 +42,8 @@ const DesktopNav = observer(() => {
                             <PopoverTrigger>
                                 <Box
                                     as={Link}
-                                    to={navItem.href}
+                                    to={navItem.to}
                                     p={2}
-                                    href={navItem.href ?? "#"}
                                     fontSize={"sm"}
                                     fontWeight={500}
                                     color={linkColor}
@@ -66,9 +65,8 @@ const DesktopNav = observer(() => {
                             <PopoverTrigger>
                                 <Box
                                     as={Link}
-                                    to={navItem.href}
+                                    to={navItem.to}
                                     p={2}
-                                    href={navItem.href ?? "#"}
                                     fontSize={"sm"}
                                     fontWeight={500}
                                     color={linkColor}
