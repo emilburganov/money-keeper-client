@@ -11,11 +11,12 @@ import {
     Stack,
     useColorModeValue,
 } from "@chakra-ui/react";
+import {ReactElement} from "react";
 import {useTranslation} from "react-i18next";
 
-const languagesIcons = {
-    "ru": <RussianFlagIcon/>,
-    "en": <EnglishFlagIcon/>,
+const LanguagesIcons: Record<string, ReactElement> = {
+    ru: <RussianFlagIcon/>,
+    en: <EnglishFlagIcon/>,
 };
 
 const LanguageSwitch = () => {
@@ -39,7 +40,7 @@ const LanguageSwitch = () => {
                                 cursor={"pointer"}
                                 borderRadius={"10px"}
                             >
-                                {languagesIcons[i18n.language]}
+                                {LanguagesIcons[i18n.language]}
                             </Flex>
                         </PopoverTrigger>
                         <PopoverContent marginRight={4} w="fit-content" _focus={{boxShadow: "none"}}>

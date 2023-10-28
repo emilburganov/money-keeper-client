@@ -1,6 +1,7 @@
 import {LoginCredentials} from "@/models/Credentials/LoginCredentials";
 import {RegistrationCredentials} from "@/models/Credentials/RegistrationCredentials";
 import {IUser} from "@/models/IUser";
+import {ErrorsResponse} from "@/models/Response/ErrorsResponse";
 import AuthService from "@/services/AuthService";
 import {createStandaloneToast} from "@chakra-ui/react";
 import {AxiosError} from "axios";
@@ -95,11 +96,9 @@ class AuthStore {
 
             return response;
         } catch (error: unknown) {
-            if (!(error instanceof AxiosError)) {
-                throw error;
-            }
+            const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (!error.response) {
+            if (!axiosError.response) {
                 return toast({
                     title: "Network error.",
                     description: "Check your internet connection and try again.",
@@ -110,7 +109,7 @@ class AuthStore {
                 });
             }
 
-            if (error.response.status === 500) {
+            if (axiosError.response.status === 500) {
                 return toast({
                     title: "Server error.",
                     description: "Server side error, try again another time.",
@@ -121,12 +120,10 @@ class AuthStore {
                 });
             }
 
-            const errors = error.response?.data?.errors;
-            const message = error.response.data?.message;
+            const errors = axiosError.response.data?.errors;
+            const message = axiosError.response.data?.message;
 
-            console.log(error);
-
-            Object.values(errors).forEach((error: string[]) => {
+            Object.values(errors).forEach((error: string[]): void => {
                 toast({
                     title: message,
                     description: error[0],

@@ -3,9 +3,9 @@ import useStores from "@/hooks/useStores";
 import {ICategory} from "@/models/ICategory";
 import {Badge, Card, CardBody, CardFooter, CardHeader, Heading, Text} from "@chakra-ui/react";
 
-enum TypeColors {
-    Incomes = "green",
-    Expenses = "red",
+const TypeColors: Record<string, string> = {
+    Incomes: "green",
+    Expenses: "red",
 }
 
 interface CategoryCardProps {
