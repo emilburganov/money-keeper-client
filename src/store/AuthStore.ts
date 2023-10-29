@@ -42,11 +42,9 @@ class AuthStore {
 
             return response;
         } catch (error: unknown) {
-            if (!(error instanceof AxiosError)) {
-                throw error;
-            }
+            const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (!error.response) {
+            if (!axiosError.response) {
                 return toast({
                     title: "Network error.",
                     description: "Check your internet connection and try again.",
@@ -57,7 +55,7 @@ class AuthStore {
                 });
             }
 
-            if (error.response.status === 500) {
+            if (axiosError.response.status === 500) {
                 return toast({
                     title: "Server error.",
                     description: "Server side error, try again another time.",
@@ -70,7 +68,7 @@ class AuthStore {
 
             toast({
                 title: "Authentication error.",
-                description: error.response.data?.message,
+                description: axiosError.response.data?.message,
                 status: "error",
                 duration: 5000,
                 isClosable: true,
@@ -120,13 +118,13 @@ class AuthStore {
                 });
             }
 
-            const errors = axiosError.response.data?.errors;
-            const message = axiosError.response.data?.message;
+            const errors: string[] = axiosError.response.data?.errors;
+            const message: string = axiosError.response.data?.message;
 
-            Object.values(errors).forEach((error: string[]): void => {
+            Object.values(errors).forEach((error): void => {
                 toast({
                     title: message,
-                    description: error[0],
+                    description: error,
                     status: "error",
                     duration: 5000,
                     isClosable: true,
@@ -150,11 +148,9 @@ class AuthStore {
             const response = await AuthService.me();
             this.setUser(response.data);
         } catch (error: unknown) {
-            if (!(error instanceof AxiosError)) {
-                throw error;
-            }
+            const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (!error.response) {
+            if (!axiosError.response) {
                 return toast({
                     title: "Network error.",
                     description: "Check your internet connection and try again.",

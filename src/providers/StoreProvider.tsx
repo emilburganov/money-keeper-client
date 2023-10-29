@@ -1,6 +1,6 @@
+import StoreContext from "@/context/StoreContext";
 import RootStore from "@/store/RootStore";
 import {ReactNode} from "react";
-import StoreContext from '@/context/StoreContext'
 
 const StoreProvider = ({children}: { children: ReactNode }) => {
     const store = new RootStore();

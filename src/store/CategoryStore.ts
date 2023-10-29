@@ -1,4 +1,5 @@
 import {ICategory} from "@/models/ICategory";
+import {ErrorsResponse} from "@/models/Response/ErrorsResponse";
 import CategoryService from "@/services/CategoryService";
 import RootStore from "@/store/RootStore";
 import {createStandaloneToast} from "@chakra-ui/react";
@@ -8,7 +9,7 @@ import {makeAutoObservable} from "mobx";
 const {toast} = createStandaloneToast();
 
 class CategoryStore {
-    private rootStore: RootStore ;
+    private rootStore: RootStore;
     categories: ICategory[] = [];
 
     constructor(rootStore: RootStore) {
@@ -25,18 +26,18 @@ class CategoryStore {
             const response = await CategoryService.index(this.rootStore.authStore.user);
             this.setCategories(response.data);
         } catch (error: unknown) {
-            if (!(error instanceof AxiosError)) {
-                throw error;
-            }
+            const axiosError = error as AxiosError<ErrorsResponse>;
 
-            toast({
-                title: "Error loading categories.",
-                description: "Check your internet connection or try again.",
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-                position: "bottom-left",
-            });
+            if (!axiosError.response) {
+                return toast({
+                    title: "Network error.",
+                    description: "Check your internet connection and try again.",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-left",
+                });
+            }
         }
     }
 
@@ -45,18 +46,18 @@ class CategoryStore {
             await CategoryService.destroy(this.rootStore.authStore.user, category);
             this.setCategories(this.categories.filter(_category => _category.id !== category.id));
         } catch (error: unknown) {
-            if (!(error instanceof AxiosError)) {
-                throw error;
-            }
+            const axiosError = error as AxiosError<ErrorsResponse>;
 
-            toast({
-                title: "Error during deletion.",
-                description: "Category does not exist.",
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-                position: "bottom-left",
-            });
+            if (!axiosError.response) {
+                return toast({
+                    title: "Network error.",
+                    description: "Check your internet connection and try again.",
+                    status: "error",
+                    duration: 5000,
+                    isClosable: true,
+                    position: "bottom-left",
+                });
+            }
         }
     }
 }

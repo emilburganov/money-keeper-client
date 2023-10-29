@@ -12,7 +12,7 @@ import "./i18n";
 import "./styles/App.css";
 
 const App: FC = () => {
-    // TODO: TypeScript fix typing
+    // TODO: TypeScript props interfaces and component FC
     // TODO: Server Error Provider
     // TODO: Network Error Provider
     // TODO: Success & Error toasts utils
