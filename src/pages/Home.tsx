@@ -25,7 +25,8 @@ const Home = () => {
                     fontSize={{base: "2xl", sm: "4xl", md: "6xl"}}
                     lineHeight={"110%"}
                 >
-                    {t("pages.hero.title.main")} <br/>
+                    {t("pages.hero.title.main")}
+                    <br/>
                     <Text as={"span"} color={"green.400"}>
                         {t("pages.hero.title.highlighted")}
                     </Text>

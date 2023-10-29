@@ -67,7 +67,7 @@
     "required": "The {{field}} field is required.",
     "max": "The {{field}} field must not be greater than {{max}} characters.",
     "min": "The {{field}} field must be at least {{min}} characters.",
-    "email": "The {{email}} field must be a valid email address.",
+    "email": "The {{field}} field must be a valid email address.",
     "oneOf": "The {{firstField}} field must match {{secondField}}."
   }
 }

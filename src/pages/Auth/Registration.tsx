@@ -2,7 +2,6 @@ import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import useStores from "@/hooks/useStores";
-import useTranslationTrigger from "@/hooks/useTranslationTrigger";
 import {RegistrationCredentials} from "@/models/Credentials/RegistrationCredentials";
 import {
     Box,
@@ -19,7 +18,7 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
@@ -56,7 +55,9 @@ const Registration: FC = () => {
             .required(() => t("validation.required", {
                 field: t("pages.register.form.fields.email"),
             }))
-            .email(() => t("validation.email")),
+            .email(() => t("validation.email", {
+                field: t("pages.register.form.fields.email"),
+            })),
         password: Yup.string()
             .required(() => t("validation.required", {
                 field: t("pages.register.form.fields.password"),
@@ -87,7 +88,7 @@ const Registration: FC = () => {
         resolver: yupResolver(validationSchema),
     });
 
-    const registration = async (): Promise<void> => {
+    const registration = async () => {
         setLoading(true);
 
         const response = await authStore.registration(credentials);
@@ -98,8 +99,11 @@ const Registration: FC = () => {
         setLoading(false);
     };
 
-    const isInvalid: boolean = !!Object.entries(errors).length;
-    useTranslationTrigger(t, handleSubmit(registration), isInvalid);
+    useEffect(() => {
+        if (Object.entries(errors).length > 0) {
+            setTimeout(handleSubmit(registration));
+        }
+    }, [t]);
 
     return (
         <Container>
@@ -126,7 +130,6 @@ const Registration: FC = () => {
                     p={6}
                 >
                     <Stack spacing={4}>
-
                         <FormControl isInvalid={!!errors.name?.message}>
                             <FormLabel>
                                 {t("pages.register.form.fields.name")}
@@ -145,7 +148,6 @@ const Registration: FC = () => {
                                 </FormErrorMessage>
                             }
                         </FormControl>
-
                         <FormControl isInvalid={!!errors.email?.message}>
                             <FormLabel>
                                 {t("pages.register.form.fields.email")}
@@ -164,7 +166,6 @@ const Registration: FC = () => {
                                 </FormErrorMessage>
                             }
                         </FormControl>
-
                         <FormControl isInvalid={!!errors.password?.message}>
                             <FormLabel>
                                 {t("pages.register.form.fields.password")}
@@ -191,7 +192,6 @@ const Registration: FC = () => {
                                 </FormErrorMessage>
                             }
                         </FormControl>
-
                         <FormControl isInvalid={!!errors.passwordConfirmation?.message}>
                             <FormLabel>
                                 {t("pages.register.form.fields.passwordConfirmation")}
@@ -218,7 +218,6 @@ const Registration: FC = () => {
                                 </FormErrorMessage>
                             }
                         </FormControl>
-
                         <Stack spacing={10} pt={2}>
                             <Button
                                 isLoading={isLoading}
@@ -228,7 +227,6 @@ const Registration: FC = () => {
                                 {t("pages.register.form.button")}
                             </Button>
                         </Stack>
-
                         <Flex
                             pt={6}
                             align={"center"}
@@ -244,7 +242,6 @@ const Registration: FC = () => {
                                 {t("pages.login.form.button")}
                             </Link>
                         </Flex>
-
                     </Stack>
                 </Box>
             </Stack>

@@ -1,13 +1,11 @@
+import {notification} from "@/helpers/notification";
 import {LoginCredentials} from "@/models/Credentials/LoginCredentials";
 import {RegistrationCredentials} from "@/models/Credentials/RegistrationCredentials";
 import {IUser} from "@/models/IUser";
 import {ErrorsResponse} from "@/models/Response/ErrorsResponse";
 import AuthService from "@/services/AuthService";
-import {createStandaloneToast} from "@chakra-ui/react";
 import {AxiosError} from "axios";
 import {makeAutoObservable} from "mobx";
-
-const {toast} = createStandaloneToast();
 
 class AuthStore {
     isAuth = !!localStorage.getItem("token");
@@ -31,49 +29,28 @@ class AuthStore {
             localStorage.setItem("token", response.data.access_token);
             this.setAuth(true);
 
-            toast({
-                title: "Successful login.",
-                description: "You have successful login into your account.",
-                status: "success",
-                duration: 5000,
-                isClosable: true,
-                position: "bottom-left",
-            });
+            notification(
+                "Successful login.",
+                "You have successful login into your account.",
+            );
 
             return response;
         } catch (error: unknown) {
             const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (!axiosError.response) {
-                return toast({
-                    title: "Network error.",
-                    description: "Check your internet connection and try again.",
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-left",
-                });
+            if (!axiosError.response || axiosError.response.status === 500) {
+                notification(
+                    "Server error.",
+                    "Server side error, try again another time.",
+                    false,
+                );
+            } else if (axiosError.response.status === 401) {
+                notification(
+                    "Authentication error.",
+                    axiosError.response.data?.message,
+                    false,
+                );
             }
-
-            if (axiosError.response.status === 500) {
-                return toast({
-                    title: "Server error.",
-                    description: "Server side error, try again another time.",
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-left",
-                });
-            }
-
-            toast({
-                title: "Authentication error.",
-                description: axiosError.response.data?.message,
-                status: "error",
-                duration: 5000,
-                isClosable: true,
-                position: "bottom-left",
-            });
         }
     }
 
@@ -83,54 +60,33 @@ class AuthStore {
             localStorage.setItem("token", response.data?.access_token);
             this.setAuth(true);
 
-            toast({
-                title: "Successful registered.",
-                description: "You have successful registered your account.",
-                status: "success",
-                duration: 5000,
-                isClosable: true,
-                position: "bottom-left",
-            });
+            notification(
+                "Successful registered.",
+                "You have successful registered your account.",
+            );
 
             return response;
         } catch (error: unknown) {
             const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (!axiosError.response) {
-                return toast({
-                    title: "Network error.",
-                    description: "Check your internet connection and try again.",
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-left",
+            if (!axiosError.response || axiosError?.response.status === 500) {
+                notification(
+                    "Server error.",
+                    "Server side error, try again another time.",
+                    false,
+                );
+            } else if (axiosError.response?.data?.errors) {
+                const errors: string[] = axiosError.response.data?.errors;
+                const message: string = axiosError.response.data?.message;
+
+                Object.values(errors).forEach((error) => {
+                    notification(
+                        message,
+                        error,
+                        false,
+                    );
                 });
             }
-
-            if (axiosError.response.status === 500) {
-                return toast({
-                    title: "Server error.",
-                    description: "Server side error, try again another time.",
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-left",
-                });
-            }
-
-            const errors: string[] = axiosError.response.data?.errors;
-            const message: string = axiosError.response.data?.message;
-
-            Object.values(errors).forEach((error): void => {
-                toast({
-                    title: message,
-                    description: error,
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-left",
-                });
-            });
         }
     }
 
@@ -150,15 +106,12 @@ class AuthStore {
         } catch (error: unknown) {
             const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (!axiosError.response) {
-                return toast({
-                    title: "Network error.",
-                    description: "Check your internet connection and try again.",
-                    status: "error",
-                    duration: 5000,
-                    isClosable: true,
-                    position: "bottom-left",
-                });
+            if (!axiosError.response || axiosError.response.status === 500) {
+                notification(
+                    "Server error.",
+                    "Server side error, try again another time.",
+                    false,
+                );
             }
         }
     }

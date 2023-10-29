@@ -2,7 +2,6 @@ import Button from "@/components/UI/Button/Button";
 import HideButton from "@/components/UI/Button/HideButton";
 import Container from "@/components/UI/Container/Container";
 import useStores from "@/hooks/useStores";
-import useTranslationTrigger from "@/hooks/useTranslationTrigger";
 import {LoginCredentials} from "@/models/Credentials/LoginCredentials";
 import {
     Box,
@@ -20,7 +19,7 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {useTranslation} from "react-i18next";
 import {Link as RouterLink, useNavigate} from "react-router-dom";
@@ -53,10 +52,10 @@ const Login: FC = () => {
         handleSubmit,
         formState: {errors},
     } = useForm<LoginCredentials>({
-        resolver: yupResolver(validationSchema)
+        resolver: yupResolver(validationSchema),
     });
 
-    const login = async (): Promise<void> => {
+    const login = async () => {
         setLoading(true);
 
         const response = await authStore.login(credentials);
@@ -67,8 +66,11 @@ const Login: FC = () => {
         setLoading(false);
     };
 
-    const isInvalid: boolean = !!Object.entries(errors).length;
-    useTranslationTrigger(t, handleSubmit(login), isInvalid);
+    useEffect(() => {
+        if (Object.entries(errors).length > 0) {
+            setTimeout(handleSubmit(login));
+        }
+    }, [t]);
 
     return (
         <Container>

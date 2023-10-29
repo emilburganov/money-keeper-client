@@ -1,8 +1,12 @@
 import StoreContext from "@/context/StoreContext";
 import RootStore from "@/store/RootStore";
-import {ReactNode} from "react";
+import {FC, ReactElement} from "react";
 
-const StoreProvider = ({children}: { children: ReactNode }) => {
+interface StoreProviderProps {
+    children: ReactElement | ReactElement[];
+}
+
+const StoreProvider: FC<StoreProviderProps> = ({children}) => {
     const store = new RootStore();
 
     return (

@@ -2,26 +2,23 @@ import Button from "@/components/UI/Button/Button";
 import useStores from "@/hooks/useStores";
 import {ICategory} from "@/models/ICategory";
 import {Badge, Card, CardBody, CardFooter, CardHeader, Heading, Text} from "@chakra-ui/react";
-
-const TypeColors: Record<string, string> = {
-    Incomes: "green",
-    Expenses: "red",
-}
+import {FC} from "react";
 
 interface CategoryCardProps {
     category: ICategory,
 }
 
-const CategoryCard = ({category}: CategoryCardProps) => {
+const CategoryCard: FC<CategoryCardProps> = ({category}) => {
     const {categoryStore} = useStores();
 
-    const getCategoryBadgeColor = (): string => {
-        return TypeColors[category.type_name];
+    const typeBadgeColors: Record<string, string> = {
+        Incomes: "green",
+        Expenses: "red",
     };
 
     const destroyCategory = () => {
         categoryStore.destroy(category);
-    }
+    };
 
     return (
         <Card borderColor="red">
@@ -29,9 +26,9 @@ const CategoryCard = ({category}: CategoryCardProps) => {
                 <Heading size="md">
                     {category.name}
                     <Badge
-                        colorScheme={getCategoryBadgeColor()}
+                        colorScheme={typeBadgeColors[category.type_name]}
                         fontSize="0.6em"
-                        variant='solid'
+                        variant="solid"
                         ml="2"
                     >
                         {category.type_name}

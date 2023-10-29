@@ -17,7 +17,7 @@ $api.interceptors.response.use((config) => {
 }, async (error) => {
     const originalRequest = error.config;
 
-    if (!error.response) {
+    if (error.response.status === 500) {
         throw error;
     }
 

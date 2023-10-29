@@ -12,14 +12,16 @@ const ProfileCard = observer(() => {
     const navigate = useNavigate();
     const [isLoading, setLoading] = useState<boolean>(false);
 
-    const logout = async (): Promise<void> => {
+    const logout = async () => {
         setLoading(true);
+
         await authStore.logout();
         navigate("/login");
+
         setLoading(false);
     };
 
-    const getUser = async (): Promise<void> => {
+    const getUser = async () => {
         await authStore.me();
     };
 
