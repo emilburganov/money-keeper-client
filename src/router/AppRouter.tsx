@@ -9,30 +9,23 @@ import {privateRoutes, publicRoutes} from "./Routes";
 const AppRouter: FC = observer(() => {
     const {authStore} = useStores();
 
+    if (authStore.isAuth) {
+        return (
+            <Routes>
+                {privateRoutes.map((route) =>
+                    <Route key={route.path} {...route}/>,
+                )}
+                <Route path="*" element={<Profile/>}/>
+            </Routes>
+        );
+    }
+
     return (
         <Routes>
-            {authStore.isAuth
-                ?
-                <>
-                    {privateRoutes.map((route) =>
-                        <Route
-                            {...route}
-                            key={route.path}
-                        />,
-                    )}
-                    <Route path="*" element={<Profile/>}/>
-                </>
-                :
-                <>
-                    {publicRoutes.map((route) =>
-                        <Route
-                            {...route}
-                            key={route.path}
-                        />,
-                    )}
-                    <Route path="*" element={<Home/>}/>
-                </>
-            }
+            {publicRoutes.map((route) =>
+                <Route key={route.path} {...route}/>,
+            )}
+            <Route path="*" element={<Home/>}/>
         </Routes>
     );
 });

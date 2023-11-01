@@ -61,6 +61,9 @@
     },
     "profile": {
       "logout": "Выйти"
+    },
+    "categories": {
+      "destroyButton": "Удалить категорию"
     }
   },
   "validation": {

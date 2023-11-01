@@ -1,5 +1,5 @@
 import {chakra, useColorModeValue, VisuallyHidden} from "@chakra-ui/react";
-import {ReactNode} from "react";
+import {FC, ReactNode} from "react";
 
 interface SocialButtonProps {
     children: ReactNode;
@@ -7,7 +7,7 @@ interface SocialButtonProps {
     href: string;
 }
 
-const SocialButton = ({children, label, href}: SocialButtonProps) => {
+const SocialButton: FC<SocialButtonProps> = ({children, label, href}) => {
     return (
         <chakra.button
             bg={useColorModeValue("blackAlpha.100", "whiteAlpha.100")}

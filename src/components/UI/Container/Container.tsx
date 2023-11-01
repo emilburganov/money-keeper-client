@@ -1,9 +1,7 @@
 import {Box, Container as ChakraContainer, useColorModeValue} from "@chakra-ui/react";
-import {FC, ReactNode} from "react";
+import {FC} from "react";
 
 interface ContainerProps {
-    children: ReactNode,
-
     [props: string]: any;
 }
 

@@ -3,6 +3,7 @@ import MobileNavItem from "@/components/UI/Nav/MobileNavItem";
 import useStores from "@/hooks/useStores";
 import {Stack, useColorModeValue} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
+import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 
@@ -10,7 +11,7 @@ interface MobileNavProps {
     onToggle: () => void;
 }
 
-const MobileNav = observer(({onToggle}: MobileNavProps) => {
+const MobileNav: FC<MobileNavProps> = observer(({onToggle}) => {
     const {t} = useTranslation();
     const {authStore} = useStores();
     const navigate = useNavigate();

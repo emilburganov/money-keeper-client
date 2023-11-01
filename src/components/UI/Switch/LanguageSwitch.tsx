@@ -1,5 +1,6 @@
 import EnglishFlagIcon from "@/components/UI/Icon/EnglishFlagIcon";
 import RussianFlagIcon from "@/components/UI/Icon/RussianFlagIcon";
+import useStores from "@/hooks/useStores";
 import {
     Button,
     Flex,
@@ -11,7 +12,7 @@ import {
     Stack,
     useColorModeValue,
 } from "@chakra-ui/react";
-import {ReactElement} from "react";
+import {FC, ReactElement} from "react";
 import {useTranslation} from "react-i18next";
 
 const LanguagesIcons: Record<string, ReactElement> = {
@@ -19,11 +20,17 @@ const LanguagesIcons: Record<string, ReactElement> = {
     en: <EnglishFlagIcon/>,
 };
 
-const LanguageSwitch = () => {
+const LanguageSwitch: FC = () => {
     const {t, i18n} = useTranslation();
+    const {authStore} = useStores();
 
-    const changeLanguage = (language: string) => {
-        i18n.changeLanguage(language);
+    const changeLanguage = async (language: string) => {
+        await i18n.changeLanguage(language);
+
+        if (authStore.isAuth) {
+            authStore.setUser({...authStore.user, lang: language});
+            await authStore.update();
+        }
     };
 
     return (

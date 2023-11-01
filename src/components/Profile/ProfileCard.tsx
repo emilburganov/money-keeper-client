@@ -1,33 +1,37 @@
 import Button from "@/components/UI/Button/Button";
+import Loader from "@/components/UI/Loader/Loader";
+import LoaderContext from "@/context/LoaderContext";
 import useStores from "@/hooks/useStores";
 import {Avatar, Box, Center, Flex, Heading, Image, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
-import {useEffect, useState} from "react";
+import {FC, useContext, useEffect} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 
-const ProfileCard = observer(() => {
+const ProfileCard: FC = observer(() => {
     const {t} = useTranslation();
     const {authStore} = useStores();
     const navigate = useNavigate();
-    const [isLoading, setLoading] = useState<boolean>(false);
+    const {isLoading, setLoading} = useContext(LoaderContext);
 
     const logout = async () => {
-        setLoading(true);
-
         await authStore.logout();
         navigate("/login");
+    };
 
+    const me = async () => {
+        setLoading(true);
+        await authStore.me();
         setLoading(false);
     };
 
-    const getUser = async () => {
-        await authStore.me();
-    };
-
     useEffect(() => {
-        getUser();
+        me();
     }, []);
+
+    if (isLoading) {
+        return <Loader/>;
+    }
 
     return (
         <Center py={6} maxW={"400px"} w={"full"}>
@@ -62,11 +66,8 @@ const ProfileCard = observer(() => {
                             fontWeight={500}
                             fontFamily={"body"}
                         >
-                            Emil Burganov
+                            {authStore.user.name}
                         </Heading>
-                        <Text color={"gray.500"}>
-                            Lorem ipsum dolor sit.
-                        </Text>
                     </Stack>
                     <Stack
                         direction={"row"}
@@ -74,19 +75,19 @@ const ProfileCard = observer(() => {
                         spacing={6}
                     >
                         <Stack spacing={0} align={"center"}>
-                            <Text fontWeight={600}>
+                            <Text fontWeight={600} color={"green.500"}>
                                 99k
                             </Text>
                             <Text fontSize={"sm"} color={"gray.500"}>
-                                Examples
+                                Incomes
                             </Text>
                         </Stack>
                         <Stack spacing={0} align={"center"}>
-                            <Text fontWeight={600}>
+                            <Text fontWeight={600} color={"red.500"}>
                                 99k
                             </Text>
                             <Text fontSize={"sm"} color={"gray.500"}>
-                                Examples
+                                Expenses
                             </Text>
                         </Stack>
                     </Stack>

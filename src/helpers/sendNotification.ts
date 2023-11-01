@@ -2,7 +2,7 @@ import {createStandaloneToast} from "@chakra-ui/react";
 
 const {toast} = createStandaloneToast();
 
-export const notification = (title: string, description: string, success = true) => {
+export const sendNotification = (title: string, description: string, success = true) => {
     toast({
         title: title,
         description: description,

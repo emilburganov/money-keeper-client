@@ -1,13 +1,13 @@
 import {Button as ChakraButton} from "@chakra-ui/react";
-import {ReactNode} from "react";
+import {FC, ReactNode} from "react";
 
-interface ButtonProps {
+interface LinkButtonProps {
     children: ReactNode;
 
     [props: string]: any;
 }
 
-const Button = ({children, ...props}: ButtonProps) => {
+const LinkButton: FC<LinkButtonProps> = ({children, ...props}) => {
     return (
         <ChakraButton
             fontSize={"sm"}
@@ -19,4 +19,4 @@ const Button = ({children, ...props}: ButtonProps) => {
     );
 };
 
-export default Button;
+export default LinkButton;

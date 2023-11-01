@@ -3,12 +3,14 @@ import useStores from "@/hooks/useStores";
 import {ICategory} from "@/models/ICategory";
 import {Badge, Card, CardBody, CardFooter, CardHeader, Heading, Text} from "@chakra-ui/react";
 import {FC} from "react";
+import {useTranslation} from "react-i18next";
 
 interface CategoryCardProps {
     category: ICategory,
 }
 
 const CategoryCard: FC<CategoryCardProps> = ({category}) => {
+    const {t} = useTranslation();
     const {categoryStore} = useStores();
 
     const typeBadgeColors: Record<string, string> = {
@@ -46,7 +48,7 @@ const CategoryCard: FC<CategoryCardProps> = ({category}) => {
                     bg={"red.400"}
                     _hover={{bg: "red.500"}}
                 >
-                    Delete Category
+                    {t("pages.categories.destroyButton")}
                 </Button>
             </CardFooter>
         </Card>

@@ -1,6 +1,7 @@
 import useStores from "@/hooks/useStores";
 import {Box, Popover, PopoverTrigger, Stack, useColorModeValue} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
+import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {Link, To} from "react-router-dom";
 
@@ -9,7 +10,7 @@ export interface NavItem {
     to?: To;
 }
 
-const DesktopNav = observer(() => {
+const DesktopNav: FC = observer(() => {
     const linkColor = useColorModeValue("gray.600", "gray.200");
     const linkHoverColor = useColorModeValue("gray.800", "white");
     const {t} = useTranslation();

@@ -9,10 +9,11 @@ import useStores from "@/hooks/useStores";
 import {CloseIcon, HamburgerIcon} from "@chakra-ui/icons";
 import {Box, Collapse, Flex, Hide, IconButton, Stack, useColorModeValue, useDisclosure} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
+import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {Link, useNavigate} from "react-router-dom";
 
-const Header = observer(() => {
+const Header: FC = observer(() => {
     const {isOpen, onToggle} = useDisclosure();
     const {authStore} = useStores();
     const navigate = useNavigate();

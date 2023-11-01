@@ -1,10 +1,11 @@
 import Button from "@/components/UI/Button/Button";
 import Container from "@/components/UI/Container/Container";
 import {Box, Flex, Heading, Stack, Text} from "@chakra-ui/react";
+import {FC} from "react";
 import {useTranslation} from "react-i18next";
 import {Link} from "react-router-dom";
 
-const Home = () => {
+const Home: FC = () => {
     const {t} = useTranslation();
 
     return (

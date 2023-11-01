@@ -61,6 +61,9 @@
     },
     "profile": {
       "logout": "Logout"
+    },
+    "categories": {
+      "destroyButton": "Destroy Category"
     }
   },
   "validation": {

@@ -1,5 +1,5 @@
 import {Box, Stack, Text, useColorModeValue} from "@chakra-ui/react";
-import {MouseEventHandler} from "react";
+import {FC, MouseEventHandler} from "react";
 import {Link, To} from "react-router-dom";
 
 interface MobileNavItemProps {
@@ -9,7 +9,7 @@ interface MobileNavItemProps {
     onToggle: () => void;
 }
 
-const MobileNavItem = ({label, to, onClick, onToggle}: MobileNavItemProps) => {
+const MobileNavItem: FC<MobileNavItemProps> = ({label, to, onClick, onToggle}) => {
     return (
         <Stack spacing={4} onClick={onToggle}>
             <Box

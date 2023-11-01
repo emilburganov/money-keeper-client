@@ -1,5 +1,5 @@
 import {Button as ChakraButton} from "@chakra-ui/react";
-import {ReactNode} from "react";
+import {FC, ReactNode} from "react";
 
 interface ButtonProps {
     children: ReactNode;
@@ -7,7 +7,7 @@ interface ButtonProps {
     [props: string]: any;
 }
 
-const Button = ({children, ...props}: ButtonProps) => {
+const Button: FC<ButtonProps> = ({children, ...props}: ButtonProps) => {
     return (
         <ChakraButton
             size="md"

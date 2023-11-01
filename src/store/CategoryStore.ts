@@ -1,14 +1,12 @@
-import {notification} from "@/helpers/notification";
+import {sendNotification} from "@/helpers/sendNotification";
 import {ICategory} from "@/models/ICategory";
-import {ErrorsResponse} from "@/models/Response/ErrorsResponse";
 import CategoryService from "@/services/CategoryService";
 import RootStore from "@/store/RootStore";
-import {AxiosError} from "axios";
 import {makeAutoObservable} from "mobx";
 
 class CategoryStore {
     private rootStore: RootStore;
-    categories: ICategory[] = [];
+    categories = [] as ICategory[];
 
     constructor(rootStore: RootStore) {
         makeAutoObservable(this);
@@ -23,33 +21,26 @@ class CategoryStore {
         try {
             const response = await CategoryService.index(this.rootStore.authStore.user);
             this.setCategories(response.data);
-        } catch (error: unknown) {
-            const axiosError = error as AxiosError<ErrorsResponse>;
-
-            if (!axiosError.response || axiosError?.response.status === 500) {
-                notification(
-                    "Server error.",
-                    "Server side error, try again another time.",
-                    false,
-                );
-            }
+        } catch {
+            sendNotification(
+                "Index error.",
+                "Error when getting a categories.",
+                false,
+            );
         }
     }
 
     async destroy(category: ICategory) {
         try {
+            const {id} = category;
             await CategoryService.destroy(this.rootStore.authStore.user, category);
-            this.setCategories(this.categories.filter(_category => _category.id !== category.id));
-        } catch (error: unknown) {
-            const axiosError = error as AxiosError<ErrorsResponse>;
-
-            if (!axiosError.response || axiosError?.response.status === 500) {
-                notification(
-                    "Server error.",
-                    "Server side error, try again another time.",
-                    false,
-                );
-            }
+            this.setCategories(this.categories.filter((category) => category.id !== id));
+        } catch {
+            sendNotification(
+                "Destroy error.",
+                "Error when destroying a category.",
+                false,
+            );
         }
     }
 }

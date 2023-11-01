@@ -1,4 +1,4 @@
-import {notification} from "@/helpers/notification";
+import {sendNotification} from "@/helpers/sendNotification";
 import {LoginCredentials} from "@/models/Credentials/LoginCredentials";
 import {RegistrationCredentials} from "@/models/Credentials/RegistrationCredentials";
 import {IUser} from "@/models/IUser";
@@ -29,7 +29,7 @@ class AuthStore {
             localStorage.setItem("token", response.data.access_token);
             this.setAuth(true);
 
-            notification(
+            sendNotification(
                 "Successful login.",
                 "You have successful login into your account.",
             );
@@ -38,18 +38,16 @@ class AuthStore {
         } catch (error: unknown) {
             const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (!axiosError.response || axiosError.response.status === 500) {
-                notification(
-                    "Server error.",
-                    "Server side error, try again another time.",
-                    false,
-                );
-            } else if (axiosError.response.status === 401) {
-                notification(
-                    "Authentication error.",
-                    axiosError.response.data?.message,
-                    false,
-                );
+            if (axiosError.response) {
+                const message: string = axiosError.response.data?.message;
+
+                if (axiosError.response.status === 401) {
+                    sendNotification(
+                        "Authentication error.",
+                        message,
+                        false,
+                    );
+                }
             }
         }
     }
@@ -60,7 +58,7 @@ class AuthStore {
             localStorage.setItem("token", response.data?.access_token);
             this.setAuth(true);
 
-            notification(
+            sendNotification(
                 "Successful registered.",
                 "You have successful registered your account.",
             );
@@ -69,18 +67,12 @@ class AuthStore {
         } catch (error: unknown) {
             const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (!axiosError.response || axiosError?.response.status === 500) {
-                notification(
-                    "Server error.",
-                    "Server side error, try again another time.",
-                    false,
-                );
-            } else if (axiosError.response?.data?.errors) {
+            if (axiosError.response?.data?.errors) {
                 const errors: string[] = axiosError.response.data?.errors;
                 const message: string = axiosError.response.data?.message;
 
                 Object.values(errors).forEach((error) => {
-                    notification(
+                    sendNotification(
                         message,
                         error,
                         false,
@@ -104,15 +96,23 @@ class AuthStore {
             const response = await AuthService.me();
             this.setUser(response.data);
         } catch (error: unknown) {
-            const axiosError = error as AxiosError<ErrorsResponse>;
+            sendNotification(
+                "Authentication error.",
+                "Error while retrieving user information",
+                false,
+            );
+        }
+    }
 
-            if (!axiosError.response || axiosError.response.status === 500) {
-                notification(
-                    "Server error.",
-                    "Server side error, try again another time.",
-                    false,
-                );
-            }
+    async update() {
+        try {
+            await AuthService.update(this.user);
+        } catch {
+            sendNotification(
+                "Update error.",
+                "Error when updating a user.",
+                false,
+            );
         }
     }
 }
