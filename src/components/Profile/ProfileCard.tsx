@@ -2,7 +2,7 @@ import Button from "@/components/UI/Button/Button";
 import Loader from "@/components/UI/Loader/Loader";
 import LoaderContext from "@/context/LoaderContext";
 import useStores from "@/hooks/useStores";
-import {Avatar, Box, Center, Flex, Heading, Image, Stack, Text, useColorModeValue} from "@chakra-ui/react";
+import {Avatar, Box, Center, Flex, Heading, Stack, Text, useColorModeValue} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {FC, useContext, useEffect} from "react";
 import {useTranslation} from "react-i18next";
@@ -42,25 +42,16 @@ const ProfileCard: FC = observer(() => {
                 rounded={"md"}
                 overflow={"hidden"}
             >
-                <Image
+                <Box
                     h={"140px"}
                     w={"full"}
-                    src={
-                        "https://images.unsplash.com/photo-1612865547334-09cb8cb455da?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80"
-                    }
-                    objectFit="cover"
-                    alt="profile-background"
+                    background={"green.500"}
                 />
                 <Flex justify={"center"} mt={-12}>
-                    <Avatar
-                        size={"xl"}
-                        css={{
-                            border: "2px solid white",
-                        }}
-                    />
+                    <Avatar size={"xl"}/>
                 </Flex>
                 <Box p={6}>
-                    <Stack spacing={2} align={"center"} mb={5}>
+                    <Stack spacing={2} align={"center"}>
                         <Heading
                             fontSize={"2xl"}
                             fontWeight={500}
@@ -68,31 +59,9 @@ const ProfileCard: FC = observer(() => {
                         >
                             {authStore.user.name}
                         </Heading>
-                        <Text color={'gray.500'}>
+                        <Text color={"gray.500"}>
                             {authStore.user.email}
                         </Text>
-                    </Stack>
-                    <Stack
-                        direction={"row"}
-                        justify={"center"}
-                        spacing={6}
-                    >
-                        <Stack spacing={0} align={"center"}>
-                            <Text fontWeight={600} color={"green.500"}>
-                                99k
-                            </Text>
-                            <Text fontSize={"sm"} color={"gray.500"}>
-                                Incomes
-                            </Text>
-                        </Stack>
-                        <Stack spacing={0} align={"center"}>
-                            <Text fontWeight={600} color={"red.500"}>
-                                99k
-                            </Text>
-                            <Text fontSize={"sm"} color={"gray.500"}>
-                                Expenses
-                            </Text>
-                        </Stack>
                     </Stack>
                     <Button
                         isLoading={isLoading}
