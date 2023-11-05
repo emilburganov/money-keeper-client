@@ -30,8 +30,4 @@ export default class AuthService {
     static async me(): Promise<AxiosResponse<IUser>> {
         return $api.post("auth/me");
     }
-
-    static async update(credentials: IUser): Promise<AxiosResponse<MessageResponse>> {
-        return $api.patch<MessageResponse>(`auth/update`, credentials);
-    }
 }

@@ -1,7 +1,10 @@
-import {sendNotification} from "@/helpers/sendNotification";
+import {sendErrorNotification} from "@/helpers/sendErrorNotification";
 import {ICategory} from "@/models/ICategory";
+import {ErrorsResponse} from "@/models/Response/ErrorsResponse";
 import CategoryService from "@/services/CategoryService";
 import RootStore from "@/store/RootStore";
+import {AxiosError} from "axios";
+import {t} from "i18next";
 import {makeAutoObservable} from "mobx";
 
 class CategoryStore {
@@ -21,11 +24,16 @@ class CategoryStore {
         try {
             const response = await CategoryService.index(this.rootStore.authStore.user);
             this.setCategories(response.data);
-        } catch {
-            sendNotification(
-                "Index error.",
-                "Error when getting a categories.",
-                false,
+        } catch (error: unknown) {
+            const axiosError = error as AxiosError<ErrorsResponse>;
+
+            if (axiosError.message == "Network Error") {
+                return;
+            }
+
+            sendErrorNotification(
+                t("notifications.error.indexError.title"),
+                t("notifications.error.indexError.description"),
             );
         }
     }
@@ -35,11 +43,16 @@ class CategoryStore {
             const {id} = category;
             await CategoryService.destroy(this.rootStore.authStore.user, category);
             this.setCategories(this.categories.filter((category) => category.id !== id));
-        } catch {
-            sendNotification(
-                "Destroy error.",
-                "Error when destroying a category.",
-                false,
+        } catch (error: unknown) {
+            const axiosError = error as AxiosError<ErrorsResponse>;
+
+            if (axiosError.message == "Network Error") {
+                return;
+            }
+
+            sendErrorNotification(
+                t("notifications.error.destroyError.title"),
+                t("notifications.error.destroyError.description"),
             );
         }
     }

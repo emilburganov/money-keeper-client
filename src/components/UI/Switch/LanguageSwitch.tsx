@@ -1,6 +1,5 @@
 import EnglishFlagIcon from "@/components/UI/Icon/EnglishFlagIcon";
 import RussianFlagIcon from "@/components/UI/Icon/RussianFlagIcon";
-import useStores from "@/hooks/useStores";
 import {
     Button,
     Flex,
@@ -22,15 +21,9 @@ const LanguagesIcons: Record<string, ReactElement> = {
 
 const LanguageSwitch: FC = () => {
     const {t, i18n} = useTranslation();
-    const {authStore} = useStores();
 
-    const changeLanguage = async (language: string) => {
-        await i18n.changeLanguage(language);
-
-        if (authStore.isAuth) {
-            authStore.setUser({...authStore.user, lang: language});
-            await authStore.update();
-        }
+    const changeLanguage = (language: string) => {
+        i18n.changeLanguage(language);
     };
 
     return (

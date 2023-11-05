@@ -1,10 +1,12 @@
-import {sendNotification} from "@/helpers/sendNotification";
+import {sendErrorNotification} from "@/helpers/sendErrorNotification";
+import {sendSuccessNotification} from "@/helpers/sendSuccessNotification";
 import {LoginCredentials} from "@/models/Credentials/LoginCredentials";
 import {RegistrationCredentials} from "@/models/Credentials/RegistrationCredentials";
 import {IUser} from "@/models/IUser";
 import {ErrorsResponse} from "@/models/Response/ErrorsResponse";
 import AuthService from "@/services/AuthService";
 import {AxiosError} from "axios";
+import {t} from "i18next";
 import {makeAutoObservable} from "mobx";
 
 class AuthStore {
@@ -29,23 +31,24 @@ class AuthStore {
             localStorage.setItem("token", response.data.access_token);
             this.setAuth(true);
 
-            sendNotification(
-                "Successful login.",
-                "You have successful login into your account.",
+            sendSuccessNotification(
+                t("notifications.success.loginSuccess.title"),
+                t("notifications.success.loginSuccess.description"),
             );
 
             return response;
         } catch (error: unknown) {
             const axiosError = error as AxiosError<ErrorsResponse>;
 
-            if (axiosError.response) {
-                const message: string = axiosError.response.data?.message;
+            if (axiosError.message == "Network Error") {
+                return;
+            }
 
+            if (axiosError.response) {
                 if (axiosError.response.status === 401) {
-                    sendNotification(
-                        "Authentication error.",
-                        message,
-                        false,
+                    sendErrorNotification(
+                        t("notifications.error.authError.title"),
+                        t("notifications.error.authError.description"),
                     );
                 }
             }
@@ -58,24 +61,27 @@ class AuthStore {
             localStorage.setItem("token", response.data?.access_token);
             this.setAuth(true);
 
-            sendNotification(
-                "Successful registered.",
-                "You have successful registered your account.",
+            sendSuccessNotification(
+                t("notifications.success.registerSuccess.title"),
+                t("notifications.success.registerSuccess.description"),
             );
 
             return response;
         } catch (error: unknown) {
             const axiosError = error as AxiosError<ErrorsResponse>;
 
+            if (axiosError.message == "Network Error") {
+                return;
+            }
+
             if (axiosError.response?.data?.errors) {
                 const errors: string[] = axiosError.response.data?.errors;
                 const message: string = axiosError.response.data?.message;
 
                 Object.values(errors).forEach((error) => {
-                    sendNotification(
+                    sendErrorNotification(
                         message,
                         error,
-                        false,
                     );
                 });
             }
@@ -96,22 +102,15 @@ class AuthStore {
             const response = await AuthService.me();
             this.setUser(response.data);
         } catch (error: unknown) {
-            sendNotification(
-                "Authentication error.",
-                "Error while retrieving user information",
-                false,
-            );
-        }
-    }
+            const axiosError = error as AxiosError<ErrorsResponse>;
 
-    async update() {
-        try {
-            await AuthService.update(this.user);
-        } catch {
-            sendNotification(
-                "Update error.",
-                "Error when updating a user.",
-                false,
+            if (axiosError.message == "Network Error") {
+                return;
+            }
+
+            sendErrorNotification(
+                t("notifications.error.meError.title"),
+                t("notifications.error.meError.description"),
             );
         }
     }

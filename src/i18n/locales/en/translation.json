@@ -72,5 +72,43 @@
     "min": "The {{field}} field must be at least {{min}} characters.",
     "email": "The {{field}} field must be a valid email address.",
     "oneOf": "The {{firstField}} field must match {{secondField}}."
+  },
+  "notifications": {
+    "error": {
+      "serverError": {
+        "title": "Server error.",
+        "description": "Server side error, try again another time."
+      },
+      "authError": {
+        "title": "Authentication error.",
+        "description": "Invalid login or password."
+      },
+      "meError": {
+        "title": "Authorization error.",
+        "description": "Error while retrieving user information."
+      },
+      "indexError": {
+        "title": "Index error.",
+        "description": "Error when getting a categories."
+      },
+      "updateError": {
+        "title": "Update error.",
+        "description": "Error when updating a data."
+      },
+      "destroyError": {
+        "title": "Destroy error.",
+        "description": "Error when destroying a data."
+      }
+    },
+    "success": {
+      "loginSuccess": {
+        "title": "Successful login.",
+        "description": "You have successful login into your account."
+      },
+      "registerSuccess": {
+        "title": "Successful registered.",
+        "description": "You have successful registered your account."
+      }
+    }
   }
 }
