@@ -2,17 +2,7 @@ import Button from "@/components/UI/Button/Button";
 import Loader from "@/components/UI/Loader/Loader";
 import LoaderContext from "@/context/LoaderContext";
 import useStores from "@/hooks/useStores";
-import {
-    Avatar,
-    Box,
-    Center,
-    Flex,
-    Heading,
-    Stack,
-    Text,
-    useColorModeValue,
-    useDisclosure,
-} from "@chakra-ui/react";
+import {Avatar, Box, Center, Flex, Heading, Stack, Text, useColorModeValue, useDisclosure} from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
 import {ChangeEvent, FC, useContext, useEffect, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
