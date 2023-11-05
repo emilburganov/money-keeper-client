@@ -110,5 +110,11 @@
         "description": "You have successful registered your account."
       }
     }
+  },
+  "models": {
+    "type": {
+      "Expenses": "Expenses",
+      "Incomes": "Incomes"
+    }
   }
 }

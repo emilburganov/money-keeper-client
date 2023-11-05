@@ -1,7 +1,7 @@
 import Button from "@/components/UI/Button/Button";
 import useStores from "@/hooks/useStores";
 import {ICategory} from "@/models/ICategory";
-import {Badge, Card, CardBody, CardFooter, CardHeader, Heading, Text} from "@chakra-ui/react";
+import {Badge, Card, CardBody, CardFooter, CardHeader, Flex, Heading, Text} from "@chakra-ui/react";
 import {FC} from "react";
 import {useTranslation} from "react-i18next";
 
@@ -25,23 +25,24 @@ const CategoryCard: FC<CategoryCardProps> = ({category}) => {
     return (
         <Card borderColor="red">
             <CardHeader>
-                <Heading size="md">
+                <Heading
+                    size="md"
+                    as={Flex}
+                    gap={2}
+                    align={"center"}
+                    wrap={"wrap"}
+                >
                     {category.name}
                     <Badge
+                        px={2}
+                        py={1}
                         colorScheme={typeBadgeColors[category.type_name]}
                         fontSize="0.6em"
-                        variant="solid"
-                        ml="2"
                     >
-                        {category.type_name}
+                        {t("models.type." + category.type_name)}
                     </Badge>
                 </Heading>
             </CardHeader>
-            <CardBody>
-                <Text>
-                    {category.description}
-                </Text>
-            </CardBody>
             <CardFooter>
                 <Button
                     onClick={destroyCategory}

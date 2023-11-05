@@ -60,7 +60,7 @@ const ProfileCard: FC = observer(() => {
                     />
                 </Flex>
                 <Box p={6}>
-                    <Stack spacing={0} align={"center"} mb={5}>
+                    <Stack spacing={2} align={"center"} mb={5}>
                         <Heading
                             fontSize={"2xl"}
                             fontWeight={500}
@@ -68,6 +68,9 @@ const ProfileCard: FC = observer(() => {
                         >
                             {authStore.user.name}
                         </Heading>
+                        <Text color={'gray.500'}>
+                            {authStore.user.email}
+                        </Text>
                     </Stack>
                     <Stack
                         direction={"row"}
