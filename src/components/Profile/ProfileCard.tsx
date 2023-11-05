@@ -4,7 +4,6 @@ import LoaderContext from "@/context/LoaderContext";
 import useStores from "@/hooks/useStores";
 import {
     Avatar,
-    AvatarBadge,
     Box,
     Center,
     Flex,
@@ -15,7 +14,7 @@ import {
     useDisclosure,
 } from "@chakra-ui/react";
 import {observer} from "mobx-react-lite";
-import {FC, useContext, useEffect, useRef, useState} from "react";
+import {ChangeEvent, FC, useContext, useEffect, useRef, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 
@@ -25,21 +24,30 @@ const ProfileCard: FC = observer(() => {
     const navigate = useNavigate();
     const {isLoading, setLoading} = useContext(LoaderContext);
 
-    const [userProfile, setUserProfile] = useState(null);
     const {onOpen} = useDisclosure();
-    const profileImage = useRef(null);
+    const [avatar, setAvatar] = useState<string | ArrayBuffer | null>("");
+    const avatarInput = useRef<HTMLInputElement>(null);
 
-    const openChooseImage = () => {
-        profileImage.current.click();
+    const openChoosedImage = () => {
+        if (!avatarInput.current) {
+            return;
+        }
+
+        avatarInput.current.click();
     };
 
-    const changeProfileImage = event => {
+    const changeAvatar = (event: ChangeEvent<HTMLInputElement>) => {
         const ALLOWED_TYPES = ["image/png", "image/jpeg", "image/jpg"];
+
+        if (!event.target.files) {
+            return;
+        }
+
         const selected = event.target.files[0];
 
         if (selected && ALLOWED_TYPES.includes(selected.type)) {
-            let reader = new FileReader();
-            reader.onloadend = () => setUserProfile(reader.result);
+            const reader = new FileReader();
+            reader.onloadend = () => setAvatar(reader.result);
             return reader.readAsDataURL(selected);
         }
 
@@ -84,14 +92,14 @@ const ProfileCard: FC = observer(() => {
                         size="xl"
                         name={authStore.user.name}
                         cursor="pointer"
-                        onClick={openChooseImage}
-                        src={userProfile ? userProfile : "/img/tim-cook.jpg"}
+                        onClick={openChoosedImage}
+                        src={avatar as string}
                     />
                     <input
                         hidden
                         type="file"
-                        ref={profileImage}
-                        onChange={changeProfileImage}
+                        ref={avatarInput}
+                        onChange={changeAvatar}
                     />
                 </Flex>
                 <Box p={6}>
