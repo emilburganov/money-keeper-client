@@ -1,0 +1,103 @@
+import { ErrorsResponse, expenseApi } from "@/shared/api";
+import { Expense, ExpenseBody } from "@/shared/api/expense";
+import { sendErrorNotification } from "@/shared/lib/helpers";
+import { AxiosError } from "axios";
+import { makeAutoObservable, runInAction } from "mobx";
+
+type PrivateFields = "_root";
+
+export class ExpenseStore {
+	private _expenses = [] as Expense[];
+
+	get expenses(): Expense[] {
+		return this._expenses;
+	}
+
+	set expenses(expenses: Expense[]) {
+		this._expenses = expenses;
+	}
+
+	constructor() {
+		makeAutoObservable<this, PrivateFields>(
+			this,
+			{ _root: false },
+			{ autoBind: true, deep: false },
+		);
+	}
+
+	public async getExpenses() {
+		try {
+			const expenseResponse = await expenseApi.getExpenses();
+
+			runInAction(() => {
+				this._expenses = expenseResponse;
+			});
+
+			return expenseResponse;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	async createExpense(body: ExpenseBody) {
+		try {
+			const expenseResponse = await expenseApi.createExpense(body);
+
+			if (expenseResponse) {
+				this.expenses = [...this.expenses, expenseResponse];
+			}
+
+			return expenseResponse;
+		} catch (error) {
+			const axiosError = error as AxiosError<ErrorsResponse>;
+
+			if (axiosError.response?.data?.errors) {
+				const errors: string[] = axiosError.response.data?.errors;
+				const message: string = axiosError.response.data?.message;
+
+				Object.values(errors).forEach(error => {
+					sendErrorNotification(message, error);
+				});
+			}
+		}
+	}
+
+	async updateExpense(body: ExpenseBody, id: number) {
+		try {
+			const expenseResponse = await expenseApi.updateExpense(body, id);
+
+			if (expenseResponse) {
+				this.expenses = this.expenses.map(expense =>
+					expense.id === id ? expenseResponse : expense,
+				);
+			}
+
+			return expenseResponse;
+		} catch (error) {
+			const axiosError = error as AxiosError<ErrorsResponse>;
+
+			if (axiosError.response?.data?.errors) {
+				const errors: string[] = axiosError.response.data?.errors;
+				const message: string = axiosError.response.data?.message;
+
+				Object.values(errors).forEach(error => {
+					sendErrorNotification(message, error);
+				});
+			}
+		}
+	}
+
+	async deleteExpense({ id }: Expense) {
+		try {
+			const expenseResponse = await expenseApi.deleteExpense(id);
+
+			if (expenseResponse) {
+				this.expenses = this.expenses.filter(expense => expense.id !== id);
+			}
+
+			return expenseResponse;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+}

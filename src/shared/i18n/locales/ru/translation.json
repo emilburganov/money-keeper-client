@@ -1,0 +1,302 @@
+{
+	"header": {
+		"buttons": {
+			"auth": {
+				"login": "Авторизация",
+				"registration": "Регистрация",
+				"logout": "Выйти"
+			},
+			"lang": {
+				"ru": "Русский",
+				"en": "Английский"
+			}
+		},
+		"navigation": {
+			"home": "Главная",
+			"profile": "Личный кабинет",
+			"categories": "Категории",
+			"incomes": "Доходы",
+			"expenses": "Расходы",
+			"accounts": "Счета",
+			"transfers": "Переводы"
+		}
+	},
+	"footer": {
+		"copyright": "© 2023 MoneyKeeper. Все права защищены."
+	},
+	"pages": {
+		"login": {
+			"form": {
+				"title": "Авторизация",
+				"fields": {
+					"email": "Почта",
+					"password": "Пароль"
+				},
+				"button": "Авторизоваться",
+				"redirect": "У вас нет учетной записи?"
+			}
+		},
+		"registration": {
+			"form": {
+				"title": "Регистрация:",
+				"fields": {
+					"name": "Имя",
+					"email": "Почта",
+					"password": "Пароль",
+					"password_confirmation": "Подтверждение пароля"
+				},
+				"button": "Зарегистрироваться",
+				"redirect": "У вас уже есть аккаунт?"
+			}
+		},
+		"hero": {
+			"title": {
+				"main": "Контроль за финансами",
+				"highlighted": "стал проще"
+			},
+			"subtitle": "Контролируйте свои расходы и доходы с помощью нашего приложения.",
+			"button": "Начать использование"
+		},
+		"home": {
+			"title": {
+				"main": "Это",
+				"highlighted": "главная страница!"
+			}
+		},
+		"profile": {
+			"logout": "Выйти"
+		},
+		"categories": {
+			"editButton": "Редактировать категорию",
+			"deleteButton": "Удалить категорию",
+			"createButton": "Создать категорию",
+			"updateButton": "Обновить категорию",
+			"deleteButtonLoadingText": "Удаление...",
+			"createButtonLoadingText": "Создание...",
+			"updateButtonLoadingText": "Обновление...",
+			"createModal": {
+				"form": {
+					"title": "Добавление категории",
+					"placeholders": {
+						"title": "Интернет и мобильная связь"
+					},
+					"fields": {
+						"title": "Наименование",
+						"type": "Вид категории"
+					}
+				}
+			},
+			"editModal": {
+				"form": {
+					"title": "Редактирование категории",
+					"placeholders": {
+						"title": "Интернет и мобильная связь"
+					},
+					"fields": {
+						"title": "Наименование",
+						"type": "Вид категории"
+					}
+				}
+			}
+		},
+		"incomes": {
+			"editButton": "Редактировать доход",
+			"deleteButton": "Удалить доход",
+			"createButton": "Создать доход",
+			"updateButton": "Обновить доход",
+			"deleteButtonLoadingText": "Удаление...",
+			"createButtonLoadingText": "Создание...",
+			"updateButtonLoadingText": "Обновление...",
+			"createModal": {
+				"form": {
+					"title": "Добавление дохода",
+					"placeholders": {
+						"title": "Зарплата"
+					},
+					"fields": {
+						"title": "Наименование",
+						"amount": "Сумма",
+						"category": "Категория",
+						"account": "Счёт"
+					}
+				}
+			},
+			"editModal": {
+				"form": {
+					"title": "Редактирование дохода",
+					"placeholders": {
+						"title": "Зарплата"
+					},
+					"fields": {
+						"title": "Наименование",
+						"amount": "Сумма",
+						"category": "Категория",
+						"account": "Счёт"
+					}
+				}
+			}
+		},
+		"expenses": {
+			"editButton": "Редактировать расход",
+			"deleteButton": "Удалить расход",
+			"createButton": "Создать расход",
+			"updateButton": "Обновить расход",
+			"deleteButtonLoadingText": "Удаление...",
+			"createButtonLoadingText": "Создание...",
+			"updateButtonLoadingText": "Обновление...",
+			"createModal": {
+				"form": {
+					"title": "Добавление расхода",
+					"placeholders": {
+						"title": "Коммунальные платежи"
+					},
+					"fields": {
+						"title": "Наименование",
+						"amount": "Сумма",
+						"category": "Категория",
+						"account": "Счёт"
+					}
+				}
+			},
+			"editModal": {
+				"form": {
+					"title": "Редактирование расхода",
+					"placeholders": {
+						"title": "Коммунальные платежи"
+					},
+					"fields": {
+						"title": "Наименование",
+						"amount": "Сумма",
+						"category": "Категория",
+						"account": "Счёт"
+					}
+				}
+			}
+		},
+		"accounts": {
+			"editButton": "Редактировать счёт",
+			"deleteButton": "Удалить счёт",
+			"createButton": "Создать счёт",
+			"updateButton": "Обновить счёт",
+			"deleteButtonLoadingText": "Удаление...",
+			"createButtonLoadingText": "Создание...",
+			"updateButtonLoadingText": "Обновление...",
+			"createModal": {
+				"form": {
+					"title": "Добавление счёта",
+					"placeholders": {
+						"title": "Банковская карта"
+					},
+					"fields": {
+						"title": "Наименование",
+						"currency": "Валюта"
+					}
+				}
+			},
+			"editModal": {
+				"form": {
+					"title": "Редактирование счёта",
+					"placeholders": {
+						"title": "Банковская карта"
+					},
+					"fields": {
+						"title": "Наименование",
+						"currency": "Валюта"
+					}
+				}
+			}
+		},
+		"transfers": {
+			"editButton": "Редактировать перевод",
+			"deleteButton": "Удалить перевод",
+			"createButton": "Создать перевод",
+			"updateButton": "Обновить перевод",
+			"deleteButtonLoadingText": "Удаление...",
+			"createButtonLoadingText": "Создание...",
+			"updateButtonLoadingText": "Обновление...",
+			"createModal": {
+				"form": {
+					"title": "Добавить перевод",
+					"placeholders": {
+						"title": "Перевод с карты на карту"
+					},
+					"fields": {
+						"title": "Наименование",
+						"amount": "Сумма",
+						"account_from": "Счёт (откуда)",
+						"account_to": "Счёт (куда)"
+					}
+				}
+			},
+			"editModal": {
+				"form": {
+					"title": "Редактирование перевода",
+					"placeholders": {
+						"title": "Перевод с карты на карту"
+					},
+					"fields": {
+						"title": "Наименование",
+						"amount": "Сумма",
+						"account_from": "Счёт (откуда)",
+						"account_to": "Счёт (куда)"
+					}
+				}
+			}
+		}
+	},
+	"validation": {
+		"required": "Поле {{field}} обязательно для заполнения.",
+		"max": "Количество символов в поле {{field}} не может превышать {{max}}.",
+		"min": "Количество символов в поле {{field}} должно быть не менее {{min}}.",
+		"email": "Поле {{field}} должно быть действительным электронным адресом.",
+		"oneOf": "Значения полей {{firstField}} и {{secondField}} должны совпадать."
+	},
+	"notifications": {
+		"error": {
+			"serverError": {
+				"title": "Ошибка сервера.",
+				"description": "Ошибка на стороне сервера, повторите попытку в другой раз."
+			},
+			"authError": {
+				"title": "Ошибка аутентификации.",
+				"description": "Неправильный логин или пароль."
+			},
+			"meError": {
+				"title": "Ошибка авторизации.",
+				"description": "Ошибка при получении информации о пользователе."
+			},
+			"indexError": {
+				"title": "Ошибка индекса.",
+				"description": "Ошибка при получении данных."
+			},
+			"updateError": {
+				"title": "Ошибка обновления.",
+				"description": "Ошибка при обновлении данных."
+			},
+			"destroyError": {
+				"title": "Ошибка удаления.",
+				"description": "Ошибка при удалении данных."
+			}
+		},
+		"success": {
+			"loginSuccess": {
+				"title": "Успешный вход в систему.",
+				"description": "Вы успешно вошли в свою учетную запись."
+			},
+			"registrationSuccess": {
+				"title": "Успешная регистрация.",
+				"description": "Вы успешно зарегистрировали свой аккаунт."
+			}
+		}
+	},
+	"models": {
+		"type": {
+			"Expenses": "Расходы",
+			"Incomes": "Доходы"
+		},
+		"currency": {
+			"RUB": "Российский рубль",
+			"USD": "Доллар США"
+		}
+	}
+}

@@ -1,0 +1,103 @@
+import { ErrorsResponse, transferApi } from "@/shared/api";
+import { Transfer, TransferBody } from "@/shared/api/transfer";
+import { sendErrorNotification } from "@/shared/lib/helpers";
+import { AxiosError } from "axios";
+import { makeAutoObservable, runInAction } from "mobx";
+
+type PrivateFields = "_root";
+
+export class TransferStore {
+	private _transfers = [] as Transfer[];
+
+	get transfers(): Transfer[] {
+		return this._transfers;
+	}
+
+	set transfers(incomes: Transfer[]) {
+		this._transfers = incomes;
+	}
+
+	constructor() {
+		makeAutoObservable<this, PrivateFields>(
+			this,
+			{ _root: false },
+			{ autoBind: true, deep: false },
+		);
+	}
+
+	public async getTransfers() {
+		try {
+			const transferResponse = await transferApi.getTransfers();
+
+			runInAction(() => {
+				this._transfers = transferResponse;
+			});
+
+			return transferResponse;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+
+	async createTransfer(body: TransferBody) {
+		try {
+			const transferResponse = await transferApi.createTransfer(body);
+
+			if (transferResponse) {
+				this.transfers = [...this.transfers, transferResponse];
+			}
+
+			return transferResponse;
+		} catch (error) {
+			const axiosError = error as AxiosError<ErrorsResponse>;
+
+			if (axiosError.response?.data?.errors) {
+				const errors: string[] = axiosError.response.data?.errors;
+				const message: string = axiosError.response.data?.message;
+
+				Object.values(errors).forEach(error => {
+					sendErrorNotification(message, error);
+				});
+			}
+		}
+	}
+
+	async updateTransfer(body: TransferBody, id: number) {
+		try {
+			const transferResponse = await transferApi.updateTransfer(body, id);
+
+			if (transferResponse) {
+				this.transfers = this.transfers.map(transfer =>
+					transfer.id === id ? transferResponse : transfer,
+				);
+			}
+
+			return transferResponse;
+		} catch (error) {
+			const axiosError = error as AxiosError<ErrorsResponse>;
+
+			if (axiosError.response?.data?.errors) {
+				const errors: string[] = axiosError.response.data?.errors;
+				const message: string = axiosError.response.data?.message;
+
+				Object.values(errors).forEach(error => {
+					sendErrorNotification(message, error);
+				});
+			}
+		}
+	}
+
+	async deleteTransfer({ id }: Transfer) {
+		try {
+			const transferResponse = await transferApi.deleteTransfer(id);
+
+			if (transferResponse) {
+				this.transfers = this.transfers.filter(transfer => transfer.id !== id);
+			}
+
+			return transferResponse;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+}
