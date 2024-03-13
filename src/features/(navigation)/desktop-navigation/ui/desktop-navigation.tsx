@@ -29,6 +29,10 @@ export const DesktopNavigation = observer(() => {
 			to: "/expenses",
 		},
 		{
+			label: t("header.navigation.transfers"),
+			to: "/transfers",
+		},
+		{
 			label: t("header.navigation.accounts"),
 			to: "/accounts",
 		},
@@ -42,7 +46,7 @@ export const DesktopNavigation = observer(() => {
 	];
 
 	return (
-		<Stack direction={"row"} spacing={4}>
+		<Stack direction={"row"} spacing={2}>
 			{!isAuth &&
 				PUBLIC_NAV_ITEMS.map(({ label, to }) => (
 					<Box key={label}>

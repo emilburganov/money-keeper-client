@@ -11,6 +11,7 @@ const CategoriesPage = lazy(() => import("./(category)/categories"));
 const IncomesPage = lazy(() => import("./(income)/incomes"));
 const ExpensesPage = lazy(() => import("./(expense)/expenses"));
 const AccountsPage = lazy(() => import("./(account)/accounts"));
+const TransfersPage = lazy(() => import("./(transfer)/transfers"));
 
 export const Routing = observer(() => {
 	const { isAuth } = useAuthStore();
@@ -36,6 +37,7 @@ export const Routing = observer(() => {
 					<Route path={ROUTE_CONSTANTS.INCOMES} element={<IncomesPage />} />
 					<Route path={ROUTE_CONSTANTS.EXPENSES} element={<ExpensesPage />} />
 					<Route path={ROUTE_CONSTANTS.ACCOUNTS} element={<AccountsPage />} />
+					<Route path={ROUTE_CONSTANTS.TRANSFERS} element={<TransfersPage />} />
 					<Route path="*" element={<AccountsPage />} />
 				</>
 			)}

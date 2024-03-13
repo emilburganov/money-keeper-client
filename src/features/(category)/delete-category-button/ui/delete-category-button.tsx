@@ -1,6 +1,7 @@
 import { useCategoryStore } from "@/entities/category";
 import { Category } from "@/shared/api/category";
 import { Button } from "@/shared/ui/(button)/button";
+import { DeleteIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -23,13 +24,12 @@ export const DeleteCategoryButton = ({
 
 	return (
 		<Button
-			w="100%"
 			onClick={handleDelete}
 			colorScheme={"red"}
 			isLoading={isLoading}
 			loadingText={t("pages.categories.deleteButtonLoadingText")}
 		>
-			{t("pages.categories.deleteButton")}
+			<DeleteIcon/>
 		</Button>
 	);
 };

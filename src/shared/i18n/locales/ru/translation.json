@@ -67,10 +67,10 @@
 			"logout": "Выйти"
 		},
 		"categories": {
-			"editButton": "Редактировать категорию",
-			"deleteButton": "Удалить категорию",
-			"createButton": "Создать категорию",
-			"updateButton": "Обновить категорию",
+			"editButton": "Редактировать",
+			"deleteButton": "Удалить",
+			"createButton": "Добавить",
+			"updateButton": "Обновить",
 			"deleteButtonLoadingText": "Удаление...",
 			"createButtonLoadingText": "Создание...",
 			"updateButtonLoadingText": "Обновление...",
@@ -100,10 +100,10 @@
 			}
 		},
 		"incomes": {
-			"editButton": "Редактировать доход",
-			"deleteButton": "Удалить доход",
-			"createButton": "Создать доход",
-			"updateButton": "Обновить доход",
+			"editButton": "Редактировать",
+			"deleteButton": "Удалить",
+			"createButton": "Добавить",
+			"updateButton": "Обновить",
 			"deleteButtonLoadingText": "Удаление...",
 			"createButtonLoadingText": "Создание...",
 			"updateButtonLoadingText": "Обновление...",
@@ -137,10 +137,10 @@
 			}
 		},
 		"expenses": {
-			"editButton": "Редактировать расход",
-			"deleteButton": "Удалить расход",
-			"createButton": "Создать расход",
-			"updateButton": "Обновить расход",
+			"editButton": "Редактировать",
+			"deleteButton": "Удалить",
+			"createButton": "Добавить",
+			"updateButton": "Обновить",
 			"deleteButtonLoadingText": "Удаление...",
 			"createButtonLoadingText": "Создание...",
 			"updateButtonLoadingText": "Обновление...",
@@ -174,10 +174,10 @@
 			}
 		},
 		"accounts": {
-			"editButton": "Редактировать счёт",
-			"deleteButton": "Удалить счёт",
-			"createButton": "Создать счёт",
-			"updateButton": "Обновить счёт",
+			"editButton": "Редактировать",
+			"deleteButton": "Удалить",
+			"createButton": "Добавить",
+			"updateButton": "Обновить",
 			"deleteButtonLoadingText": "Удаление...",
 			"createButtonLoadingText": "Создание...",
 			"updateButtonLoadingText": "Обновление...",
@@ -207,10 +207,10 @@
 			}
 		},
 		"transfers": {
-			"editButton": "Редактировать перевод",
-			"deleteButton": "Удалить перевод",
-			"createButton": "Создать перевод",
-			"updateButton": "Обновить перевод",
+			"editButton": "Редактировать",
+			"deleteButton": "Удалить",
+			"createButton": "Добавить",
+			"updateButton": "Обновить",
 			"deleteButtonLoadingText": "Удаление...",
 			"createButtonLoadingText": "Создание...",
 			"updateButtonLoadingText": "Обновление...",
@@ -223,8 +223,8 @@
 					"fields": {
 						"title": "Наименование",
 						"amount": "Сумма",
-						"account_from": "Счёт (откуда)",
-						"account_to": "Счёт (куда)"
+						"account_from": "Счет списания",
+						"account_to": "Счет зачисления"
 					}
 				}
 			},
@@ -237,8 +237,8 @@
 					"fields": {
 						"title": "Наименование",
 						"amount": "Сумма",
-						"account_from": "Счёт (откуда)",
-						"account_to": "Счёт (куда)"
+						"account_from": "Счет списания",
+						"account_to": "Счет зачисления"
 					}
 				}
 			}
@@ -249,7 +249,8 @@
 		"max": "Количество символов в поле {{field}} не может превышать {{max}}.",
 		"min": "Количество символов в поле {{field}} должно быть не менее {{min}}.",
 		"email": "Поле {{field}} должно быть действительным электронным адресом.",
-		"oneOf": "Значения полей {{firstField}} и {{secondField}} должны совпадать."
+		"oneOf": "Значения полей {{firstField}} и {{secondField}} должны совпадать.",
+		"notOneOf": "Значения полей {{firstField}} и {{secondField}} не должны совпадать."
 	},
 	"notifications": {
 		"error": {

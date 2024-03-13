@@ -67,10 +67,10 @@
 			"logout": "Logout"
 		},
 		"categories": {
-			"editButton": "Edit category",
-			"deleteButton": "Delete category",
-			"createButton": "Create category",
-			"updateButton": "Update category",
+			"editButton": "Edit",
+			"deleteButton": "Delete",
+			"createButton": "Create",
+			"updateButton": "Update",
 			"deleteButtonLoadingText": "Deleting...",
 			"createButtonLoadingText": "Creating...",
 			"updateButtonLoadingText": "Updating...",
@@ -100,10 +100,10 @@
 			}
 		},
 		"incomes": {
-			"editButton": "Edit income",
-			"deleteButton": "Delete income",
-			"createButton": "Create income",
-			"updateButton": "Update income",
+			"editButton": "Edit",
+			"deleteButton": "Delete",
+			"createButton": "Create",
+			"updateButton": "Update",
 			"deleteButtonLoadingText": "Deleting...",
 			"createButtonLoadingText": "Creating...",
 			"updateButtonLoadingText": "Updating...",
@@ -137,10 +137,10 @@
 			}
 		},
 		"expenses": {
-			"editButton": "Edit expense",
-			"deleteButton": "Delete expense",
-			"createButton": "Create expense",
-			"updateButton": "Update expense",
+			"editButton": "Edit",
+			"deleteButton": "Delete",
+			"createButton": "Create",
+			"updateButton": "Update",
 			"deleteButtonLoadingText": "Deleting...",
 			"createButtonLoadingText": "Creating...",
 			"updateButtonLoadingText": "Updating...",
@@ -174,10 +174,10 @@
 			}
 		},
 		"accounts": {
-			"editButton": "Edit account",
-			"deleteButton": "Delete account",
-			"createButton": "Create account",
-			"updateButton": "Update account",
+			"editButton": "Edit",
+			"deleteButton": "Delete",
+			"createButton": "Create",
+			"updateButton": "Update",
 			"deleteButtonLoadingText": "Deleting...",
 			"createButtonLoadingText": "Creating...",
 			"updateButtonLoadingText": "Updating...",
@@ -207,10 +207,10 @@
 			}
 		},
 		"transfers": {
-			"editButton": "Edit transfer",
-			"deleteButton": "Delete transfer",
-			"createButton": "Create transfer",
-			"updateButton": "Update transfer",
+			"editButton": "Edit",
+			"deleteButton": "Delete",
+			"createButton": "Create",
+			"updateButton": "Update",
 			"deleteButtonLoadingText": "Deleting...",
 			"createButtonLoadingText": "Creating...",
 			"updateButtonLoadingText": "Updating...",
@@ -249,7 +249,8 @@
 		"max": "The {{field}} field must not be greater than {{max}} characters.",
 		"min": "The {{field}} field must be at least {{min}} characters.",
 		"email": "The {{field}} field must be a valid email address.",
-		"oneOf": "The {{firstField}} field must match {{secondField}}."
+		"oneOf": "The {{firstField}} field must match {{secondField}}.",
+		"notOneOf": "The {{firstField}} field must not match {{secondField}}."
 	},
 	"notifications": {
 		"error": {

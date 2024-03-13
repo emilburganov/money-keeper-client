@@ -2,6 +2,7 @@ import { useAccountStore } from "@/entities/account";
 import { useCategoryStore } from "@/entities/category";
 import { ExpenseSchema } from "@/entities/expense";
 import { CreateExpenseButton } from "@/features/(expense)";
+import { CategoryType } from "@/shared/api/category";
 import { ExpenseBody } from "@/shared/api/expense";
 import {
 	Box,
@@ -128,7 +129,9 @@ export const CreateExpenseModal = observer(
 											colorMode === "light" ? "green.500" : "green.200"
 										}
 									>
-										{categories.map(({ id, title }) => (
+										{categories
+											.filter((category) => category.type !== CategoryType.INCOMES)
+											.map(({ id, title }) => (
 											<option key={id} value={id}>
 												{title}
 											</option>

@@ -2,6 +2,7 @@ import { useAccountStore } from "@/entities/account";
 import { useCategoryStore } from "@/entities/category";
 import { IncomeSchema } from "@/entities/income";
 import { UpdateIncomeButton } from "@/features/(income)";
+import { CategoryType } from "@/shared/api/category";
 import { Income, IncomeBody } from "@/shared/api/income";
 import {
 	Box,
@@ -131,7 +132,9 @@ export const EditIncomeModal = observer(
 											colorMode === "light" ? "green.500" : "green.200"
 										}
 									>
-										{categories.map(({ id, title }) => (
+										{categories
+											.filter((category) => category.type !== CategoryType.EXPENSES)
+											.map(({ id, title }) => (
 											<option key={id} value={id}>
 												{title}
 											</option>
@@ -149,7 +152,7 @@ export const EditIncomeModal = observer(
 									</FormLabel>
 									<Select
 										{...register("account_id")}
-										defaultValue={income.account_id}
+										defaultValue={income.account.id}
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
 										}

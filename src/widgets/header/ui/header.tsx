@@ -43,7 +43,7 @@ export const Header = observer(() => {
 				maxW={"container.xl"}
 				margin={"auto"}
 			>
-				<Flex ml={{ base: -2 }} display={{ base: "flex", md: "none" }}>
+				<Flex ml={{ base: -2 }} display={{ base: "flex", xl: "none" }}>
 					<IconButton
 						onClick={onToggle}
 						icon={
@@ -53,9 +53,9 @@ export const Header = observer(() => {
 						aria-label={"Toggle Navigation"}
 					/>
 				</Flex>
-				<Flex align={"center"} justify={{ base: "center", md: "start" }}>
+				<Flex align={"center"} justify={{ base: "center", xl: "start" }}>
 					<Logo />
-					<Flex display={{ base: "none", md: "flex" }} ml={10}>
+					<Flex display={{ base: "none", xl: "flex" }} ml={10}>
 						<DesktopNavigation />
 					</Flex>
 				</Flex>
@@ -73,7 +73,7 @@ export const Header = observer(() => {
 							<LinkButton
 								as={Link}
 								to="/login"
-								display={{ base: "none", md: "flex" }}
+								display={{ base: "none", xl: "flex" }}
 							>
 								{t("header.buttons.auth.login")}
 							</LinkButton>
@@ -82,7 +82,7 @@ export const Header = observer(() => {
 								to="/registration"
 								fontSize={"sm"}
 								size={"md"}
-								display={{ base: "none", md: "flex" }}
+								display={{ base: "none", xl: "flex" }}
 							>
 								{t("header.buttons.auth.registration")}
 							</Button>

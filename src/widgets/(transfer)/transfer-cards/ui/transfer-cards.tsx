@@ -1,11 +1,10 @@
-import { useIncomeStore } from "@/entities/income";
-import { DeleteIncomeButton } from "@/features/(income)";
-import { Income } from "@/shared/api/income";
+import { useTransferStore } from "@/entities/transfer";
+import { DeleteTransferButton } from "@/features/(transfer)";
+import { Transfer } from "@/shared/api/transfer";
 import { Button } from "@/shared/ui/(button)/button";
 import { Spinner } from "@/shared/ui/(spinner)/spinner";
-import { EditIcon } from "@chakra-ui/icons";
+import { ArrowForwardIcon, EditIcon } from "@chakra-ui/icons";
 import {
-    Badge,
     Card,
     CardBody,
     CardFooter,
@@ -23,20 +22,20 @@ import {
 import { observer } from "mobx-react-lite";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-interface IncomeCardsProps {
-    setIncome: Dispatch<SetStateAction<Income | null>>;
+interface TransferCardsProps {
+    setTransfer: Dispatch<SetStateAction<Transfer | null>>;
     onOpen: () => void;
 }
 
-export const IncomeCards = observer(
-    ({setIncome, onOpen}: IncomeCardsProps) => {
-        const {incomes, getIncomes} = useIncomeStore();
+export const TransferCards = observer(
+    ({setTransfer, onOpen}: TransferCardsProps) => {
+        const {transfers, getTransfers} = useTransferStore();
         const [isLoading, setLoading] = useState<boolean>(false);
         
         useEffect(() => {
             (async () => {
                 setLoading(true);
-                await getIncomes();
+                await getTransfers();
                 setLoading(false);
             })();
         }, []);
@@ -48,12 +47,12 @@ export const IncomeCards = observer(
         return (
             <Flex direction="column" gap={4}>
                 <SimpleGrid columns={{base: 1, sm: 2, lg: 3, xl: 4}} spacing="20px">
-                    {incomes.map(income => (
-                        <IncomeCard
-                            key={income.id}
-                            income={income}
+                    {transfers.map((transfer) => (
+                        <TransferCard
+                            key={transfer.id}
+                            transfer={transfer}
                             onOpen={onOpen}
-                            setIncome={setIncome}
+                            setTransfer={setTransfer}
                         />
                     ))}
                 </SimpleGrid>
@@ -62,15 +61,15 @@ export const IncomeCards = observer(
     },
 );
 
-interface IncomeCardProps {
-    setIncome: Dispatch<SetStateAction<Income | null>>;
-    income: Income;
+interface TransferCardProps {
+    setTransfer: Dispatch<SetStateAction<Transfer | null>>;
+    transfer: Transfer;
     onOpen: () => void;
 }
 
-export const IncomeCard = ({setIncome, income, onOpen}: IncomeCardProps) => {
+const TransferCard = ({setTransfer, transfer, onOpen}: TransferCardProps) => {
     const handleEdit = () => {
-        setIncome(income);
+        setTransfer(transfer);
         onOpen();
     };
     
@@ -86,25 +85,26 @@ export const IncomeCard = ({setIncome, income, onOpen}: IncomeCardProps) => {
                         justifyContent="space-between"
                     >
                         <Text overflow="hidden" whiteSpace="nowrap" textOverflow="ellipsis">
-                            {income.title}
+                            {transfer.title}
                         </Text>
-                        <Badge fontSize="0.7em" colorScheme="green" px={2} py={1}>
-                            {income.category.title}
-                        </Badge>
                     </Heading>
                 </CardHeader>
                 <CardBody py={0}>
                     <Stat>
-                        <StatLabel>{income.account.title}</StatLabel>
-                        <StatNumber>+ {income.amount} {income.account.currency.symbol}</StatNumber>
-                        <StatHelpText>{income.created_at}</StatHelpText>
+                        <StatLabel display="flex" gap={2} alignItems="center">
+                            {transfer.account_from.title}
+                            <ArrowForwardIcon/>
+                            {transfer.account_to.title}
+                        </StatLabel>
+                        <StatNumber>{transfer.amount} {transfer.account_from.currency.symbol}</StatNumber>
+                        <StatHelpText>{transfer.created_at}</StatHelpText>
                     </Stat>
                 </CardBody>
                 <CardFooter gap={5}>
                     <Button onClick={handleEdit}>
                         <EditIcon/>
                     </Button>
-                    <DeleteIncomeButton income={income}/>
+                    <DeleteTransferButton transfer={transfer}/>
                 </CardFooter>
             </Card>
         </ScaleFade>

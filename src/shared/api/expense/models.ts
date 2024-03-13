@@ -7,6 +7,7 @@ export interface Expense {
 	amount: number;
 	category: Category;
 	account: Account;
+	created_at: string;
 }
 
 export interface ExpenseBody {

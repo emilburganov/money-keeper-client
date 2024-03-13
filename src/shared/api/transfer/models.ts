@@ -6,8 +6,9 @@ export interface Transfer {
 	title: string;
 	amount: number;
 	category: Category;
-	account_from_id: Account;
-	account_to_id: Account;
+	account_from: Account;
+	account_to: Account;
+	created_at: string;
 }
 
 export interface TransferBody {

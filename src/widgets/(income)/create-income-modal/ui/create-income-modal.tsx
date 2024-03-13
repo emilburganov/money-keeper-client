@@ -2,6 +2,7 @@ import { useAccountStore } from "@/entities/account";
 import { useCategoryStore } from "@/entities/category";
 import { IncomeSchema } from "@/entities/income";
 import { CreateIncomeButton } from "@/features/(income)";
+import { CategoryType } from "@/shared/api/category";
 import { IncomeBody } from "@/shared/api/income";
 import {
 	Box,
@@ -128,7 +129,9 @@ export const CreateIncomeModal = observer(
 											colorMode === "light" ? "green.500" : "green.200"
 										}
 									>
-										{categories.map(({ id, title }) => (
+										{categories
+											.filter((category) => category.type !== CategoryType.EXPENSES)
+											.map(({ id, title }) => (
 											<option key={id} value={id}>
 												{title}
 											</option>

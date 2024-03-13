@@ -1,22 +1,22 @@
-import { useExpenseStore } from "@/entities/expense";
-import { Expense } from "@/shared/api/expense";
+import { useTransferStore } from "@/entities/transfer";
+import { Transfer } from "@/shared/api/transfer";
 import { Button } from "@/shared/ui/(button)/button";
 import { DeleteIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
-interface DeleteExpenseButtonProps {
-	expense: Expense;
+interface DeleteTransferButtonProps {
+	transfer: Transfer;
 }
 
-export const DeleteExpenseButton = ({ expense }: DeleteExpenseButtonProps) => {
-	const { deleteExpense } = useExpenseStore();
+export const DeleteTransferButton = ({ transfer }: DeleteTransferButtonProps) => {
+	const { deleteTransfer } = useTransferStore();
 	const { t } = useTranslation();
 	const [isLoading, setLoading] = useState<boolean>(false);
 
 	const handleDelete = async () => {
 		setLoading(true);
-		await deleteExpense(expense);
+		await deleteTransfer(transfer);
 		setLoading(false);
 	};
 
@@ -25,7 +25,7 @@ export const DeleteExpenseButton = ({ expense }: DeleteExpenseButtonProps) => {
 			onClick={handleDelete}
 			colorScheme={"red"}
 			isLoading={isLoading}
-			loadingText={t("pages.expenses.deleteButtonLoadingText")}
+			loadingText={t("pages.transfers.deleteButtonLoadingText")}
 		>
 			<DeleteIcon/>
 		</Button>

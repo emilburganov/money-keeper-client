@@ -70,7 +70,7 @@ export const LanguageSwitchButton = () => {
 										p={2}
 										fontSize={"14px"}
 									>
-										<Image
+										<img
 											src="/assets/icons/russian-flag.svg"
 											alt="russian-flag-icon"
 										/>
@@ -87,7 +87,7 @@ export const LanguageSwitchButton = () => {
 										p={2}
 										fontSize={"14px"}
 									>
-										<Image
+										<img
 											src="/assets/icons/english-flag.svg"
 											alt="english-flag-icon"
 										/>

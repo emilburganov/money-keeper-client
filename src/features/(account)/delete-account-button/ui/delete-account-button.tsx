@@ -1,6 +1,7 @@
 import { useAccountStore } from "@/entities/account";
 import { Account } from "@/shared/api/account";
 import { Button } from "@/shared/ui/(button)/button";
+import { DeleteIcon } from "@chakra-ui/icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -21,13 +22,12 @@ export const DeleteAccountButton = ({ account }: DeleteAccountButtonProps) => {
 
 	return (
 		<Button
-			w="100%"
 			onClick={handleDelete}
 			colorScheme={"red"}
 			isLoading={isLoading}
 			loadingText={t("pages.accounts.deleteButtonLoadingText")}
 		>
-			{t("pages.accounts.deleteButton")}
+			<DeleteIcon/>
 		</Button>
 	);
 };

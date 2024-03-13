@@ -28,6 +28,10 @@ export const MobileNavigation = observer(
 				to: "/expenses",
 			},
 			{
+				label: t("header.navigation.transfers"),
+				to: "/transfers",
+			},
+			{
 				label: t("header.navigation.accounts"),
 				to: "/accounts",
 			},
@@ -45,7 +49,7 @@ export const MobileNavigation = observer(
 				fontSize="sm"
 				bg={colorMode === "light" ? "gray.50" : "gray.700"}
 				p={4}
-				display={{ md: "none" }}
+				display={{ xl: "none" }}
 			>
 				<Stack spacing={0} onClick={onToggle}>
 					{!isAuth &&

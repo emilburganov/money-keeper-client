@@ -1,1 +1,1 @@
-export { CategoryCards } from "./ui/category-cards.tsx";
+export { CategoryCards } from "./ui/category-cards";

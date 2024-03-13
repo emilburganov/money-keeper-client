@@ -1,9 +1,7 @@
 import { useAccountStore } from "@/entities/account";
-import { useCategoryStore } from "@/entities/category";
-import { ExpenseSchema } from "@/entities/expense";
-import { UpdateExpenseButton } from "@/features/(expense)";
-import { CategoryType } from "@/shared/api/category";
-import { Expense, ExpenseBody } from "@/shared/api/expense";
+import { TransferSchema } from "@/entities/transfer";
+import { UpdateTransferButton } from "@/features/(transfer)";
+import { Transfer, TransferBody } from "@/shared/api/transfer";
 import {
 	Box,
 	Flex,
@@ -15,12 +13,7 @@ import {
 	ModalCloseButton,
 	ModalContent,
 	ModalHeader,
-	ModalOverlay,
-	NumberDecrementStepper,
-	NumberIncrementStepper,
-	NumberInput,
-	NumberInputField,
-	NumberInputStepper,
+	ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper,
 	Select,
 	Stack,
 	useColorMode,
@@ -31,16 +24,15 @@ import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-interface EditExpenseModalProps {
-	expense: Expense;
+interface EditTransferModalProps {
+	transfer: Transfer;
 	isOpen: boolean;
 	onClose: () => void;
 }
 
-export const EditExpenseModal = observer(
-	({ expense, isOpen, onClose }: EditExpenseModalProps) => {
+export const EditTransferModal = observer(
+	({ transfer, isOpen, onClose }: EditTransferModalProps) => {
 		const { accounts, getAccounts } = useAccountStore();
-		const { categories, getCategories } = useCategoryStore();
 		const { t } = useTranslation();
 		const { colorMode } = useColorMode();
 
@@ -49,14 +41,13 @@ export const EditExpenseModal = observer(
 			handleSubmit,
 			reset,
 			formState: { errors, isValid },
-		} = useForm<ExpenseBody>({
-			resolver: yupResolver(ExpenseSchema),
+		} = useForm<TransferBody>({
+			resolver: yupResolver(TransferSchema),
 		});
 
 		useEffect(() => {
 			(async () => {
 				await getAccounts();
-				await getCategories();
 			})();
 		}, []);
 
@@ -65,7 +56,7 @@ export const EditExpenseModal = observer(
 				<ModalOverlay />
 				<ModalContent maxW={{ base: "calc(100% - 32px)", sm: 400 }}>
 					<ModalHeader pt={5} px={5} pb={0}>
-						{t("pages.expenses.editModal.form.title")}
+						{t("pages.transfers.editModal.form.title")}
 					</ModalHeader>
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
@@ -78,17 +69,17 @@ export const EditExpenseModal = observer(
 							<Stack spacing={4}>
 								<FormControl isInvalid={!!errors.title?.message}>
 									<FormLabel>
-										{t("pages.expenses.editModal.form.fields.title")}:
+										{t("pages.transfers.editModal.form.fields.title")}:
 									</FormLabel>
 									<Input
 										{...register("title")}
-										defaultValue={expense.title}
+										defaultValue={transfer.title}
 										type="text"
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
 										}
 										placeholder={t(
-											"pages.expenses.editModal.form.placeholders.title",
+											"pages.transfers.editModal.form.placeholders.title",
 										)}
 									/>
 									{errors.title && (
@@ -100,7 +91,7 @@ export const EditExpenseModal = observer(
 										{t("pages.expenses.editModal.form.fields.amount")}:
 									</FormLabel>
 									<NumberInput
-										defaultValue={expense.amount}
+										defaultValue={transfer.amount}
 										precision={2}
 										min={0}
 										max={1000000000}
@@ -121,38 +112,13 @@ export const EditExpenseModal = observer(
 										</FormErrorMessage>
 									)}
 								</FormControl>
-								<FormControl isInvalid={!!errors.category_id?.message}>
+								<FormControl isInvalid={!!errors.account_from_id?.message}>
 									<FormLabel>
-										{t("pages.expenses.editModal.form.fields.category")}:
+										{t("pages.transfers.editModal.form.fields.account_from")}:
 									</FormLabel>
 									<Select
-										{...register("category_id")}
-										defaultValue={expense.category.id}
-										focusBorderColor={
-											colorMode === "light" ? "green.500" : "green.200"
-										}
-									>
-										{categories
-											.filter((category) => category.type !== CategoryType.INCOMES)
-											.map(({ id, title }) => (
-											<option key={id} value={id}>
-												{title}
-											</option>
-										))}
-									</Select>
-									{errors.category_id && (
-										<FormErrorMessage>
-											{errors.category_id?.message}
-										</FormErrorMessage>
-									)}
-								</FormControl>
-								<FormControl isInvalid={!!errors.account_id?.message}>
-									<FormLabel>
-										{t("pages.expenses.editModal.form.fields.account")}:
-									</FormLabel>
-									<Select
-										{...register("account_id")}
-										defaultValue={expense.account.id}
+										{...register("account_from_id")}
+										defaultValue={transfer.account_from.id}
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
 										}
@@ -163,15 +129,38 @@ export const EditExpenseModal = observer(
 											</option>
 										))}
 									</Select>
-									{errors.account_id && (
+									{errors.account_from_id && (
 										<FormErrorMessage>
-											{errors.account_id?.message}
+											{errors.account_from_id?.message}
+										</FormErrorMessage>
+									)}
+								</FormControl>
+								<FormControl isInvalid={!!errors.account_to_id?.message}>
+									<FormLabel>
+										{t("pages.transfers.editModal.form.fields.account_to")}:
+									</FormLabel>
+									<Select
+										{...register("account_to_id")}
+										defaultValue={transfer.account_to.id}
+										focusBorderColor={
+											colorMode === "light" ? "green.500" : "green.200"
+										}
+									>
+										{accounts.map(({ id, title }) => (
+											<option key={id} value={id}>
+												{title}
+											</option>
+										))}
+									</Select>
+									{errors.account_to_id && (
+										<FormErrorMessage>
+											{errors.account_to_id?.message}
 										</FormErrorMessage>
 									)}
 								</FormControl>
 								<Stack spacing={10} pt={2}>
-									<UpdateExpenseButton
-										id={expense.id}
+									<UpdateTransferButton
+										id={transfer.id}
 										reset={reset}
 										isValid={isValid}
 										handleSubmit={handleSubmit}

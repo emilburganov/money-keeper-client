@@ -7,6 +7,7 @@ export interface Income {
 	amount: number;
 	category: Category;
 	account: Account;
+	created_at: string;
 }
 
 export interface IncomeBody {
