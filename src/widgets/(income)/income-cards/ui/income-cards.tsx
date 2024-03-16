@@ -96,7 +96,7 @@ export const IncomeCard = ({setIncome, income, onOpen}: IncomeCardProps) => {
                 <CardBody py={0}>
                     <Stat>
                         <StatLabel>{income.account.title}</StatLabel>
-                        <StatNumber>+ {income.amount} {income.account.currency.symbol}</StatNumber>
+                        <StatNumber>+ {income.amount} {income.account.currency.code}</StatNumber>
                         <StatHelpText>{income.created_at}</StatHelpText>
                     </Stat>
                 </CardBody>

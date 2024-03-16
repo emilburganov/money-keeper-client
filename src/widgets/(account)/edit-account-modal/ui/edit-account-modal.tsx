@@ -33,7 +33,7 @@ interface EditAccountModalProps {
 export const EditAccountModal = observer(
 	({ account, isOpen, onClose }: EditAccountModalProps) => {
 		const { currencies, getCurrencies } = useCurrencyStore();
-		const { t } = useTranslation();
+		const { t, i18n } = useTranslation();
 		const { colorMode } = useColorMode();
 
 		const {
@@ -97,9 +97,9 @@ export const EditAccountModal = observer(
 											colorMode === "light" ? "green.500" : "green.200"
 										}
 									>
-										{currencies.map(({ id, code }) => (
+										{currencies.map(({ id, code, title }) => (
 											<option key={id} value={id}>
-												{t(`models.currency.${code}`)}
+												{i18n.language === "ru" ? title : code}
 											</option>
 										))}
 									</Select>

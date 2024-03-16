@@ -7,4 +7,5 @@ export const ROUTE_CONSTANTS = {
 	EXPENSES: "/expenses/",
 	ACCOUNTS: "/accounts/",
 	TRANSFERS: "/transfers/",
+	PROFILE: "/profile/",
 };

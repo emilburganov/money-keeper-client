@@ -32,7 +32,7 @@ interface CreateAccountModalProps {
 export const CreateAccountModal = observer(
 	({ isOpen, onClose }: CreateAccountModalProps) => {
 		const { currencies, getCurrencies } = useCurrencyStore();
-		const { t } = useTranslation();
+		const { t, i18n } = useTranslation();
 		const { colorMode } = useColorMode();
 
 		const {
@@ -94,9 +94,9 @@ export const CreateAccountModal = observer(
 											colorMode === "light" ? "green.500" : "green.200"
 										}
 									>
-										{currencies.map(({ id, code }) => (
+										{currencies.map(({ id, code, title }) => (
 											<option key={id} value={id}>
-												{t(`models.currency.${code}`)}
+												{i18n.language === "ru" ? title : code}
 											</option>
 										))}
 									</Select>

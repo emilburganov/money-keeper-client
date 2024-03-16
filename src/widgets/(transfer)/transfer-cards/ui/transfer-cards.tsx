@@ -96,7 +96,7 @@ const TransferCard = ({setTransfer, transfer, onOpen}: TransferCardProps) => {
                             <ArrowForwardIcon/>
                             {transfer.account_to.title}
                         </StatLabel>
-                        <StatNumber>{transfer.amount} {transfer.account_from.currency.symbol}</StatNumber>
+                        <StatNumber>{transfer.amount} {transfer.account_from.currency.code}</StatNumber>
                         <StatHelpText>{transfer.created_at}</StatHelpText>
                     </Stat>
                 </CardBody>

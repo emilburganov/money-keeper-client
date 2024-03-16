@@ -1,4 +1,3 @@
-import { useAuthStore } from "@/entities/auth";
 import {
 	Button,
 	Flex,
@@ -14,13 +13,11 @@ import { useTranslation } from "react-i18next";
 
 export const LanguageSwitchButton = () => {
 	const { t, i18n } = useTranslation();
-	const { init } = useAuthStore();
 	const { colorMode } = useColorMode();
 
-	const switchLanguage = (language: string) => {
-		i18n.changeLanguage(language);
-		localStorage.setItem("lang", i18n.language);
-		init();
+	const switchLanguage = async (language: string) => {
+		await i18n.changeLanguage(language)
+		localStorage.setItem("lang", language);
 	};
 
 	return (

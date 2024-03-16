@@ -5,6 +5,7 @@ import { CurrencyProvider } from "@/entities/currency";
 import { ExpenseProvider } from "@/entities/expense";
 import { IncomeProvider } from "@/entities/income";
 import { TransferProvider } from "@/entities/transfer";
+import { UserProvider } from "@/entities/user";
 import { ChakraProvider } from "@chakra-ui/react";
 import { ReactElement, ReactNode } from "react";
 
@@ -32,4 +33,5 @@ export const Providers = compose(
 	IncomeProvider,
 	ExpenseProvider,
 	TransferProvider,
+	UserProvider,
 );

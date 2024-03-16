@@ -101,7 +101,7 @@ export const ExpenseCard = ({
                 <CardBody py={0}>
                     <Stat>
                         <StatLabel>{expense.account.title}</StatLabel>
-                        <StatNumber>- {expense.amount} {expense.account.currency.symbol}</StatNumber>
+                        <StatNumber>- {expense.amount} {expense.account.currency.code}</StatNumber>
                         <StatHelpText>{expense.created_at}</StatHelpText>
                     </Stat>
                 </CardBody>

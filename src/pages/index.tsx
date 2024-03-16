@@ -5,13 +5,14 @@ import { lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 
 const HomePage = lazy(() => import("./home"));
-const LoginPage = lazy(() => import("./(auth)/login"));
-const RegistrationPage = lazy(() => import("./(auth)/registration"));
-const CategoriesPage = lazy(() => import("./(category)/categories"));
-const IncomesPage = lazy(() => import("./(income)/incomes"));
-const ExpensesPage = lazy(() => import("./(expense)/expenses"));
-const AccountsPage = lazy(() => import("./(account)/accounts"));
-const TransfersPage = lazy(() => import("./(transfer)/transfers"));
+const LoginPage = lazy(() => import("./login"));
+const RegistrationPage = lazy(() => import("./registration"));
+const CategoriesPage = lazy(() => import("./categories"));
+const IncomesPage = lazy(() => import("./incomes"));
+const ExpensesPage = lazy(() => import("./expenses"));
+const AccountsPage = lazy(() => import("./accounts"));
+const TransfersPage = lazy(() => import("./transfers"));
+const ProfilePage = lazy(() => import("./profile"));
 
 export const Routing = observer(() => {
 	const { isAuth } = useAuthStore();
@@ -38,6 +39,7 @@ export const Routing = observer(() => {
 					<Route path={ROUTE_CONSTANTS.EXPENSES} element={<ExpensesPage />} />
 					<Route path={ROUTE_CONSTANTS.ACCOUNTS} element={<AccountsPage />} />
 					<Route path={ROUTE_CONSTANTS.TRANSFERS} element={<TransfersPage />} />
+					<Route path={ROUTE_CONSTANTS.PROFILE} element={<ProfilePage />} />
 					<Route path="*" element={<AccountsPage />} />
 				</>
 			)}

@@ -63,9 +63,6 @@
 				"highlighted": "home page!"
 			}
 		},
-		"profile": {
-			"logout": "Logout"
-		},
 		"categories": {
 			"editButton": "Edit",
 			"deleteButton": "Delete",
@@ -261,22 +258,6 @@
 			"authError": {
 				"title": "Authentication error.",
 				"description": "Invalid login or password."
-			},
-			"meError": {
-				"title": "Authorization error.",
-				"description": "Error while retrieving user information."
-			},
-			"indexError": {
-				"title": "Index error.",
-				"description": "Error when getting a categories."
-			},
-			"updateError": {
-				"title": "Update error.",
-				"description": "Error when updating a data."
-			},
-			"deleteError": {
-				"title": "Delete error.",
-				"description": "Error when deleting a data."
 			}
 		},
 		"success": {
@@ -294,10 +275,6 @@
 		"type": {
 			"Expenses": "Expenses",
 			"Incomes": "Incomes"
-		},
-		"currency": {
-			"RUB": "Russian ruble",
-			"USD": "United States dollar"
 		}
 	}
 }

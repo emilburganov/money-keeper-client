@@ -50,14 +50,19 @@ export class ExpenseStore {
 			return expenseResponse;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-
+			
+			const message: string = String(axiosError?.response?.data?.message);
+			
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
-				const message: string = axiosError.response.data?.message;
-
+				
 				Object.values(errors).forEach(error => {
 					sendErrorNotification(message, error);
 				});
+			}
+			
+			if (message) {
+				sendErrorNotification(message);
 			}
 		}
 	}
@@ -75,14 +80,19 @@ export class ExpenseStore {
 			return expenseResponse;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-
+			
+			const message: string = String(axiosError?.response?.data?.message);
+			
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
-				const message: string = axiosError.response.data?.message;
-
+				
 				Object.values(errors).forEach(error => {
 					sendErrorNotification(message, error);
 				});
+			}
+			
+			if (message) {
+				sendErrorNotification(message);
 			}
 		}
 	}
