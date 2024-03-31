@@ -1,8 +1,8 @@
 import { useAuthStore } from "@/entities/auth";
 import { LogoutButton } from "@/features/(auth)";
 import { DesktopNavigation, MobileNavigation } from "@/features/(navigation)";
-import { LanguageSwitchButton } from "@/shared/ui/(button)/language-switch-button";
 import { Button } from "@/shared/ui/(button)/button";
+import { LanguageSwitchButton } from "@/shared/ui/(button)/language-switch-button";
 import { LinkButton } from "@/shared/ui/(button)/link-button";
 import { ThemeSwitchButton } from "@/shared/ui/(button)/theme-switch-button";
 import { Logo } from "@/shared/ui/(logo)/logo";
@@ -44,12 +44,14 @@ export const Header = observer(() => {
                         aria-label={"Toggle Navigation"}
                     />
                 </Flex>
+                
                 <Flex align={"center"} justify={{base: "center", xl: "start"}}>
                     <Logo/>
                     <Flex display={{base: "none", xl: "flex"}} ml={10}>
                         <DesktopNavigation/>
                     </Flex>
                 </Flex>
+                
                 <Stack
                     as={Flex}
                     justify={"flex-end"}
@@ -79,18 +81,15 @@ export const Header = observer(() => {
                             </Button>
                         </>
                     )}
+                    
                     <Hide below="sm">
                         <ThemeSwitchButton/>
                         <LanguageSwitchButton/>
                     </Hide>
-                    <Link to="/profile">
-                        <Stack direction="row">
-                            <Avatar
-                                name="Sasuke Uchiha"
-                                src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?ixid=MnwxMjA3fDB8MHxzZWFyY2h8N3x8YXZhdGFyfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60https://bit.ly/broken-link"
-                            />
-                        </Stack>
-                    </Link>
+                    
+                    {isAuth && <Link to="/profile">
+						<Avatar size="sm" name="Emil Burganov"/>
+					</Link>}
                 </Stack>
             </Flex>
             <Collapse in={isOpen} animateOpacity>

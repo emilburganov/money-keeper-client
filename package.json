@@ -1,5 +1,5 @@
 {
-	"name": "core",
+	"name": "money-keeper-client",
 	"private": true,
 	"version": "0.0.0",
 	"type": "module",
@@ -19,6 +19,7 @@
 		"axios": "^1.6.5",
 		"chakra-react-select": "^4.7.6",
 		"class-variance-authority": "^0.7.0",
+		"clsx": "^2.1.0",
 		"compose-function": "^3.0.3",
 		"framer-motion": "^10.18.0",
 		"mobx": "^6.12.0",

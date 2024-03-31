@@ -1,6 +1,6 @@
-import { CategoryStore } from "./model/store";
-import { CategoryProvider } from "./lib/provider";
+import { CreateCategorySchema, UpdateCategorySchema } from "./lib/contracts";
 import { useCategoryStore } from "./lib/hooks";
-import { CategorySchema } from "./lib/contracts";
+import { CategoryProvider } from "./lib/provider";
+import { CategoryStore } from "./model/store";
 
-export { CategoryStore, CategoryProvider, useCategoryStore, CategorySchema };
+export { CategoryStore, CategoryProvider, useCategoryStore, CreateCategorySchema, UpdateCategorySchema };

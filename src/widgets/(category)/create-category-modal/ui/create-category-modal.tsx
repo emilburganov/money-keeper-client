@@ -1,4 +1,4 @@
-import { CategorySchema } from "@/entities/category";
+import { CreateCategorySchema } from "@/entities/category/lib/contracts.ts";
 import { CreateCategoryButton } from "@/features/(category)";
 import { CategoryBody, CategoryType } from "@/shared/api/category";
 import {
@@ -38,7 +38,7 @@ export const CreateCategoryModal = observer(
 			reset,
 			formState: { errors, isValid, isLoading },
 		} = useForm<CategoryBody>({
-			resolver: yupResolver(CategorySchema),
+			resolver: yupResolver(CreateCategorySchema),
 		});
 
 		return (
