@@ -25,7 +25,7 @@ export class TransferStore {
 		);
 	}
 
-	public async getTransfers() {
+	async getTransfers() {
 		try {
 			const transferResponse = await transferApi.getTransfers();
 

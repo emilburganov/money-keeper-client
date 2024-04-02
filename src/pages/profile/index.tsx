@@ -1,5 +1,5 @@
 import { Container } from "@/shared/ui/(container)/container";
-import { Sidebar, Content } from "@/widgets/(profile)";
+import { Content, Sidebar } from "@/widgets/(profile)";
 import { Box, } from "@chakra-ui/react";
 
 export default function Profile() {

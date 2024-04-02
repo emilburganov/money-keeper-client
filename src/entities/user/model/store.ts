@@ -23,7 +23,7 @@ export class UserStore {
 		);
 	}
 	
-	public async getBalance(currency: string) {
+	async getBalance(currency: string) {
 		try {
 			const balanceResponse = await userApi.getBalance(currency);
 			

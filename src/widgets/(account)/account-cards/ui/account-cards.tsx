@@ -7,7 +7,6 @@ import { EditIcon } from "@chakra-ui/icons";
 import { Badge, Card, CardFooter, CardHeader, Flex, Heading, ScaleFade, SimpleGrid, Text, } from "@chakra-ui/react";
 import { observer } from "mobx-react-lite";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 
 interface AccountCardsProps {
     setAccount: Dispatch<SetStateAction<Account | null>>;

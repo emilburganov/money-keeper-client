@@ -19,7 +19,7 @@ export class CurrencyStore {
 		);
 	}
 
-	public async getCurrencies() {
+	async getCurrencies() {
 		try {
 			const currencyResponse = await currencyApi.getCurrencies();
 

@@ -88,7 +88,7 @@ export const Header = observer(() => {
                     </Hide>
                     
                     {isAuth && <Link to="/profile">
-						<Avatar size="sm" name="Emil Burganov"/>
+						<Avatar name="Emil Burganov"/>
 					</Link>}
                 </Stack>
             </Flex>

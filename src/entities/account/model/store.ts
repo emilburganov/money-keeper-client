@@ -25,7 +25,7 @@ export class AccountStore {
 		);
 	}
 
-	public async getAccounts() {
+	async getAccounts() {
 		try {
 			const accountResponse = await accountApi.getAccounts();
 

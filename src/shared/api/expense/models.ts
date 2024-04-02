@@ -16,3 +16,8 @@ export interface ExpenseBody {
 	category_id: number;
 	account_id: number;
 }
+
+export interface ExpensesStats {
+	labels: string[],
+	values: number[],
+}

@@ -1,5 +1,5 @@
 import { useAccountStore } from "@/entities/account";
-import { TransferSchema } from "@/entities/transfer";
+import { UpdateTransferSchema } from "@/entities/transfer";
 import { UpdateTransferButton } from "@/features/(transfer)";
 import { Transfer, TransferBody } from "@/shared/api/transfer";
 import {
@@ -13,7 +13,12 @@ import {
 	ModalCloseButton,
 	ModalContent,
 	ModalHeader,
-	ModalOverlay, NumberDecrementStepper, NumberIncrementStepper, NumberInput, NumberInputField, NumberInputStepper,
+	ModalOverlay,
+	NumberDecrementStepper,
+	NumberIncrementStepper,
+	NumberInput,
+	NumberInputField,
+	NumberInputStepper,
 	Select,
 	Stack,
 	useColorMode,
@@ -42,7 +47,7 @@ export const EditTransferModal = observer(
 			reset,
 			formState: { errors, isValid },
 		} = useForm<TransferBody>({
-			resolver: yupResolver(TransferSchema),
+			resolver: yupResolver(UpdateTransferSchema),
 		});
 
 		useEffect(() => {

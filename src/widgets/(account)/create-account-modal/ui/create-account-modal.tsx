@@ -1,4 +1,4 @@
-import { AccountSchema } from "@/entities/account";
+import { StoreAccountSchema } from "@/entities/account";
 import { useCurrencyStore } from "@/entities/currency";
 import { CreateAccountButton } from "@/features/(account)";
 import { AccountBody } from "@/shared/api/account";
@@ -41,7 +41,7 @@ export const CreateAccountModal = observer(
 			reset,
 			formState: { errors, isValid, isLoading },
 		} = useForm<AccountBody>({
-			resolver: yupResolver(AccountSchema),
+			resolver: yupResolver(StoreAccountSchema),
 		});
 
 		useEffect(() => {

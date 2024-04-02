@@ -42,7 +42,9 @@ export class AuthStore {
             {autoBind: true, deep: false},
         );
         
-        this.init();
+        (async () => {
+            await this.init();
+        })();
     }
     
     async load() {

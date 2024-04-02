@@ -1,7 +1,7 @@
 import { t } from "i18next";
 import * as Yup from "yup";
 
-export const CreateCategorySchema = Yup.object().shape({
+export const StoreCategorySchema = Yup.object().shape({
 	title: Yup.string()
 		.required(() =>
 			t("validation.required", {

@@ -2,9 +2,10 @@ import { useAuthStore } from "@/entities/auth";
 import { useCurrencyStore } from "@/entities/currency";
 import { useUserStore } from "@/entities/user";
 import { Avatar, Card, Heading, Select, Stack, Text, useColorMode, VStack } from "@chakra-ui/react";
-import { ChangeEvent, useEffect, useMemo, useState } from "react";
+import { observer } from "mobx-react-lite";
+import { ChangeEvent, useEffect, useState } from "react";
 
-export const Sidebar = () => {
+export const Sidebar = observer(() => {
     const {currencies, getCurrencies} = useCurrencyStore();
     const {balance, getBalance} = useUserStore();
     const {user, load} = useAuthStore();
@@ -22,19 +23,19 @@ export const Sidebar = () => {
         })();
     }, []);
     
-    useMemo(() => {
+    useEffect(() => {
         (async () => {
             await getBalance(currency);
         })();
     }, [currency]);
     
-    if (isLoading) {
-        return;
-    }
-    
     const changeCurrency = (event: ChangeEvent<HTMLSelectElement>) => {
         setCurrency(event.target.value);
     };
+    
+    if (isLoading) {
+        return;
+    }
     
     return (
         <Card
@@ -51,7 +52,7 @@ export const Sidebar = () => {
                     <Heading fontSize="xl" fontWeight={500} fontFamily="body">
                         {user.name}
                     </Heading>
-                    <Text color={colorMode === "light" ? "gray.600" : "gray.200"}>
+                    <Text fontSize="sm" color={colorMode === "light" ? "gray.600" : "gray.200"}>
                         {user.email}
                     </Text>
                 </Stack>
@@ -98,4 +99,4 @@ export const Sidebar = () => {
             </VStack>
         </Card>
     );
-};
+});

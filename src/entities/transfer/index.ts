@@ -1,6 +1,6 @@
-import { TransferStore } from "./model/store";
-import { TransferProvider } from "./lib/provider";
+import { StoreTransferSchema, UpdateTransferSchema } from "./lib/contracts";
 import { useTransferStore } from "./lib/hooks";
-import { TransferSchema } from "./lib/contracts";
+import { TransferProvider } from "./lib/provider";
+import { TransferStore } from "./model/store";
 
-export { TransferStore, TransferProvider, useTransferStore, TransferSchema };
+export { TransferStore, TransferProvider, useTransferStore, StoreTransferSchema, UpdateTransferSchema };

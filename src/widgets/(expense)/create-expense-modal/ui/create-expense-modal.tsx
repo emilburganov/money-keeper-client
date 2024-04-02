@@ -1,6 +1,6 @@
 import { useAccountStore } from "@/entities/account";
 import { useCategoryStore } from "@/entities/category";
-import { ExpenseSchema } from "@/entities/expense";
+import { StoreExpenseSchema } from "@/entities/expense";
 import { CreateExpenseButton } from "@/features/(expense)";
 import { CategoryType } from "@/shared/api/category";
 import { ExpenseBody } from "@/shared/api/expense";
@@ -49,7 +49,7 @@ export const CreateExpenseModal = observer(
 			reset,
 			formState: { errors, isValid, isLoading },
 		} = useForm<ExpenseBody>({
-			resolver: yupResolver(ExpenseSchema),
+			resolver: yupResolver(StoreExpenseSchema),
 		});
 
 		useEffect(() => {

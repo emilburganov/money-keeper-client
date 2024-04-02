@@ -10,7 +10,7 @@ interface UpdateCategoryButtonProps {
 	id: number;
 	reset: () => void;
 	isValid: boolean;
-	handleSubmit: UseFormHandleSubmit<CategoryBody>;
+	handleSubmit: UseFormHandleSubmit<Omit<CategoryBody, "type">>;
 	onSubmit: () => void;
 }
 

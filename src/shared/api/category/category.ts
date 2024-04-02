@@ -13,7 +13,7 @@ export const createCategory = (body: CategoryBody): Promise<Category> => {
 };
 
 export const updateCategory = (
-	body: CategoryBody,
+	body: Omit<CategoryBody, "type">,
 	id: number,
 ): Promise<Category> => {
 	return apiInstance.patch(`${BASE_URL}/${id}`, body);

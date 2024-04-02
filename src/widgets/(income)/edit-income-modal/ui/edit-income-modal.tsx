@@ -1,6 +1,6 @@
 import { useAccountStore } from "@/entities/account";
 import { useCategoryStore } from "@/entities/category";
-import { IncomeSchema } from "@/entities/income";
+import { UpdateIncomeSchema } from "@/entities/income";
 import { UpdateIncomeButton } from "@/features/(income)";
 import { CategoryType } from "@/shared/api/category";
 import { Income, IncomeBody } from "@/shared/api/income";
@@ -50,7 +50,7 @@ export const EditIncomeModal = observer(
 			reset,
 			formState: { errors, isValid },
 		} = useForm<IncomeBody>({
-			resolver: yupResolver(IncomeSchema),
+			resolver: yupResolver(UpdateIncomeSchema),
 		});
 
 		useEffect(() => {

@@ -1,5 +1,5 @@
 import { ErrorsResponse, incomeApi } from "@/shared/api";
-import { Income, IncomeBody } from "@/shared/api/income";
+import { Income, IncomeBody, IncomesStats } from "@/shared/api/income";
 import { sendErrorNotification } from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
@@ -8,6 +8,7 @@ type PrivateFields = "_root";
 
 export class IncomeStore {
 	private _incomes = [] as Income[];
+	private _incomesStats = {} as IncomesStats;
 
 	get incomes(): Income[] {
 		return this._incomes;
@@ -15,6 +16,10 @@ export class IncomeStore {
 
 	set incomes(incomes: Income[]) {
 		this._incomes = incomes;
+	}
+	
+	get incomesStats(): IncomesStats {
+		return this._incomesStats;
 	}
 
 	constructor() {
@@ -25,7 +30,7 @@ export class IncomeStore {
 		);
 	}
 
-	public async getIncomes() {
+	async getIncomes() {
 		try {
 			const incomeResponse = await incomeApi.getIncomes();
 
@@ -34,6 +39,20 @@ export class IncomeStore {
 			});
 
 			return incomeResponse;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	
+	async getIncomesStats() {
+		try {
+			const incomesStatsResponse = await incomeApi.getIncomesStats();
+			
+			runInAction(() => {
+				this._incomesStats = incomesStatsResponse;
+			});
+			
+			return incomesStatsResponse;
 		} catch (error) {
 			console.error(error);
 		}

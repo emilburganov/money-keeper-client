@@ -1,4 +1,4 @@
-import { UpdateCategorySchema } from "@/entities/category/lib/contracts.ts";
+import { UpdateCategorySchema } from "@/entities/category";
 import { UpdateCategoryButton } from "@/features/(category)";
 import { Category, CategoryBody } from "@/shared/api/category";
 import {
@@ -37,7 +37,7 @@ export const EditCategoryModal = observer(
             handleSubmit,
             reset,
             formState: {errors, isValid},
-        } = useForm<CategoryBody>({
+        } = useForm<Omit<CategoryBody, "type">>({
             resolver: yupResolver(UpdateCategorySchema),
         });
         

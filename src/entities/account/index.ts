@@ -1,6 +1,6 @@
-import { AccountStore } from "./model/store";
-import { AccountProvider } from "./lib/provider";
+import { StoreAccountSchema, UpdateAccountSchema } from "./lib/contracts";
 import { useAccountStore } from "./lib/hooks";
-import { AccountSchema } from "./lib/contracts";
+import { AccountProvider } from "./lib/provider";
+import { AccountStore } from "./model/store";
 
-export { AccountStore, AccountProvider, useAccountStore, AccountSchema };
+export { AccountStore, AccountProvider, useAccountStore, StoreAccountSchema, UpdateAccountSchema };

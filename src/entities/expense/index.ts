@@ -1,6 +1,6 @@
-import { ExpenseStore } from "./model/store";
-import { ExpenseProvider } from "./lib/provider";
+import { StoreExpenseSchema, UpdateExpenseSchema } from "./lib/contracts";
 import { useExpenseStore } from "./lib/hooks";
-import { ExpenseSchema } from "./lib/contracts";
+import { ExpenseProvider } from "./lib/provider";
+import { ExpenseStore } from "./model/store";
 
-export { ExpenseStore, ExpenseProvider, useExpenseStore, ExpenseSchema };
+export { ExpenseStore, ExpenseProvider, useExpenseStore, StoreExpenseSchema, UpdateExpenseSchema };

@@ -25,7 +25,7 @@ export class CategoryStore {
 		);
 	}
 
-	public async getCategories() {
+	async getCategories() {
 		try {
 			const categoryResponse = await categoryApi.getCategories();
 
@@ -67,7 +67,7 @@ export class CategoryStore {
 		}
 	}
 
-	async updateCategory(body: CategoryBody, id: number) {
+	async updateCategory(body: Omit<CategoryBody, "type">, id: number) {
 		try {
 			const categoryResponse = await categoryApi.updateCategory(body, id);
 

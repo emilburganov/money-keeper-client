@@ -1,7 +1,29 @@
+import { ExpensesStatsByDate } from "@/features/(expense)";
+import { IncomesStatsByDate } from "@/features/(income)";
 import { Card, Tab, TabList, TabPanel, TabPanels, Tabs, useColorMode } from "@chakra-ui/react";
+import {
+    CategoryScale,
+    Chart as ChartJS,
+    Legend,
+    LinearScale,
+    LineElement,
+    PointElement,
+    Title,
+    Tooltip,
+} from "chart.js";
+
+ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+);
 
 export const Content = () => {
-    const tabs = ["First", "Second", "Third"];
+    const tabs = ["Incomes stats", "Expenses stats", "Accounts stats"];
     const {colorMode} = useColorMode();
     
     return (
@@ -13,10 +35,8 @@ export const Content = () => {
             justifyContent="space-between"
             pt={2}
         >
-            <Tabs
-                color="whiteAlpha-900"
-            >
-                <TabList px={4}>
+            <Tabs color="whiteAlpha-900">
+                <TabList className="overflow-auto" px={4}>
                     {tabs.map((tab) => (
                         <Tab
                             _selected={{
@@ -24,8 +44,6 @@ export const Content = () => {
                                 color: colorMode === "light" ? "green.500" : "green.200",
                             }}
                             key={tab}
-                            mx={4}
-                            px={0}
                             py={4}
                             fontWeight="semibold"
                         >
@@ -34,9 +52,15 @@ export const Content = () => {
                     ))}
                 </TabList>
                 
-                <TabPanels px={4} mt={6}>
+                <TabPanels>
                     <TabPanel>
-                    
+                        <IncomesStatsByDate/>
+                    </TabPanel>
+                    <TabPanel>
+                        <ExpensesStatsByDate/>
+                    </TabPanel>
+                    <TabPanel>
+                        <IncomesStatsByDate/>
                     </TabPanel>
                 </TabPanels>
             </Tabs>

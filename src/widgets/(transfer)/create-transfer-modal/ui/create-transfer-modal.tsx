@@ -1,5 +1,5 @@
 import { useAccountStore } from "@/entities/account";
-import { TransferSchema } from "@/entities/transfer";
+import { StoreTransferSchema } from "@/entities/transfer";
 import { CreateTransferButton } from "@/features/(transfer)";
 import { TransferBody } from "@/shared/api/transfer";
 import {
@@ -46,7 +46,7 @@ export const CreateTransferModal = observer(
 			reset,
 			formState: { errors, isValid, isLoading },
 		} = useForm<TransferBody>({
-			resolver: yupResolver(TransferSchema),
+			resolver: yupResolver(StoreTransferSchema),
 		});
 
 		useEffect(() => {

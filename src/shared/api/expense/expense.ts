@@ -1,11 +1,15 @@
 import { apiInstance } from "../base";
 import { MessageResponse } from "../types";
-import { Expense, ExpenseBody } from "./models";
+import { Expense, ExpenseBody, ExpensesStats } from "./models";
 
 const BASE_URL = "/expenses";
 
 export const getExpenses = (): Promise<Expense[]> => {
 	return apiInstance.get(BASE_URL);
+};
+
+export const getExpensesStats = (): Promise<ExpensesStats> => {
+	return apiInstance.get(`${BASE_URL}/stats`);
 };
 
 export const createExpense = (body: ExpenseBody): Promise<Expense> => {

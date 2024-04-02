@@ -1,5 +1,5 @@
 import { ErrorsResponse, expenseApi } from "@/shared/api";
-import { Expense, ExpenseBody } from "@/shared/api/expense";
+import { Expense, ExpenseBody, ExpensesStats } from "@/shared/api/expense";
 import { sendErrorNotification } from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
@@ -8,6 +8,7 @@ type PrivateFields = "_root";
 
 export class ExpenseStore {
 	private _expenses = [] as Expense[];
+	private _expensesStats = {} as ExpensesStats;
 
 	get expenses(): Expense[] {
 		return this._expenses;
@@ -15,6 +16,10 @@ export class ExpenseStore {
 
 	set expenses(expenses: Expense[]) {
 		this._expenses = expenses;
+	}
+	
+	get expensesStats(): ExpensesStats {
+		return this._expensesStats;
 	}
 
 	constructor() {
@@ -25,7 +30,7 @@ export class ExpenseStore {
 		);
 	}
 
-	public async getExpenses() {
+	async getExpenses() {
 		try {
 			const expenseResponse = await expenseApi.getExpenses();
 
@@ -34,6 +39,20 @@ export class ExpenseStore {
 			});
 
 			return expenseResponse;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	
+	async getExpensesStats() {
+		try {
+			const expensesStatsResponse = await expenseApi.getExpensesStats();
+			
+			runInAction(() => {
+				this._expensesStats = expensesStatsResponse;
+			});
+			
+			return expensesStatsResponse;
 		} catch (error) {
 			console.error(error);
 		}
