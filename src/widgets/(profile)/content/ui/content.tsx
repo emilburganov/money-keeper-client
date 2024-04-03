@@ -36,12 +36,14 @@ export const Content = () => {
             justifyContent="space-between"
             pt={2}
         >
-            <Tabs color="whiteAlpha-900">
+            <Tabs>
                 <TabList
-                    overflowY="hidden"
                     overflowX="auto"
                     whiteSpace="nowrap"
                     px={4}
+                    pb="2px"
+                    borderBottom="none"
+                    boxShadow="0 -2px rgba(255, 255, 255, 0.16) inset"
                 >
                     {tabs.map((tab) => (
                         <Tab
