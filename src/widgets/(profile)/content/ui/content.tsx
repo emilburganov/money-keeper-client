@@ -1,3 +1,4 @@
+import { AccountsSummaryStats } from "@/features/(account)";
 import { ExpensesStatsByDate } from "@/features/(expense)";
 import { IncomesStatsByDate } from "@/features/(income)";
 import { Card, Tab, TabList, TabPanel, TabPanels, Tabs, useColorMode } from "@chakra-ui/react";
@@ -23,7 +24,7 @@ ChartJS.register(
 );
 
 export const Content = () => {
-    const tabs = ["Incomes stats", "Expenses stats", "Accounts stats"];
+    const tabs = ["Incomes stats by date", "Expenses stats by date", "Accounts summary stats"];
     const {colorMode} = useColorMode();
     
     return (
@@ -36,9 +37,15 @@ export const Content = () => {
             pt={2}
         >
             <Tabs color="whiteAlpha-900">
-                <TabList className="overflow-auto" px={4}>
+                <TabList
+                    overflowY="hidden"
+                    overflowX="auto"
+                    whiteSpace="nowrap"
+                    px={4}
+                >
                     {tabs.map((tab) => (
                         <Tab
+                            wordBreak="unset"
                             _selected={{
                                 borderBottomColor: colorMode === "light" ? "green.500" : "green.200",
                                 color: colorMode === "light" ? "green.500" : "green.200",
@@ -60,7 +67,7 @@ export const Content = () => {
                         <ExpensesStatsByDate/>
                     </TabPanel>
                     <TabPanel>
-                        <IncomesStatsByDate/>
+                        <AccountsSummaryStats/>
                     </TabPanel>
                 </TabPanels>
             </Tabs>

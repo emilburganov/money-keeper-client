@@ -1,5 +1,5 @@
 import { useExpenseStore } from "@/entities/expense";
-import { useColorMode } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import {
     CategoryScale,
     Chart as ChartJS,
@@ -24,7 +24,6 @@ ChartJS.register(
 );
 
 export const ExpensesStatsByDate = () => {
-    const {colorMode} = useColorMode();
     const {getExpensesStats, expensesStats} = useExpenseStore();
     const [isLoading, setLoading] = useState<boolean>(false);
     
@@ -42,8 +41,8 @@ export const ExpensesStatsByDate = () => {
             {
                 label: "Expenses",
                 data: expensesStats.values,
-                borderColor: colorMode === "light" ? "#38A169" : "#9AE6B4",
-                backgroundColor: colorMode === "light" ? "#38A169" : "#9AE6B4",
+                borderColor: "rgba(255, 99, 132, 1)",
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
             },
         ],
     };
@@ -53,6 +52,17 @@ export const ExpensesStatsByDate = () => {
     }
     
     return (
-        <Line data={data}/>
+        <Flex h={400} justifyContent="center">
+            <Line
+                data={data}
+                options={{
+                    maintainAspectRatio: false,
+                    animation: {
+                        duration: 0
+                    }
+                }}
+                width="100%"
+            />
+        </Flex>
     );
 };

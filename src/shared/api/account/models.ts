@@ -10,3 +10,8 @@ export interface AccountBody {
 	title: string;
 	currency_id: number;
 }
+
+export interface AccountsStats {
+	labels: string[],
+	values: number[],
+}

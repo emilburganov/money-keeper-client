@@ -1,5 +1,5 @@
 import { accountApi, ErrorsResponse } from "@/shared/api";
-import { Account, AccountBody } from "@/shared/api/account";
+import { Account, AccountBody, AccountsStats } from "@/shared/api/account";
 import { sendErrorNotification } from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
@@ -8,6 +8,7 @@ type PrivateFields = "_root";
 
 export class AccountStore {
 	private _accounts = [] as Account[];
+	private _accountsSummaryStats = {} as AccountsStats;
 
 	get accounts(): Account[] {
 		return this._accounts;
@@ -15,6 +16,10 @@ export class AccountStore {
 
 	set accounts(accounts: Account[]) {
 		this._accounts = accounts;
+	}
+	
+	get accountsSummaryStats() {
+		return this._accountsSummaryStats;
 	}
 
 	constructor() {
@@ -34,6 +39,20 @@ export class AccountStore {
 			});
 
 			return accountResponse;
+		} catch (error) {
+			console.error(error);
+		}
+	}
+	
+	async getAccountsSummaryStats() {
+		try {
+			const accountsSummaryStatsResponse = await accountApi.getAccountsSummaryStats();
+			
+			runInAction(() => {
+				this._accountsSummaryStats = accountsSummaryStatsResponse;
+			});
+			
+			return accountsSummaryStatsResponse;
 		} catch (error) {
 			console.error(error);
 		}

@@ -45,6 +45,7 @@ export const Sidebar = observer(() => {
             mb={{base: 5, md: 0}}
             bg={colorMode === "light" ? "gray.50" : "gray.700"}
             rounded="md"
+            h="fit-content"
         >
             <VStack spacing={3}>
                 <Avatar size="xl" name={user.name}/>

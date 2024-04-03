@@ -1,12 +1,17 @@
 import { apiInstance } from "../base";
 import { MessageResponse } from "../types";
-import { Account, AccountBody } from "./models";
+import { Account, AccountBody, AccountsStats } from "./models";
 
 const BASE_URL = "/accounts";
 
 export const getAccounts = (): Promise<Account[]> => {
 	return apiInstance.get(BASE_URL);
 };
+
+export const getAccountsSummaryStats = (): Promise<AccountsStats> => {
+	return apiInstance.get(`${BASE_URL}/stats`);
+};
+
 
 export const createAccount = (body: AccountBody): Promise<Account> => {
 	return apiInstance.post(`${BASE_URL}`, body);
