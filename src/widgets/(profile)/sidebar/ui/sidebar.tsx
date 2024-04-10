@@ -1,36 +1,77 @@
-import { useAuthStore } from "@/entities/auth";
+import { UpdateUserSchema, useAuthStore } from "@/entities/auth";
 import { useCurrencyStore } from "@/entities/currency";
-import { useUserStore } from "@/entities/user";
-import { Avatar, Card, Heading, Select, Stack, Text, useColorMode, VStack } from "@chakra-ui/react";
+import { UpdateUserButton } from "@/features/(auth)";
+import { UpdateUserCredentials } from "@/shared/api/auth";
+import {
+    Avatar,
+    AvatarBadge,
+    Box,
+    Card,
+    FormControl,
+    FormErrorMessage,
+    FormLabel,
+    Input,
+    Select,
+    Stack,
+    useColorMode,
+    VStack
+} from "@chakra-ui/react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import axios from "axios";
+import i18n from "i18next";
 import { observer } from "mobx-react-lite";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 export const Sidebar = observer(() => {
+    const {t} = useTranslation();
     const {currencies, getCurrencies} = useCurrencyStore();
-    const {balance, getBalance} = useUserStore();
-    const {user, load} = useAuthStore();
+    const {user, updateUser} = useAuthStore();
     const {colorMode} = useColorMode();
-    const [currency, setCurrency] = useState<string>(localStorage.getItem("currency") ?? "1");
     const [isLoading, setLoading] = useState<boolean>(false);
+    const profileAvatar = useRef<HTMLInputElement | null>(null);
     
     useEffect(() => {
         (async () => {
             setLoading(true);
             await getCurrencies();
-            await load();
-            await getBalance(currency);
             setLoading(false);
         })();
     }, []);
     
-    useEffect(() => {
-        (async () => {
-            await getBalance(currency);
-        })();
-    }, [currency]);
+    const {
+        register,
+        handleSubmit,
+        formState: {errors},
+    } = useForm<UpdateUserCredentials>({
+        resolver: yupResolver(UpdateUserSchema),
+        defaultValues: {
+            name: user.name,
+            email: user.email,
+            currency_id: user.currency.id,
+        }
+    });
     
-    const changeCurrency = (event: ChangeEvent<HTMLSelectElement>) => {
-        setCurrency(event.target.value);
+    const openChooseAvatar = () => {
+        profileAvatar.current?.click();
+    };
+    
+    const changeProfileAvatar = async () => {
+        const formData = new FormData();
+        
+        formData.append("name", user.name);
+        formData.append("email", user.email);
+        formData.append("currency_id", String(user.currency.id));
+        formData.append("avatar", profileAvatar.current.files[0]);
+        
+        await axios.post("http://localhost/api/auth/update-user", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data",
+                "Authorization": `Bearer ${localStorage.getItem("token")}`,
+                "Lang": localStorage.getItem("lang"),
+            },
+        })
     };
     
     if (isLoading) {
@@ -48,55 +89,93 @@ export const Sidebar = observer(() => {
             h="fit-content"
         >
             <VStack spacing={3}>
-                <Avatar size="xl" name={user.name}/>
-                <Stack spacing={2} align="center" mb={2}>
-                    <Heading fontSize="xl" fontWeight={500} fontFamily="body">
-                        {user.name}
-                    </Heading>
-                    <Text fontSize="sm" color={colorMode === "light" ? "gray.600" : "gray.200"}>
-                        {user.email}
-                    </Text>
-                </Stack>
-                
-                <Stack direction="row" spacing={6} mb={2}>
-                    <Stack spacing={0} align="center">
-                        <Text fontWeight={600}>
-                            {balance.incomes}
-                        </Text>
-                        <Text fontSize="sm" color={colorMode === "light" ? "gray.600" : "gray.200"}>
-                            Incomes
-                        </Text>
-                    </Stack>
-                    <Stack spacing={0} align="center">
-                        <Text fontWeight={600}>
-                            {balance.expenses}
-                        </Text>
-                        <Text fontSize="sm" color={colorMode === "light" ? "gray.600" : "gray.200"}>
-                            Expenses
-                        </Text>
-                    </Stack>
-                    <Stack spacing={0} align="center">
-                        <Text fontWeight={600}>
-                            {balance.total}
-                        </Text>
-                        <Text fontSize="sm" color={colorMode === "light" ? "gray.600" : "gray.200"}>
-                            Total
-                        </Text>
-                    </Stack>
-                </Stack>
-                <Select
-                    onChange={changeCurrency}
-                    defaultValue={1}
-                    focusBorderColor={
-                        colorMode === "light" ? "green.500" : "green.200"
-                    }
+                <Avatar
+                    src={"http://localhost/" + user.avatar}
+                    name={user.name}
+                    onClick={openChooseAvatar}
+                    size="2xl"
+                    cursor="pointer"
+                    bg={colorMode === "light" ? "green.500" : "green.200"}
                 >
-                    {currencies.map((currency) =>
-                        <option key={currency.id} value={currency.id}>
-                            {currency.title}
-                        </option>
-                    )}
-                </Select>
+                    <AvatarBadge
+                        borderColor={colorMode === "light" ? "gray.50" : "gray.700"}
+                        bg={colorMode === "light" ? "green.500" : "green.200"}
+                        boxSize="1em"
+                    >
+                        <svg width="0.4em" fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                fillRule="evenodd"
+                                clipRule="evenodd"
+                                d="M4 5a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V7a2 2 0 00-2-2h-1.586a1 1 0 01-.707-.293l-1.121-1.121A2 2 0 0011.172 3H8.828a2 2 0 00-1.414.586L6.293 4.707A1 1 0 015.586 5H4zm6 9a3 3 0 100-6 3 3 0 000 6z"
+                            />
+                        </svg>
+                    </AvatarBadge>
+                </Avatar>
+                <input
+                    hidden
+                    type="file"
+                    ref={profileAvatar}
+                    onChange={changeProfileAvatar}
+                />
+                <Box
+                    w={"full"}
+                    minW={{md: "sm", sm: "full"}}
+                    as={"form"}
+                    rounded={"lg"}
+                    bg={colorMode === "light" ? "gray.50" : "gray.700"}
+                >
+                    <Stack spacing={4}>
+                        <FormControl isInvalid={!!errors.name?.message}>
+                            <FormLabel>{t("pages.profile.updateForm.fields.name")}:</FormLabel>
+                            <Input
+                                {...register("name")}
+                                type="text"
+                                placeholder="Username"
+                                focusBorderColor={colorMode === "light" ? "green.500" : "green.200"}
+                            />
+                            {errors.name && (
+                                <FormErrorMessage>{errors.name?.message}</FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl isInvalid={!!errors.email?.message}>
+                            <FormLabel>{t("pages.registration.form.fields.email")}:</FormLabel>
+                            <Input
+                                {...register("email")}
+                                type="text"
+                                placeholder="Example@gmail.com"
+                                focusBorderColor={colorMode === "light" ? "green.500" : "green.200"}
+                            />
+                            {errors.email && (
+                                <FormErrorMessage>{errors.email?.message}</FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <FormControl isInvalid={!!errors.currency_id?.message}>
+                            <FormLabel>
+                                {t("pages.accounts.createModal.form.fields.currency")}:
+                            </FormLabel>
+                            <Select
+                                {...register("currency_id")}
+                                focusBorderColor={
+                                    colorMode === "light" ? "green.500" : "green.200"
+                                }
+                            >
+                                {currencies.map(({id, code, title}) => (
+                                    <option key={id} value={id}>
+                                        {i18n.language === "ru" ? title : code}
+                                    </option>
+                                ))}
+                            </Select>
+                            {errors.currency_id && (
+                                <FormErrorMessage>
+                                    {errors.currency_id?.message}
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>
+                        <Stack spacing={10} pt={2}>
+                            <UpdateUserButton handleSubmit={handleSubmit}/>
+                        </Stack>
+                    </Stack>
+                </Box>
             </VStack>
         </Card>
     );

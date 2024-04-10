@@ -1,1 +1,0 @@
-export { IncomesStatsByDate } from "./ui/incomes-stats-by-date";

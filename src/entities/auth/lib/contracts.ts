@@ -81,3 +81,45 @@ export const RegistrationSchema = Yup.object().shape({
 			}),
 		),
 });
+
+export const UpdateUserSchema = Yup.object().shape({
+	name: Yup.string()
+		.required(() =>
+			t("validation.required", {
+				field: t("pages.registration.form.fields.name"),
+			}),
+		)
+		.min(3, () =>
+			t("validation.min", {
+				field: t("pages.registration.form.fields.name"),
+				min: 3,
+			}),
+		)
+		.max(60, () =>
+			t("validation.max", {
+				field: t("pages.registration.form.fields.name"),
+				max: 60,
+			}),
+		),
+	email: Yup.string()
+		.required(() =>
+			t("validation.required", {
+				field: t("pages.registration.form.fields.email"),
+			}),
+		)
+		.email(() =>
+			t("validation.email", {
+				field: t("pages.registration.form.fields.email"),
+			}),
+		),
+	currency_id: Yup.number()
+		.transform(value =>
+			isNaN(value) || value === null || value === undefined ? 0 : value,
+		)
+		.nullable()
+		.required(() =>
+			t("validation.required", {
+				field: t("pages.accounts.createModal.form.fields.currency"),
+			}),
+		),
+});

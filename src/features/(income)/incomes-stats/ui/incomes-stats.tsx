@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/entities/auth";
 import { useIncomeStore } from "@/entities/income";
 import { Flex } from "@chakra-ui/react";
 import {
@@ -10,6 +11,7 @@ import {
     Title,
     Tooltip,
 } from "chart.js";
+import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
@@ -23,9 +25,10 @@ ChartJS.register(
     Legend
 );
 
-export const IncomesStatsByDate = () => {
+export const IncomesStats = observer(() => {
     const {getIncomesStats, incomesStats} = useIncomeStore();
     const [isLoading, setLoading] = useState<boolean>(false);
+    const {user} = useAuthStore();
     
     useEffect(() => {
         (async () => {
@@ -33,7 +36,7 @@ export const IncomesStatsByDate = () => {
             await getIncomesStats();
             setLoading(false);
         })();
-    }, []);
+    }, [user.currency]);
     
     const data = {
         labels: incomesStats.labels,
@@ -50,7 +53,7 @@ export const IncomesStatsByDate = () => {
     if (isLoading) {
         return;
     }
-    
+  
     return (
         <Flex h={400} justifyContent="center">
             <Line
@@ -59,10 +62,24 @@ export const IncomesStatsByDate = () => {
                     maintainAspectRatio: false,
                     animation: {
                         duration: 0
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: (value) => `${value} ${user.currency.code}`,
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `${context.formattedValue} ${user.currency.code}`,
+                            }
+                        }
                     }
                 }}
                 width="100%"
             />
         </Flex>
     );
-};
+});

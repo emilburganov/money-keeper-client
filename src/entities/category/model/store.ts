@@ -56,7 +56,7 @@ export class CategoryStore {
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
 				
-				Object.values(errors).forEach(error => {
+				Object.values(errors).forEach((error) => {
 					sendErrorNotification(message, error);
 				});
 			}
@@ -72,7 +72,7 @@ export class CategoryStore {
 			const categoryResponse = await categoryApi.updateCategory(body, id);
 
 			if (categoryResponse) {
-				this.categories = this.categories.map(category =>
+				this.categories = this.categories.map((category) =>
 					category.id === id ? categoryResponse : category,
 				);
 			}
@@ -86,7 +86,7 @@ export class CategoryStore {
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
 				
-				Object.values(errors).forEach(error => {
+				Object.values(errors).forEach((error) => {
 					sendErrorNotification(message, error);
 				});
 			}
@@ -102,9 +102,7 @@ export class CategoryStore {
 			const categoryResponse = await categoryApi.deleteCategory(id);
 
 			if (categoryResponse) {
-				this.categories = this.categories.filter(
-					category => category.id !== id,
-				);
+				this.categories = this.categories.filter((category) => category.id !== id,);
 			}
 
 			return categoryResponse;

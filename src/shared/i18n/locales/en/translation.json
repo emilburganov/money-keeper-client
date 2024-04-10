@@ -1,280 +1,300 @@
 {
-	"header": {
-		"buttons": {
-			"auth": {
-				"login": "Login",
-				"registration": "Registration",
-				"logout": "Logout"
-			},
-			"lang": {
-				"ru": "Russian",
-				"en": "English"
-			}
-		},
-		"navigation": {
-			"home": "Home",
-			"profile": "Profile",
-			"categories": "Categories",
-			"incomes": "Incomes",
-			"expenses": "Expenses",
-			"accounts": "Accounts",
-			"transfers": "Transfers"
-		}
-	},
-	"footer": {
-		"copyright": "© 2023 MoneyKeeper. All rights reserved."
-	},
-	"pages": {
-		"login": {
-			"form": {
-				"title": "Login",
-				"fields": {
-					"email": "E-mail",
-					"password": "Password"
-				},
-				"button": "Login",
-				"redirect": "Don't have an account?"
-			}
-		},
-		"registration": {
-			"form": {
-				"title": "Registration",
-				"fields": {
-					"name": "Name",
-					"email": "E-mail",
-					"password": "Password",
-					"password_confirmation": "Password confirmation"
-				},
-				"button": "Registration",
-				"redirect": "Already have an account?"
-			}
-		},
-		"hero": {
-			"title": {
-				"main": "Financial control",
-				"highlighted": "made easy"
-			},
-			"subtitle": "Control your expenses and income with our application.",
-			"button": "Start using"
-		},
-		"home": {
-			"title": {
-				"main": "This is a",
-				"highlighted": "home page!"
-			}
-		},
-		"categories": {
-			"editButton": "Edit",
-			"deleteButton": "Delete",
-			"createButton": "Create",
-			"updateButton": "Update",
-			"deleteButtonLoadingText": "Deleting...",
-			"createButtonLoadingText": "Creating...",
-			"updateButtonLoadingText": "Updating...",
-			"createModal": {
-				"form": {
-					"title": "Create category",
-					"placeholders": {
-						"title": "Internet and mobile communications"
-					},
-					"fields": {
-						"title": "Title",
-						"type": "Type"
-					}
-				}
-			},
-			"editModal": {
-				"form": {
-					"title": "Editing category",
-					"placeholders": {
-						"title": "Internet and mobile communications"
-					},
-					"fields": {
-						"title": "Title",
-						"type": "Type"
-					}
-				}
-			}
-		},
-		"incomes": {
-			"editButton": "Edit",
-			"deleteButton": "Delete",
-			"createButton": "Create",
-			"updateButton": "Update",
-			"deleteButtonLoadingText": "Deleting...",
-			"createButtonLoadingText": "Creating...",
-			"updateButtonLoadingText": "Updating...",
-			"createModal": {
-				"form": {
-					"title": "Create income",
-					"placeholders": {
-						"title": "Salary"
-					},
-					"fields": {
-						"title": "Title",
-						"amount": "Amount",
-						"category": "Category",
-						"account": "Account"
-					}
-				}
-			},
-			"editModal": {
-				"form": {
-					"title": "Editing income",
-					"placeholders": {
-						"title": "Salary"
-					},
-					"fields": {
-						"title": "Title",
-						"amount": "Amount",
-						"category": "Category",
-						"account": "Account"
-					}
-				}
-			}
-		},
-		"expenses": {
-			"editButton": "Edit",
-			"deleteButton": "Delete",
-			"createButton": "Create",
-			"updateButton": "Update",
-			"deleteButtonLoadingText": "Deleting...",
-			"createButtonLoadingText": "Creating...",
-			"updateButtonLoadingText": "Updating...",
-			"createModal": {
-				"form": {
-					"title": "Create expense",
-					"placeholders": {
-						"title": "Сommunal payments"
-					},
-					"fields": {
-						"title": "Title",
-						"amount": "Amount",
-						"category": "Category",
-						"account": "Account"
-					}
-				}
-			},
-			"editModal": {
-				"form": {
-					"title": "Editing expense",
-					"placeholders": {
-						"title": "Сommunal payments"
-					},
-					"fields": {
-						"title": "Title",
-						"amount": "Amount",
-						"category": "Category",
-						"account": "Account"
-					}
-				}
-			}
-		},
-		"accounts": {
-			"editButton": "Edit",
-			"deleteButton": "Delete",
-			"createButton": "Create",
-			"updateButton": "Update",
-			"deleteButtonLoadingText": "Deleting...",
-			"createButtonLoadingText": "Creating...",
-			"updateButtonLoadingText": "Updating...",
-			"createModal": {
-				"form": {
-					"title": "Create account",
-					"placeholders": {
-						"title": "Bank card"
-					},
-					"fields": {
-						"title": "Title",
-						"currency": "Currency"
-					}
-				}
-			},
-			"editModal": {
-				"form": {
-					"title": "Editing account",
-					"placeholders": {
-						"title": "Bank card"
-					},
-					"fields": {
-						"title": "Title",
-						"currency": "Currency"
-					}
-				}
-			}
-		},
-		"transfers": {
-			"editButton": "Edit",
-			"deleteButton": "Delete",
-			"createButton": "Create",
-			"updateButton": "Update",
-			"deleteButtonLoadingText": "Deleting...",
-			"createButtonLoadingText": "Creating...",
-			"updateButtonLoadingText": "Updating...",
-			"createModal": {
-				"form": {
-					"title": "Create transfer",
-					"placeholders": {
-						"title": "Transfer from card to card"
-					},
-					"fields": {
-						"title": "Title",
-						"amount": "Amount",
-						"account_from": "Account from",
-						"account_to": "Account to"
-					}
-				}
-			},
-			"editModal": {
-				"form": {
-					"title": "Editing transfer",
-					"placeholders": {
-						"title": "Transfer from card to card"
-					},
-					"fields": {
-						"title": "Title",
-						"amount": "Amount",
-						"account_from": "Account from",
-						"account_to": "Account to"
-					}
-				}
-			}
-		}
-	},
-	"validation": {
-		"required": "The {{field}} field is required.",
-		"max": "The {{field}} field must not be greater than {{max}} characters.",
-		"min": "The {{field}} field must be at least {{min}} characters.",
-		"email": "The {{field}} field must be a valid email address.",
-		"oneOf": "The {{firstField}} field must match {{secondField}}.",
-		"notOneOf": "The {{firstField}} field must not match {{secondField}}."
-	},
-	"notifications": {
-		"error": {
-			"serverError": {
-				"title": "Server error.",
-				"description": "Server side error, try again another time."
-			},
-			"authError": {
-				"title": "Authentication error.",
-				"description": "Invalid login or password."
-			}
-		},
-		"success": {
-			"loginSuccess": {
-				"title": "Successful login.",
-				"description": "You have successful login into your account."
-			},
-			"registrationSuccess": {
-				"title": "Successful registered.",
-				"description": "You have successful registered your account."
-			}
-		}
-	},
-	"models": {
-		"type": {
-			"Expenses": "Expenses",
-			"Incomes": "Incomes"
-		}
-	}
+  "header": {
+    "buttons": {
+      "auth": {
+        "login": "Login",
+        "registration": "Registration",
+        "logout": "Logout"
+      },
+      "lang": {
+        "ru": "Russian",
+        "en": "English"
+      }
+    },
+    "navigation": {
+      "home": "Home",
+      "profile": "Profile",
+      "categories": "Categories",
+      "incomes": "Incomes",
+      "expenses": "Expenses",
+      "accounts": "Accounts",
+      "transfers": "Transfers"
+    }
+  },
+  "footer": {
+    "copyright": "© 2023 MoneyKeeper. All rights reserved."
+  },
+  "pages": {
+    "login": {
+      "form": {
+        "title": "Login",
+        "fields": {
+          "email": "E-mail",
+          "password": "Password"
+        },
+        "button": "Login",
+        "redirect": "Don't have an account?"
+      }
+    },
+    "registration": {
+      "form": {
+        "title": "Registration",
+        "fields": {
+          "name": "Name",
+          "email": "E-mail",
+          "password": "Password",
+          "password_confirmation": "Password confirmation"
+        },
+        "button": "Registration",
+        "redirect": "Already have an account?"
+      }
+    },
+    "hero": {
+      "title": {
+        "main": "Financial control",
+        "highlighted": "made easy"
+      },
+      "subtitle": "Control your expenses and income with our application.",
+      "button": "Start using"
+    },
+    "home": {
+      "title": {
+        "main": "This is a",
+        "highlighted": "home page!"
+      }
+    },
+    "categories": {
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "createButton": "Create",
+      "updateButton": "Update",
+      "deleteButtonLoadingText": "Deleting...",
+      "createButtonLoadingText": "Creating...",
+      "updateButtonLoadingText": "Updating...",
+      "createModal": {
+        "form": {
+          "title": "Create category",
+          "placeholders": {
+            "title": "Internet and mobile communications"
+          },
+          "fields": {
+            "title": "Title",
+            "type": "Type"
+          }
+        }
+      },
+      "editModal": {
+        "form": {
+          "title": "Editing category",
+          "placeholders": {
+            "title": "Internet and mobile communications"
+          },
+          "fields": {
+            "title": "Title",
+            "type": "Type"
+          }
+        }
+      }
+    },
+    "incomes": {
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "createButton": "Create",
+      "updateButton": "Update",
+      "deleteButtonLoadingText": "Deleting...",
+      "createButtonLoadingText": "Creating...",
+      "updateButtonLoadingText": "Updating...",
+      "createModal": {
+        "form": {
+          "title": "Create income",
+          "placeholders": {
+            "title": "Salary"
+          },
+          "fields": {
+            "title": "Title",
+            "amount": "Amount",
+            "category": "Category",
+            "account": "Account"
+          }
+        }
+      },
+      "editModal": {
+        "form": {
+          "title": "Editing income",
+          "placeholders": {
+            "title": "Salary"
+          },
+          "fields": {
+            "title": "Title",
+            "amount": "Amount",
+            "category": "Category",
+            "account": "Account"
+          }
+        }
+      }
+    },
+    "expenses": {
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "createButton": "Create",
+      "updateButton": "Update",
+      "deleteButtonLoadingText": "Deleting...",
+      "createButtonLoadingText": "Creating...",
+      "updateButtonLoadingText": "Updating...",
+      "createModal": {
+        "form": {
+          "title": "Create expense",
+          "placeholders": {
+            "title": "Сommunal payments"
+          },
+          "fields": {
+            "title": "Title",
+            "amount": "Amount",
+            "category": "Category",
+            "account": "Account"
+          }
+        }
+      },
+      "editModal": {
+        "form": {
+          "title": "Editing expense",
+          "placeholders": {
+            "title": "Сommunal payments"
+          },
+          "fields": {
+            "title": "Title",
+            "amount": "Amount",
+            "category": "Category",
+            "account": "Account"
+          }
+        }
+      }
+    },
+    "accounts": {
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "createButton": "Create",
+      "updateButton": "Update",
+      "deleteButtonLoadingText": "Deleting...",
+      "createButtonLoadingText": "Creating...",
+      "updateButtonLoadingText": "Updating...",
+      "createModal": {
+        "form": {
+          "title": "Create account",
+          "placeholders": {
+            "title": "Bank card"
+          },
+          "fields": {
+            "title": "Title",
+            "currency": "Currency"
+          }
+        }
+      },
+      "editModal": {
+        "form": {
+          "title": "Editing account",
+          "placeholders": {
+            "title": "Bank card"
+          },
+          "fields": {
+            "title": "Title",
+            "currency": "Currency"
+          }
+        }
+      }
+    },
+    "transfers": {
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "createButton": "Create",
+      "updateButton": "Update",
+      "deleteButtonLoadingText": "Deleting...",
+      "createButtonLoadingText": "Creating...",
+      "updateButtonLoadingText": "Updating...",
+      "createModal": {
+        "form": {
+          "title": "Create transfer",
+          "placeholders": {
+            "title": "Transfer from card to card"
+          },
+          "fields": {
+            "title": "Title",
+            "amount": "Amount",
+            "account_from": "Account from",
+            "account_to": "Account to"
+          }
+        }
+      },
+      "editModal": {
+        "form": {
+          "title": "Editing transfer",
+          "placeholders": {
+            "title": "Transfer from card to card"
+          },
+          "fields": {
+            "title": "Title",
+            "amount": "Amount",
+            "account_from": "Account from",
+            "account_to": "Account to"
+          }
+        }
+      }
+    },
+    "profile": {
+      "updateForm": {
+        "fields": {
+          "name": "Name",
+          "email": "E-mail",
+          "currency": "Currency"
+        }
+      }
+    }
+  },
+  "crud": {
+    "buttons": {
+      "editButton": "Edit",
+      "deleteButton": "Delete",
+      "createButton": "Create",
+      "updateButton": "Update",
+      "deleteButtonLoadingText": "Deleting...",
+      "createButtonLoadingText": "Creating...",
+      "updateButtonLoadingText": "Updating..."
+    }
+  },
+  "validation": {
+    "required": "The {{field}} field is required.",
+    "max": "The {{field}} field must not be greater than {{max}} characters.",
+    "min": "The {{field}} field must be at least {{min}} characters.",
+    "email": "The {{field}} field must be a valid email address.",
+    "oneOf": "The {{firstField}} field must match {{secondField}}.",
+    "notOneOf": "The {{firstField}} field must not match {{secondField}}."
+  },
+  "notifications": {
+    "error": {
+      "serverError": {
+        "title": "Server error.",
+        "description": "Server side error, try again another time."
+      },
+      "authError": {
+        "title": "Authentication error.",
+        "description": "Invalid login or password."
+      }
+    },
+    "success": {
+      "loginSuccess": {
+        "title": "Successful login.",
+        "description": "You have successful login into your account."
+      },
+      "registrationSuccess": {
+        "title": "Successful registered.",
+        "description": "You have successful registered your account."
+      }
+    }
+  },
+  "models": {
+    "type": {
+      "Expenses": "Expenses",
+      "Incomes": "Incomes"
+    }
+  }
 }

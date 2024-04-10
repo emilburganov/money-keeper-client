@@ -75,7 +75,7 @@ export class ExpenseStore {
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
 				
-				Object.values(errors).forEach(error => {
+				Object.values(errors).forEach((error) => {
 					sendErrorNotification(message, error);
 				});
 			}
@@ -91,7 +91,7 @@ export class ExpenseStore {
 			const expenseResponse = await expenseApi.updateExpense(body, id);
 
 			if (expenseResponse) {
-				this.expenses = this.expenses.map(expense =>
+				this.expenses = this.expenses.map((expense) =>
 					expense.id === id ? expenseResponse : expense,
 				);
 			}
@@ -105,7 +105,7 @@ export class ExpenseStore {
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
 				
-				Object.values(errors).forEach(error => {
+				Object.values(errors).forEach((error) => {
 					sendErrorNotification(message, error);
 				});
 			}
@@ -121,7 +121,7 @@ export class ExpenseStore {
 			const expenseResponse = await expenseApi.deleteExpense(id);
 
 			if (expenseResponse) {
-				this.expenses = this.expenses.filter(expense => expense.id !== id);
+				this.expenses = this.expenses.filter((expense) => expense.id !== id);
 			}
 
 			return expenseResponse;

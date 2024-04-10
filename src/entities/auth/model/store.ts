@@ -1,14 +1,7 @@
 import { authApi } from "@/shared/api";
-import {
-    LoginCredentials,
-    RegistrationCredentials,
-    User,
-} from "@/shared/api/auth";
+import { LoginCredentials, RegistrationCredentials, UpdateUserCredentials, User, } from "@/shared/api/auth";
 import { ErrorsResponse } from "@/shared/api/types";
-import {
-    sendErrorNotification,
-    sendSuccessNotification,
-} from "@/shared/lib/helpers";
+import { sendErrorNotification, sendSuccessNotification, } from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { t } from "i18next";
 import { makeAutoObservable, runInAction } from "mobx";
@@ -49,14 +42,14 @@ export class AuthStore {
     
     async load() {
         try {
-            const authResponse = await authApi.me();
+            const response = await authApi.me();
             
             runInAction(() => {
-                this.user = authResponse;
+                this.user = response;
                 this.isAuth = true;
             });
             
-            return authResponse;
+            return response;
         } catch (error) {
             console.error(error);
         }
@@ -64,10 +57,10 @@ export class AuthStore {
     
     async login(credentials: LoginCredentials) {
         try {
-            const authResponse = await authApi.login(credentials);
+            const response = await authApi.login(credentials);
             
             runInAction(() => {
-                localStorage.setItem("token", authResponse.access_token);
+                localStorage.setItem("token", response.access_token);
                 this.isAuth = true;
                 
                 sendSuccessNotification(
@@ -76,7 +69,7 @@ export class AuthStore {
                 );
             });
             
-            return authResponse;
+            return response;
         } catch (error) {
             const axiosError = error as AxiosError<ErrorsResponse>;
             
@@ -91,10 +84,10 @@ export class AuthStore {
     
     async registration(credentials: RegistrationCredentials) {
         try {
-            const authResponse = await authApi.registration(credentials);
+            const response = await authApi.registration(credentials);
             
             runInAction(() => {
-                localStorage.setItem("token", authResponse.access_token);
+                localStorage.setItem("token", response.access_token);
                 this.isAuth = true;
                 
                 sendSuccessNotification(
@@ -103,7 +96,7 @@ export class AuthStore {
                 );
             });
             
-            return authResponse;
+            return response;
         } catch (error) {
             const axiosError = error as AxiosError<ErrorsResponse>;
             
@@ -125,16 +118,44 @@ export class AuthStore {
     
     async logout() {
         try {
-            const authResponse = await authApi.logout();
+            const response = await authApi.logout();
             
             runInAction(() => {
                 localStorage.removeItem("token");
                 this.isAuth = false;
             });
             
-            return authResponse;
+            return response;
         } catch (error) {
             console.error(error);
+        }
+    }
+    
+    async updateUser(credentials: UpdateUserCredentials | FormData) {
+        try {
+            const response = await authApi.updateUser(credentials);
+            
+            runInAction(() => {
+                this.user = response;
+            });
+            
+            return response;
+        } catch (error) {
+            const axiosError = error as AxiosError<ErrorsResponse>;
+            
+            const message: string = String(axiosError?.response?.data?.message);
+            
+            if (axiosError.response?.data?.errors) {
+                const errors: string[] = axiosError.response.data?.errors;
+                
+                Object.values(errors).forEach((error) => {
+                    sendErrorNotification(message, error);
+                });
+            }
+            
+            if (message) {
+                sendErrorNotification(message);
+            }
         }
     }
     

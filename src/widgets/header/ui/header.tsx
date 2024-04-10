@@ -17,6 +17,7 @@ export const Header = observer(() => {
     const {t} = useTranslation();
     const {isAuth} = useAuthStore();
     const {colorMode} = useColorMode();
+    const {user} = useAuthStore();
     
     return (
         <Box
@@ -88,7 +89,10 @@ export const Header = observer(() => {
                     </Hide>
                     
                     {isAuth && <Link to="/profile">
-						<Avatar name="Emil Burganov"/>
+						<Avatar
+                            name={user.name}
+							bg={colorMode === "light" ? "green.500" : "green.200"}
+                        />
 					</Link>}
                 </Stack>
             </Flex>

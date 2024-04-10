@@ -1,14 +1,17 @@
 import { useAccountStore } from "@/entities/account";
+import { useAuthStore } from "@/entities/auth";
 import { Flex } from "@chakra-ui/react";
 import { ArcElement, Chart as ChartJS, Legend, Tooltip, } from "chart.js";
+import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { Pie } from "react-chartjs-2";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
-export const AccountsSummaryStats = () => {
+export const AccountsStats = observer(() => {
     const {accountsSummaryStats, getAccountsSummaryStats} = useAccountStore();
     const [isLoading, setLoading] = useState<boolean>(false);
+    const {user} = useAuthStore();
     
     useEffect(() => {
         (async () => {
@@ -16,7 +19,7 @@ export const AccountsSummaryStats = () => {
             await getAccountsSummaryStats();
             setLoading(false);
         })();
-    }, []);
+    }, [user.currency]);
     
     const data = {
         labels: accountsSummaryStats.labels,
@@ -56,10 +59,17 @@ export const AccountsSummaryStats = () => {
                     maintainAspectRatio: false,
                     animation: {
                         duration: 0
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `${context.formattedValue} ${user.currency.code}`,
+                            }
+                        }
                     }
                 }}
                 width="100%"
             />
         </Flex>
     );
-};
+});

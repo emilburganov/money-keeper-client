@@ -75,7 +75,7 @@ export class IncomeStore {
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
 				
-				Object.values(errors).forEach(error => {
+				Object.values(errors).forEach((error) => {
 					sendErrorNotification(message, error);
 				});
 			}
@@ -91,7 +91,7 @@ export class IncomeStore {
 			const incomeResponse = await incomeApi.updateIncome(body, id);
 
 			if (incomeResponse) {
-				this.incomes = this.incomes.map(income =>
+				this.incomes = this.incomes.map((income) =>
 					income.id === id ? incomeResponse : income,
 				);
 			}
@@ -105,7 +105,7 @@ export class IncomeStore {
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
 				
-				Object.values(errors).forEach(error => {
+				Object.values(errors).forEach((error) => {
 					sendErrorNotification(message, error);
 				});
 			}
@@ -121,7 +121,7 @@ export class IncomeStore {
 			const incomeResponse = await incomeApi.deleteIncome(id);
 
 			if (incomeResponse) {
-				this.incomes = this.incomes.filter(income => income.id !== id);
+				this.incomes = this.incomes.filter((income) => income.id !== id);
 			}
 
 			return incomeResponse;

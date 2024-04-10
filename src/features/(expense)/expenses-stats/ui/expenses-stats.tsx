@@ -1,3 +1,4 @@
+import { useAuthStore } from "@/entities/auth";
 import { useExpenseStore } from "@/entities/expense";
 import { Flex } from "@chakra-ui/react";
 import {
@@ -10,6 +11,7 @@ import {
     Title,
     Tooltip,
 } from "chart.js";
+import { observer } from "mobx-react-lite";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
@@ -23,9 +25,10 @@ ChartJS.register(
     Legend
 );
 
-export const ExpensesStatsByDate = () => {
+export const ExpensesStats = observer(() => {
     const {getExpensesStats, expensesStats} = useExpenseStore();
     const [isLoading, setLoading] = useState<boolean>(false);
+    const {user} = useAuthStore();
     
     useEffect(() => {
         (async () => {
@@ -59,10 +62,24 @@ export const ExpensesStatsByDate = () => {
                     maintainAspectRatio: false,
                     animation: {
                         duration: 0
+                    },
+                    scales: {
+                        y: {
+                            ticks: {
+                                callback: (value) => `${value} ${user.currency.code}`,
+                            }
+                        }
+                    },
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: (context) => `${context.formattedValue} ${user.currency.code}`,
+                            }
+                        }
                     }
                 }}
                 width="100%"
             />
         </Flex>
     );
-};
+});

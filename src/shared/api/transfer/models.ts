@@ -17,3 +17,8 @@ export interface TransferBody {
 	account_from_id: number;
 	account_to_id: number;
 }
+
+export interface TransfersStats {
+	labels: string[],
+	values: number[],
+}

@@ -75,7 +75,7 @@ export class AccountStore {
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
 				
-				Object.values(errors).forEach(error => {
+				Object.values(errors).forEach((error) => {
 					sendErrorNotification(message, error);
 				});
 			}
@@ -91,7 +91,7 @@ export class AccountStore {
 			const accountResponse = await accountApi.updateAccount(body, id);
 
 			if (accountResponse) {
-				this.accounts = this.accounts.map(account =>
+				this.accounts = this.accounts.map((account) =>
 					account.id === id ? accountResponse : account,
 				);
 			}
@@ -105,7 +105,7 @@ export class AccountStore {
 			if (axiosError.response?.data?.errors) {
 				const errors: string[] = axiosError.response.data?.errors;
 				
-				Object.values(errors).forEach(error => {
+				Object.values(errors).forEach((error) => {
 					sendErrorNotification(message, error);
 				});
 			}
@@ -121,7 +121,7 @@ export class AccountStore {
 			const accountResponse = await accountApi.deleteAccount(id);
 
 			if (accountResponse) {
-				this.accounts = this.accounts.filter(account => account.id !== id);
+				this.accounts = this.accounts.filter((account) => account.id !== id);
 			}
 
 			return accountResponse;

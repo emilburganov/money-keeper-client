@@ -1,30 +1,11 @@
-import { AccountsSummaryStats } from "@/features/(account)";
-import { ExpensesStatsByDate } from "@/features/(expense)";
-import { IncomesStatsByDate } from "@/features/(income)";
+import { AccountsStats } from "@/features/(account)";
+import { ExpensesStats } from "@/features/(expense)";
+import { IncomesStats } from "@/features/(income)";
+import { TransfersStats } from "@/features/(transfer)";
 import { Card, Tab, TabList, TabPanel, TabPanels, Tabs, useColorMode } from "@chakra-ui/react";
-import {
-    CategoryScale,
-    Chart as ChartJS,
-    Legend,
-    LinearScale,
-    LineElement,
-    PointElement,
-    Title,
-    Tooltip,
-} from "chart.js";
-
-ChartJS.register(
-    CategoryScale,
-    LinearScale,
-    PointElement,
-    LineElement,
-    Title,
-    Tooltip,
-    Legend
-);
 
 export const Content = () => {
-    const tabs = ["Incomes stats by date", "Expenses stats by date", "Accounts summary stats"];
+    const tabs = ["Incomes", "Expenses", "Transfers", "Accounts"];
     const {colorMode} = useColorMode();
     
     return (
@@ -63,13 +44,16 @@ export const Content = () => {
                 
                 <TabPanels>
                     <TabPanel>
-                        <IncomesStatsByDate/>
+                        <IncomesStats/>
                     </TabPanel>
                     <TabPanel>
-                        <ExpensesStatsByDate/>
+                        <ExpensesStats/>
                     </TabPanel>
                     <TabPanel>
-                        <AccountsSummaryStats/>
+                        <TransfersStats/>
+                    </TabPanel>
+                    <TabPanel>
+                        <AccountsStats/>
                     </TabPanel>
                 </TabPanels>
             </Tabs>
