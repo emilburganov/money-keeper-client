@@ -43,6 +43,10 @@ export const EditAccountModal = observer(
 			formState: { errors, isValid },
 		} = useForm<AccountBody>({
 			resolver: yupResolver(UpdateAccountSchema),
+			defaultValues: {
+				title: account.title,
+				currency_id: account.currency.id,
+			},
 		});
 
 		useEffect(() => {
@@ -61,9 +65,9 @@ export const EditAccountModal = observer(
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
 						<Box
-							rounded={"lg"}
+							rounded="lg"
 							bg={colorMode === "light" ? "gray.50" : "gray.700"}
-							boxShadow={"lg"}
+							boxShadow="lg"
 							p={5}
 						>
 							<Stack spacing={4}>
@@ -73,7 +77,6 @@ export const EditAccountModal = observer(
 									</FormLabel>
 									<Input
 										{...register("title")}
-										defaultValue={account.title}
 										type="text"
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
@@ -92,7 +95,6 @@ export const EditAccountModal = observer(
 									</FormLabel>
 									<Select
 										{...register("currency_id")}
-										defaultValue={account.currency.id}
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
 										}

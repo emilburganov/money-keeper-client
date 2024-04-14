@@ -25,11 +25,11 @@ export const DeleteCategoryButton = ({
 	return (
 		<Button
 			onClick={handleDelete}
-			colorScheme={"red"}
+			colorScheme="red"
 			isLoading={isLoading}
-			loadingText={t("pages.categories.deleteButtonLoadingText")}
+			loadingText={t("crud.buttons.deleteButtonLoadingText")}
 		>
-			<DeleteIcon/>
+			<DeleteIcon />
 		</Button>
 	);
 };

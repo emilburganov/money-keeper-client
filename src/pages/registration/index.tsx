@@ -9,16 +9,16 @@ export default function Registration() {
 	return (
 		<Container>
 			<Stack
-				align={"canter"}
-				justify={"center"}
-				minH={"100vh"}
-				maxW={"lg"}
+				align="canter"
+				justify="center"
+				minH="100vh"
+				maxW="lg"
 				spacing={8}
-				mx={"auto"}
+				mx="auto"
 				py={6}
 			>
-				<Stack align={"center"}>
-					<Heading fontSize={"4xl"} textAlign={"center"}>
+				<Stack align="center">
+					<Heading fontSize="4xl" textAlign="center">
 						{t("pages.registration.form.title")}
 					</Heading>
 				</Stack>

@@ -46,18 +46,18 @@ export const DesktopNavigation = observer(() => {
 	];
 
 	return (
-		<Stack direction={"row"} spacing={2}>
+		<Stack direction="row" spacing={2}>
 			{!isAuth &&
 				PUBLIC_NAV_ITEMS.map(({ label, to }) => (
 					<Box key={label}>
-						<Popover trigger={"hover"} placement={"bottom-start"}>
+						<Popover trigger="hover" placement="bottom-start">
 							<PopoverTrigger>
 								<Box
 									key={label}
 									as={Link}
 									to={to}
 									p={2}
-									fontSize={"sm"}
+									fontSize="sm"
 									fontWeight={500}
 									color={colorMode === "light" ? "gray.600" : "gray.200"}
 									_hover={{
@@ -75,14 +75,14 @@ export const DesktopNavigation = observer(() => {
 			{isAuth &&
 				PRIVATE_NAV_ITEMS.map(({ label, to }) => (
 					<Box key={label}>
-						<Popover trigger={"hover"} placement={"bottom-start"}>
+						<Popover trigger="hover" placement="bottom-start">
 							<PopoverTrigger>
 								<Box
 									key={label}
 									as={Link}
 									to={to}
 									p={2}
-									fontSize={"sm"}
+									fontSize="sm"
 									fontWeight={500}
 									color={colorMode === "light" ? "gray.600" : "gray.200"}
 									_hover={{

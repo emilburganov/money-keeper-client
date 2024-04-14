@@ -25,11 +25,11 @@ export const DeleteIncomeButton = ({ income }: DeleteIncomeButtonProps) => {
 			display="flex"
 			gap={2}
 			onClick={handleDelete}
-			colorScheme={"red"}
+			colorScheme="red"
 			isLoading={isLoading}
-			loadingText={t("pages.incomes.deleteButtonLoadingText")}
+			loadingText={t("crud.buttons.deleteButtonLoadingText")}
 		>
-			<DeleteIcon/>
+			<DeleteIcon />
 		</Button>
 	);
 };

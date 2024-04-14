@@ -1,6 +1,6 @@
 import { ErrorsResponse, incomeApi } from "@/shared/api";
 import { Income, IncomeBody, IncomesStats } from "@/shared/api/income";
-import { sendErrorNotification } from "@/shared/lib/helpers";
+import { sendValidationErrors } from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -17,7 +17,7 @@ export class IncomeStore {
 	set incomes(incomes: Income[]) {
 		this._incomes = incomes;
 	}
-	
+
 	get incomesStats(): IncomesStats {
 		return this._incomesStats;
 	}
@@ -32,27 +32,27 @@ export class IncomeStore {
 
 	async getIncomes() {
 		try {
-			const incomeResponse = await incomeApi.getIncomes();
+			const response = await incomeApi.getIncomes();
 
 			runInAction(() => {
-				this._incomes = incomeResponse;
+				this._incomes = response;
 			});
 
-			return incomeResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}
 	}
-	
+
 	async getIncomesStats() {
 		try {
-			const incomesStatsResponse = await incomeApi.getIncomesStats();
-			
+			const response = await incomeApi.getIncomesStats();
+
 			runInAction(() => {
-				this._incomesStats = incomesStatsResponse;
+				this._incomesStats = response;
 			});
-			
-			return incomesStatsResponse;
+
+			return response;
 		} catch (error) {
 			console.error(error);
 		}
@@ -60,71 +60,47 @@ export class IncomeStore {
 
 	async createIncome(body: IncomeBody) {
 		try {
-			const incomeResponse = await incomeApi.createIncome(body);
+			const response = await incomeApi.createIncome(body);
 
-			if (incomeResponse) {
-				this.incomes = [...this.incomes, incomeResponse];
+			if (response) {
+				this.incomes = [...this.incomes, response];
 			}
 
-			return incomeResponse;
+			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-			
-			const message: string = String(axiosError?.response?.data?.message);
-			
-			if (axiosError.response?.data?.errors) {
-				const errors: string[] = axiosError.response.data?.errors;
-				
-				Object.values(errors).forEach((error) => {
-					sendErrorNotification(message, error);
-				});
-			}
-			
-			if (message) {
-				sendErrorNotification(message);
-			}
+
+			sendValidationErrors(axiosError);
 		}
 	}
 
 	async updateIncome(body: IncomeBody, id: number) {
 		try {
-			const incomeResponse = await incomeApi.updateIncome(body, id);
+			const response = await incomeApi.updateIncome(body, id);
 
-			if (incomeResponse) {
-				this.incomes = this.incomes.map((income) =>
-					income.id === id ? incomeResponse : income,
+			if (response) {
+				this.incomes = this.incomes.map(income =>
+					income.id === id ? response : income,
 				);
 			}
 
-			return incomeResponse;
+			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-			
-			const message: string = String(axiosError?.response?.data?.message);
-			
-			if (axiosError.response?.data?.errors) {
-				const errors: string[] = axiosError.response.data?.errors;
-				
-				Object.values(errors).forEach((error) => {
-					sendErrorNotification(message, error);
-				});
-			}
-			
-			if (message) {
-				sendErrorNotification(message);
-			}
+
+			sendValidationErrors(axiosError);
 		}
 	}
 
 	async deleteIncome({ id }: Income) {
 		try {
-			const incomeResponse = await incomeApi.deleteIncome(id);
+			const response = await incomeApi.deleteIncome(id);
 
-			if (incomeResponse) {
-				this.incomes = this.incomes.filter((income) => income.id !== id);
+			if (response) {
+				this.incomes = this.incomes.filter(income => income.id !== id);
 			}
 
-			return incomeResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}

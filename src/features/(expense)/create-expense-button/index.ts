@@ -1,1 +1,1 @@
-export { CreateExpenseButton } from "./ui/create-expense-button.tsx";
+export { CreateExpenseButton } from "./ui/create-expense-button";

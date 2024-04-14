@@ -11,7 +11,7 @@ export const HideButton = ({ show, setShow }: HideButtonProps) => {
 	return (
 		<ChakraButton
 			onClick={() => setShow(show => !show)}
-			variant={"ghost"}
+			variant="ghost"
 			_hover={{
 				bg: "transparent",
 			}}

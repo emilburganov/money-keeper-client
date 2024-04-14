@@ -9,7 +9,9 @@ interface DeleteTransferButtonProps {
 	transfer: Transfer;
 }
 
-export const DeleteTransferButton = ({ transfer }: DeleteTransferButtonProps) => {
+export const DeleteTransferButton = ({
+	transfer,
+}: DeleteTransferButtonProps) => {
 	const { deleteTransfer } = useTransferStore();
 	const { t } = useTranslation();
 	const [isLoading, setLoading] = useState<boolean>(false);
@@ -23,11 +25,11 @@ export const DeleteTransferButton = ({ transfer }: DeleteTransferButtonProps) =>
 	return (
 		<Button
 			onClick={handleDelete}
-			colorScheme={"red"}
+			colorScheme="red"
 			isLoading={isLoading}
-			loadingText={t("pages.transfers.deleteButtonLoadingText")}
+			loadingText={t("crud.buttons.deleteButtonLoadingText")}
 		>
-			<DeleteIcon/>
+			<DeleteIcon />
 		</Button>
 	);
 };

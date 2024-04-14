@@ -44,7 +44,7 @@ export const CreateTransferModal = observer(
 			register,
 			handleSubmit,
 			reset,
-			formState: { errors, isValid, isLoading },
+			formState: { errors, isValid },
 		} = useForm<TransferBody>({
 			resolver: yupResolver(StoreTransferSchema),
 		});
@@ -65,9 +65,9 @@ export const CreateTransferModal = observer(
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
 						<Box
-							rounded={"lg"}
+							rounded="lg"
 							bg={colorMode === "light" ? "gray.50" : "gray.700"}
-							boxShadow={"lg"}
+							boxShadow="lg"
 							p={5}
 						>
 							<Stack spacing={4}>
@@ -94,7 +94,7 @@ export const CreateTransferModal = observer(
 										{t("pages.transfers.createModal.form.fields.amount")}:
 									</FormLabel>
 									<NumberInput
-										defaultValue={1000.0}
+										defaultValue={1000}
 										precision={2}
 										min={0}
 										max={1000000000}
@@ -163,7 +163,6 @@ export const CreateTransferModal = observer(
 									<CreateTransferButton
 										reset={reset}
 										isValid={isValid}
-										isLoading={isLoading}
 										handleSubmit={handleSubmit}
 										onSubmit={onClose}
 									/>

@@ -36,7 +36,7 @@ export const CreateCategoryModal = observer(
 			register,
 			handleSubmit,
 			reset,
-			formState: { errors, isValid, isLoading },
+			formState: { errors, isValid },
 		} = useForm<CategoryBody>({
 			resolver: yupResolver(StoreCategorySchema),
 		});
@@ -51,9 +51,9 @@ export const CreateCategoryModal = observer(
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
 						<Box
-							rounded={"lg"}
+							rounded="lg"
 							bg={colorMode === "light" ? "gray.50" : "gray.700"}
-							boxShadow={"lg"}
+							boxShadow="lg"
 							p={5}
 						>
 							<Stack spacing={4}>
@@ -99,7 +99,6 @@ export const CreateCategoryModal = observer(
 									<CreateCategoryButton
 										reset={reset}
 										isValid={isValid}
-										isLoading={isLoading}
 										handleSubmit={handleSubmit}
 										onSubmit={onClose}
 									/>

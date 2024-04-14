@@ -9,15 +9,15 @@ export default function Login() {
 	return (
 		<Container>
 			<Stack
-				align={"canter"}
-				justify={"center"}
-				minH={"100vh"}
-				maxW={"lg"}
+				align="canter"
+				justify="center"
+				minH="100vh"
+				maxW="lg"
 				spacing={8}
-				mx={"auto"}
+				mx="auto"
 				py={6}
 			>
-				<Heading fontSize={"4xl"} textAlign={"center"}>
+				<Heading fontSize="4xl" textAlign="center">
 					{t("pages.login.form.title")}
 				</Heading>
 				<LoginForm />

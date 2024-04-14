@@ -39,7 +39,7 @@ export const CreateAccountModal = observer(
 			register,
 			handleSubmit,
 			reset,
-			formState: { errors, isValid, isLoading },
+			formState: { errors, isValid },
 		} = useForm<AccountBody>({
 			resolver: yupResolver(StoreAccountSchema),
 		});
@@ -60,9 +60,9 @@ export const CreateAccountModal = observer(
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
 						<Box
-							rounded={"lg"}
+							rounded="lg"
 							bg={colorMode === "light" ? "gray.50" : "gray.700"}
-							boxShadow={"lg"}
+							boxShadow="lg"
 							p={5}
 						>
 							<Stack spacing={4}>
@@ -110,7 +110,6 @@ export const CreateAccountModal = observer(
 									<CreateAccountButton
 										reset={reset}
 										isValid={isValid}
-										isLoading={isLoading}
 										handleSubmit={handleSubmit}
 										onSubmit={onClose}
 									/>

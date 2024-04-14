@@ -37,9 +37,9 @@ export const UpdateExpenseButton = observer(
 			<Button
 				onClick={handleUpdate}
 				isLoading={isLoading}
-				loadingText={t("pages.expenses.updateButtonLoadingText")}
+				loadingText={t("crud.buttons.updateButtonLoadingText")}
 			>
-				{t("pages.expenses.updateButton")}
+				{t("crud.buttons.updateButton")}
 			</Button>
 		);
 	},

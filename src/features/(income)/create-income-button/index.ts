@@ -1,1 +1,1 @@
-export { CreateIncomeButton } from "./ui/create-income-button.tsx";
+export { CreateIncomeButton } from "./ui/create-income-button";

@@ -1,6 +1,6 @@
 import { categoryApi, ErrorsResponse } from "@/shared/api";
 import { Category, CategoryBody } from "@/shared/api/category";
-import { sendErrorNotification } from "@/shared/lib/helpers";
+import { sendValidationErrors } from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -27,13 +27,13 @@ export class CategoryStore {
 
 	async getCategories() {
 		try {
-			const categoryResponse = await categoryApi.getCategories();
+			const response = await categoryApi.getCategories();
 
 			runInAction(() => {
-				this._categories = categoryResponse;
+				this._categories = response;
 			});
 
-			return categoryResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}
@@ -41,71 +41,49 @@ export class CategoryStore {
 
 	async createCategory(body: CategoryBody) {
 		try {
-			const categoryResponse = await categoryApi.createCategory(body);
+			const response = await categoryApi.createCategory(body);
 
-			if (categoryResponse) {
-				this.categories = [...this.categories, categoryResponse];
+			if (response) {
+				this.categories = [...this.categories, response];
 			}
 
-			return categoryResponse;
+			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-			
-			const message: string = String(axiosError?.response?.data?.message);
-			
-			if (axiosError.response?.data?.errors) {
-				const errors: string[] = axiosError.response.data?.errors;
-				
-				Object.values(errors).forEach((error) => {
-					sendErrorNotification(message, error);
-				});
-			}
-			
-			if (message) {
-				sendErrorNotification(message);
-			}
+
+			sendValidationErrors(axiosError);
 		}
 	}
 
 	async updateCategory(body: Omit<CategoryBody, "type">, id: number) {
 		try {
-			const categoryResponse = await categoryApi.updateCategory(body, id);
+			const response = await categoryApi.updateCategory(body, id);
 
-			if (categoryResponse) {
-				this.categories = this.categories.map((category) =>
-					category.id === id ? categoryResponse : category,
+			if (response) {
+				this.categories = this.categories.map(category =>
+					category.id === id ? response : category,
 				);
 			}
 
-			return categoryResponse;
+			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-			
-			const message: string = String(axiosError?.response?.data?.message);
-			
-			if (axiosError.response?.data?.errors) {
-				const errors: string[] = axiosError.response.data?.errors;
-				
-				Object.values(errors).forEach((error) => {
-					sendErrorNotification(message, error);
-				});
-			}
-			
-			if (message) {
-				sendErrorNotification(message);
-			}
+
+			sendValidationErrors(axiosError);
 		}
 	}
 
 	async deleteCategory({ id }: Category) {
 		try {
-			const categoryResponse = await categoryApi.deleteCategory(id);
+			const response = await categoryApi.deleteCategory(id);
 
-			if (categoryResponse) {
-				this.categories = this.categories.filter((category) => category.id !== id,);
+			if (response) {
+				this.categories = this.categories.filter(
+					category => category.id !== id,
+				);
 			}
 
-			return categoryResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}

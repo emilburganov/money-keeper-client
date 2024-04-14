@@ -1,6 +1,6 @@
 import { accountApi, ErrorsResponse } from "@/shared/api";
 import { Account, AccountBody, AccountsStats } from "@/shared/api/account";
-import { sendErrorNotification } from "@/shared/lib/helpers";
+import { sendValidationErrors } from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -17,7 +17,7 @@ export class AccountStore {
 	set accounts(accounts: Account[]) {
 		this._accounts = accounts;
 	}
-	
+
 	get accountsSummaryStats() {
 		return this._accountsSummaryStats;
 	}
@@ -32,27 +32,27 @@ export class AccountStore {
 
 	async getAccounts() {
 		try {
-			const accountResponse = await accountApi.getAccounts();
+			const response = await accountApi.getAccounts();
 
 			runInAction(() => {
-				this._accounts = accountResponse;
+				this._accounts = response;
 			});
 
-			return accountResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}
 	}
-	
+
 	async getAccountsSummaryStats() {
 		try {
-			const accountsSummaryStatsResponse = await accountApi.getAccountsSummaryStats();
-			
+			const response = await accountApi.getAccountsSummaryStats();
+
 			runInAction(() => {
-				this._accountsSummaryStats = accountsSummaryStatsResponse;
+				this._accountsSummaryStats = response;
 			});
-			
-			return accountsSummaryStatsResponse;
+
+			return response;
 		} catch (error) {
 			console.error(error);
 		}
@@ -60,71 +60,47 @@ export class AccountStore {
 
 	async createAccount(body: AccountBody) {
 		try {
-			const accountResponse = await accountApi.createAccount(body);
+			const response = await accountApi.createAccount(body);
 
-			if (accountResponse) {
-				this.accounts = [...this.accounts, accountResponse];
+			if (response) {
+				this.accounts = [...this.accounts, response];
 			}
 
-			return accountResponse;
+			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-			
-			const message: string = String(axiosError?.response?.data?.message);
-			
-			if (axiosError.response?.data?.errors) {
-				const errors: string[] = axiosError.response.data?.errors;
-				
-				Object.values(errors).forEach((error) => {
-					sendErrorNotification(message, error);
-				});
-			}
-			
-			if (message) {
-				sendErrorNotification(message);
-			}
+
+			sendValidationErrors(axiosError);
 		}
 	}
 
 	async updateAccount(body: AccountBody, id: number) {
 		try {
-			const accountResponse = await accountApi.updateAccount(body, id);
+			const response = await accountApi.updateAccount(body, id);
 
-			if (accountResponse) {
-				this.accounts = this.accounts.map((account) =>
-					account.id === id ? accountResponse : account,
+			if (response) {
+				this.accounts = this.accounts.map(account =>
+					account.id === id ? response : account,
 				);
 			}
 
-			return accountResponse;
+			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-			
-			const message: string = String(axiosError?.response?.data?.message);
-			
-			if (axiosError.response?.data?.errors) {
-				const errors: string[] = axiosError.response.data?.errors;
-				
-				Object.values(errors).forEach((error) => {
-					sendErrorNotification(message, error);
-				});
-			}
-			
-			if (message) {
-				sendErrorNotification(message);
-			}
+
+			sendValidationErrors(axiosError);
 		}
 	}
 
 	async deleteAccount({ id }: Account) {
 		try {
-			const accountResponse = await accountApi.deleteAccount(id);
+			const response = await accountApi.deleteAccount(id);
 
-			if (accountResponse) {
-				this.accounts = this.accounts.filter((account) => account.id !== id);
+			if (response) {
+				this.accounts = this.accounts.filter(account => account.id !== id);
 			}
 
-			return accountResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}

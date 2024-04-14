@@ -51,6 +51,12 @@ export const EditIncomeModal = observer(
 			formState: { errors, isValid },
 		} = useForm<IncomeBody>({
 			resolver: yupResolver(UpdateIncomeSchema),
+			defaultValues: {
+				title: income.title,
+				amount: String(income.amount),
+				category_id: income.category.id,
+				account_id: income.account.id,
+			},
 		});
 
 		useEffect(() => {
@@ -70,9 +76,9 @@ export const EditIncomeModal = observer(
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
 						<Box
-							rounded={"lg"}
+							rounded="lg"
 							bg={colorMode === "light" ? "gray.50" : "gray.700"}
-							boxShadow={"lg"}
+							boxShadow="lg"
 							p={5}
 						>
 							<Stack spacing={4}>
@@ -82,7 +88,6 @@ export const EditIncomeModal = observer(
 									</FormLabel>
 									<Input
 										{...register("title")}
-										defaultValue={income.title}
 										type="text"
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
@@ -100,7 +105,6 @@ export const EditIncomeModal = observer(
 										{t("pages.incomes.editModal.form.fields.amount")}:
 									</FormLabel>
 									<NumberInput
-										defaultValue={income.amount}
 										precision={2}
 										min={0}
 										max={1000000000}
@@ -127,18 +131,19 @@ export const EditIncomeModal = observer(
 									</FormLabel>
 									<Select
 										{...register("category_id")}
-										defaultValue={income.category.id}
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
 										}
 									>
 										{categories
-											.filter((category) => category.type !== CategoryType.EXPENSES)
+											.filter(
+												category => category.type !== CategoryType.EXPENSES,
+											)
 											.map(({ id, title }) => (
-											<option key={id} value={id}>
-												{title}
-											</option>
-										))}
+												<option key={id} value={id}>
+													{title}
+												</option>
+											))}
 									</Select>
 									{errors.category_id && (
 										<FormErrorMessage>
@@ -152,7 +157,6 @@ export const EditIncomeModal = observer(
 									</FormLabel>
 									<Select
 										{...register("account_id")}
-										defaultValue={income.account.id}
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
 										}

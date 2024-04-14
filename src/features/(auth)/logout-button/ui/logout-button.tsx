@@ -17,8 +17,8 @@ export const LogoutButton = () => {
 	return (
 		<Button
 			onClick={handleLogout}
-			fontSize={"sm"}
-			size={"md"}
+			fontSize="sm"
+			size="md"
 			display={{ base: "none", md: "flex" }}
 			isLoading={isLoading}
 		>

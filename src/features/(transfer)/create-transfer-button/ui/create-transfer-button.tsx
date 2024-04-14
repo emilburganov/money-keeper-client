@@ -2,27 +2,30 @@ import { useTransferStore } from "@/entities/transfer";
 import { TransferBody } from "@/shared/api/transfer";
 import { Button } from "@/shared/ui/(button)/button";
 import { observer } from "mobx-react-lite";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 import { UseFormHandleSubmit } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 interface CreateTransferButtonProps {
 	reset: () => void;
 	isValid: boolean;
-	isLoading: boolean;
 	handleSubmit: UseFormHandleSubmit<TransferBody>;
 	onSubmit: () => void;
 }
 
 export const CreateTransferButton = observer(
 	(props: CreateTransferButtonProps) => {
-		const { reset, isValid, isLoading, handleSubmit, onSubmit } = props;
+		const { reset, isValid, handleSubmit, onSubmit } = props;
 		const { createTransfer } = useTransferStore();
 		const { t } = useTranslation();
+		const [isLoading, setLoading] = useState<boolean>(false);
 
-		const handleCreate = (event: MouseEvent<HTMLButtonElement>) => {
+		const handleCreate = async (event: MouseEvent<HTMLButtonElement>) => {
 			event.preventDefault();
-			handleSubmit(createTransfer)();
+
+			setLoading(true);
+			await handleSubmit(createTransfer)();
+			setLoading(false);
 
 			if (isValid) {
 				onSubmit();
@@ -31,8 +34,12 @@ export const CreateTransferButton = observer(
 		};
 
 		return (
-			<Button isLoading={isLoading} onClick={handleCreate}>
-				{t("pages.transfers.createButton")}
+			<Button
+				isLoading={isLoading}
+				onClick={handleCreate}
+				loadingText={t("crud.buttons.createButtonLoadingText")}
+			>
+				{t("crud.buttons.createButton")}
 			</Button>
 		);
 	},

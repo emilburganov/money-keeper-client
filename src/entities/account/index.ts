@@ -3,4 +3,10 @@ import { useAccountStore } from "./lib/hooks";
 import { AccountProvider } from "./lib/provider";
 import { AccountStore } from "./model/store";
 
-export { AccountStore, AccountProvider, useAccountStore, StoreAccountSchema, UpdateAccountSchema };
+export {
+	AccountStore,
+	AccountProvider,
+	useAccountStore,
+	StoreAccountSchema,
+	UpdateAccountSchema,
+};

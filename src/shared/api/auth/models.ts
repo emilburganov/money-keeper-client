@@ -16,6 +16,7 @@ export interface UpdateUserCredentials {
 	name: string;
 	email: string;
 	currency_id: number;
+	avatar?: File | null;
 }
 
 export interface LoginCredentials {

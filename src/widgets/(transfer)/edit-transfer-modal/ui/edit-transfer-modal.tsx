@@ -48,6 +48,12 @@ export const EditTransferModal = observer(
 			formState: { errors, isValid },
 		} = useForm<TransferBody>({
 			resolver: yupResolver(UpdateTransferSchema),
+			defaultValues: {
+				title: transfer.title,
+				amount: String(transfer.amount),
+				account_from_id: transfer.account_from.id,
+				account_to_id: transfer.account_to.id,
+			},
 		});
 
 		useEffect(() => {
@@ -66,9 +72,9 @@ export const EditTransferModal = observer(
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
 						<Box
-							rounded={"lg"}
+							rounded="lg"
 							bg={colorMode === "light" ? "gray.50" : "gray.700"}
-							boxShadow={"lg"}
+							boxShadow="lg"
 							p={5}
 						>
 							<Stack spacing={4}>
@@ -78,7 +84,6 @@ export const EditTransferModal = observer(
 									</FormLabel>
 									<Input
 										{...register("title")}
-										defaultValue={transfer.title}
 										type="text"
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
@@ -96,7 +101,6 @@ export const EditTransferModal = observer(
 										{t("pages.expenses.editModal.form.fields.amount")}:
 									</FormLabel>
 									<NumberInput
-										defaultValue={transfer.amount}
 										precision={2}
 										min={0}
 										max={1000000000}
@@ -123,7 +127,6 @@ export const EditTransferModal = observer(
 									</FormLabel>
 									<Select
 										{...register("account_from_id")}
-										defaultValue={transfer.account_from.id}
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
 										}
@@ -146,7 +149,6 @@ export const EditTransferModal = observer(
 									</FormLabel>
 									<Select
 										{...register("account_to_id")}
-										defaultValue={transfer.account_to.id}
 										focusBorderColor={
 											colorMode === "light" ? "green.500" : "green.200"
 										}

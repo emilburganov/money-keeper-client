@@ -23,11 +23,11 @@ export const DeleteAccountButton = ({ account }: DeleteAccountButtonProps) => {
 	return (
 		<Button
 			onClick={handleDelete}
-			colorScheme={"red"}
+			colorScheme="red"
 			isLoading={isLoading}
-			loadingText={t("pages.accounts.deleteButtonLoadingText")}
+			loadingText={t("crud.buttons.deleteButtonLoadingText")}
 		>
-			<DeleteIcon/>
+			<DeleteIcon />
 		</Button>
 	);
 };

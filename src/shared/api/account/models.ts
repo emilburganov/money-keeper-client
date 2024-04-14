@@ -3,7 +3,7 @@ import { Currency } from "../currency";
 export interface Account {
 	id: number;
 	title: string;
-	currency: Currency
+	currency: Currency;
 }
 
 export interface AccountBody {
@@ -12,6 +12,6 @@ export interface AccountBody {
 }
 
 export interface AccountsStats {
-	labels: string[],
-	values: number[],
+	labels: string[];
+	values: number[];
 }

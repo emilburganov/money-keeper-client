@@ -47,7 +47,7 @@ export const CreateIncomeModal = observer(
 			register,
 			handleSubmit,
 			reset,
-			formState: { errors, isValid, isLoading },
+			formState: { errors, isValid },
 		} = useForm<IncomeBody>({
 			resolver: yupResolver(StoreIncomeSchema),
 		});
@@ -69,9 +69,9 @@ export const CreateIncomeModal = observer(
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
 						<Box
-							rounded={"lg"}
+							rounded="lg"
 							bg={colorMode === "light" ? "gray.50" : "gray.700"}
-							boxShadow={"lg"}
+							boxShadow="lg"
 							p={5}
 						>
 							<Stack spacing={4}>
@@ -98,7 +98,7 @@ export const CreateIncomeModal = observer(
 										{t("pages.incomes.createModal.form.fields.amount")}:
 									</FormLabel>
 									<NumberInput
-										defaultValue={1000.0}
+										defaultValue={1000}
 										precision={2}
 										min={0}
 										max={1000000000}
@@ -130,12 +130,14 @@ export const CreateIncomeModal = observer(
 										}
 									>
 										{categories
-											.filter((category) => category.type !== CategoryType.EXPENSES)
+											.filter(
+												category => category.type !== CategoryType.EXPENSES,
+											)
 											.map(({ id, title }) => (
-											<option key={id} value={id}>
-												{title}
-											</option>
-										))}
+												<option key={id} value={id}>
+													{title}
+												</option>
+											))}
 									</Select>
 									{errors.category_id && (
 										<FormErrorMessage>
@@ -169,7 +171,6 @@ export const CreateIncomeModal = observer(
 									<CreateIncomeButton
 										reset={reset}
 										isValid={isValid}
-										isLoading={isLoading}
 										handleSubmit={handleSubmit}
 										onSubmit={onClose}
 									/>

@@ -25,7 +25,7 @@ export const LoginButton = observer(({ handleSubmit }: LoginButtonProps) => {
 	return (
 		<Button
 			fontSize="md"
-			w={"100%"}
+			w="100%"
 			onClick={handleLogin}
 			type="submit"
 			size="lg"

@@ -37,10 +37,10 @@ export const LoginForm = () => {
 
 	return (
 		<Box
-			as={"form"}
-			rounded={"lg"}
+			as="form"
+			rounded="lg"
 			bg={colorMode === "light" ? "gray.50" : "gray.700"}
-			boxShadow={"lg"}
+			boxShadow="lg"
 			p={5}
 		>
 			<Stack spacing={4}>
@@ -67,7 +67,7 @@ export const LoginForm = () => {
 								colorMode === "light" ? "green.500" : "green.200"
 							}
 						/>
-						<InputRightElement h={"full"}>
+						<InputRightElement h="full">
 							<HideButton show={showPassword} setShow={setShowPassword} />
 						</InputRightElement>
 					</InputGroup>
@@ -78,7 +78,7 @@ export const LoginForm = () => {
 				<Stack spacing={10} pt={2}>
 					<LoginButton handleSubmit={handleSubmit} />
 				</Stack>
-				<Flex pt={6} align={"center"} wrap={"wrap"} gap={1}>
+				<Flex pt={6} align="center" wrap="wrap" gap={1}>
 					<Text>{t("pages.login.form.redirect")}</Text>
 					<LinkButton as={Link} to="/registration">
 						{t("pages.registration.form.button")}

@@ -1,6 +1,6 @@
 import { ErrorsResponse, expenseApi } from "@/shared/api";
 import { Expense, ExpenseBody, ExpensesStats } from "@/shared/api/expense";
-import { sendErrorNotification } from "@/shared/lib/helpers";
+import { sendValidationErrors } from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
 
@@ -17,7 +17,7 @@ export class ExpenseStore {
 	set expenses(expenses: Expense[]) {
 		this._expenses = expenses;
 	}
-	
+
 	get expensesStats(): ExpensesStats {
 		return this._expensesStats;
 	}
@@ -32,27 +32,27 @@ export class ExpenseStore {
 
 	async getExpenses() {
 		try {
-			const expenseResponse = await expenseApi.getExpenses();
+			const response = await expenseApi.getExpenses();
 
 			runInAction(() => {
-				this._expenses = expenseResponse;
+				this._expenses = response;
 			});
 
-			return expenseResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}
 	}
-	
+
 	async getExpensesStats() {
 		try {
-			const expensesStatsResponse = await expenseApi.getExpensesStats();
-			
+			const response = await expenseApi.getExpensesStats();
+
 			runInAction(() => {
-				this._expensesStats = expensesStatsResponse;
+				this._expensesStats = response;
 			});
-			
-			return expensesStatsResponse;
+
+			return response;
 		} catch (error) {
 			console.error(error);
 		}
@@ -60,71 +60,47 @@ export class ExpenseStore {
 
 	async createExpense(body: ExpenseBody) {
 		try {
-			const expenseResponse = await expenseApi.createExpense(body);
+			const response = await expenseApi.createExpense(body);
 
-			if (expenseResponse) {
-				this.expenses = [...this.expenses, expenseResponse];
+			if (response) {
+				this.expenses = [...this.expenses, response];
 			}
 
-			return expenseResponse;
+			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-			
-			const message: string = String(axiosError?.response?.data?.message);
-			
-			if (axiosError.response?.data?.errors) {
-				const errors: string[] = axiosError.response.data?.errors;
-				
-				Object.values(errors).forEach((error) => {
-					sendErrorNotification(message, error);
-				});
-			}
-			
-			if (message) {
-				sendErrorNotification(message);
-			}
+
+			sendValidationErrors(axiosError);
 		}
 	}
 
 	async updateExpense(body: ExpenseBody, id: number) {
 		try {
-			const expenseResponse = await expenseApi.updateExpense(body, id);
+			const response = await expenseApi.updateExpense(body, id);
 
-			if (expenseResponse) {
-				this.expenses = this.expenses.map((expense) =>
-					expense.id === id ? expenseResponse : expense,
+			if (response) {
+				this.expenses = this.expenses.map(expense =>
+					expense.id === id ? response : expense,
 				);
 			}
 
-			return expenseResponse;
+			return response;
 		} catch (error) {
 			const axiosError = error as AxiosError<ErrorsResponse>;
-			
-			const message: string = String(axiosError?.response?.data?.message);
-			
-			if (axiosError.response?.data?.errors) {
-				const errors: string[] = axiosError.response.data?.errors;
-				
-				Object.values(errors).forEach((error) => {
-					sendErrorNotification(message, error);
-				});
-			}
-			
-			if (message) {
-				sendErrorNotification(message);
-			}
+
+			sendValidationErrors(axiosError);
 		}
 	}
 
 	async deleteExpense({ id }: Expense) {
 		try {
-			const expenseResponse = await expenseApi.deleteExpense(id);
+			const response = await expenseApi.deleteExpense(id);
 
-			if (expenseResponse) {
-				this.expenses = this.expenses.filter((expense) => expense.id !== id);
+			if (response) {
+				this.expenses = this.expenses.filter(expense => expense.id !== id);
 			}
 
-			return expenseResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}

@@ -37,9 +37,9 @@ export const UpdateCategoryButton = observer(
 			<Button
 				onClick={handleUpdate}
 				isLoading={isLoading}
-				loadingText={t("pages.categories.updateButtonLoadingText")}
+				loadingText={t("crud.buttons.updateButtonLoadingText")}
 			>
-				{t("pages.categories.updateButton")}
+				{t("crud.buttons.updateButton")}
 			</Button>
 		);
 	},

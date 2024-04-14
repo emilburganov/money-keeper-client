@@ -2,27 +2,30 @@ import { useCategoryStore } from "@/entities/category";
 import { CategoryBody } from "@/shared/api/category";
 import { Button } from "@/shared/ui/(button)/button";
 import { observer } from "mobx-react-lite";
-import { MouseEvent } from "react";
+import { MouseEvent, useState } from "react";
 import { UseFormHandleSubmit } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 interface CreateCategoryButtonProps {
 	reset: () => void;
 	isValid: boolean;
-	isLoading: boolean;
 	handleSubmit: UseFormHandleSubmit<CategoryBody>;
 	onSubmit: () => void;
 }
 
 export const CreateCategoryButton = observer(
 	(props: CreateCategoryButtonProps) => {
-		const { reset, isValid, isLoading, handleSubmit, onSubmit } = props;
+		const { reset, isValid, handleSubmit, onSubmit } = props;
 		const { createCategory } = useCategoryStore();
 		const { t } = useTranslation();
+		const [isLoading, setLoading] = useState<boolean>(false);
 
-		const handleCreate = (event: MouseEvent<HTMLButtonElement>) => {
+		const handleCreate = async (event: MouseEvent<HTMLButtonElement>) => {
 			event.preventDefault();
-			handleSubmit(createCategory)();
+
+			setLoading(true);
+			await handleSubmit(createCategory)();
+			setLoading(false);
 
 			if (isValid) {
 				onSubmit();
@@ -31,8 +34,12 @@ export const CreateCategoryButton = observer(
 		};
 
 		return (
-			<Button isLoading={isLoading} onClick={handleCreate}>
-				{t("pages.categories.createButton")}
+			<Button
+				isLoading={isLoading}
+				onClick={handleCreate}
+				loadingText={t("crud.buttons.createButtonLoadingText")}
+			>
+				{t("crud.buttons.createButton")}
 			</Button>
 		);
 	},

@@ -16,7 +16,7 @@ export const LanguageSwitchButton = () => {
 	const { colorMode } = useColorMode();
 
 	const switchLanguage = async (language: string) => {
-		await i18n.changeLanguage(language)
+		await i18n.changeLanguage(language);
 		localStorage.setItem("lang", language);
 	};
 
@@ -27,12 +27,12 @@ export const LanguageSwitchButton = () => {
 					<>
 						<PopoverTrigger>
 							<Flex
-								align={"center"}
-								justify={"center"}
-								w={"40px"}
-								h={"40px"}
-								cursor={"pointer"}
-								borderRadius={"10px"}
+								align="center"
+								justify="center"
+								w="40px"
+								h="40px"
+								cursor="pointer"
+								borderRadius="10px"
 							>
 								{i18n.language === "en" && (
 									<img
@@ -55,17 +55,17 @@ export const LanguageSwitchButton = () => {
 						>
 							<PopoverArrow marginLeft={2} />
 							<PopoverBody p={2}>
-								<Stack align={"baseline"} onClick={onClose}>
+								<Stack align="baseline" onClick={onClose}>
 									<Button
 										onClick={() => switchLanguage("ru")}
 										color={colorMode === "light" ? "gray.600" : "gray.200"}
-										display={"flex"}
-										justifyContent={"start"}
-										w={"full"}
+										display="flex"
+										justifyContent="start"
+										w="full"
 										variant="ghost"
 										gap={2}
 										p={2}
-										fontSize={"14px"}
+										fontSize="14px"
 									>
 										<img
 											src="/assets/icons/russian-flag.svg"
@@ -76,13 +76,13 @@ export const LanguageSwitchButton = () => {
 									<Button
 										onClick={() => switchLanguage("en")}
 										color={colorMode === "light" ? "gray.600" : "gray.200"}
-										display={"flex"}
-										justifyContent={"start"}
-										w={"full"}
+										display="flex"
+										justifyContent="start"
+										w="full"
 										variant="ghost"
 										gap={2}
 										p={2}
-										fontSize={"14px"}
+										fontSize="14px"
 									>
 										<img
 											src="/assets/icons/english-flag.svg"

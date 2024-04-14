@@ -23,7 +23,7 @@ export default function CategoriesPage() {
 	return (
 		<Container>
 			<Stack pt={2} gap={6}>
-				<Button onClick={onOpen}>{t("pages.categories.createButton")}</Button>
+				<Button onClick={onOpen}>{t("crud.buttons.createButton")}</Button>
 				<CreateCategoryModal isOpen={isOpen && !category} onClose={onClose} />
 				{category && (
 					<EditCategoryModal

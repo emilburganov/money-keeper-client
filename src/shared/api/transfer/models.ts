@@ -19,6 +19,6 @@ export interface TransferBody {
 }
 
 export interface TransfersStats {
-	labels: string[],
-	values: number[],
+	labels: string[];
+	values: number[];
 }

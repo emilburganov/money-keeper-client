@@ -9,12 +9,7 @@ interface LinkButtonProps {
 
 export const LinkButton = ({ children, ...props }: LinkButtonProps) => {
 	return (
-		<ChakraButton
-			fontSize={"sm"}
-			colorScheme="green"
-			variant={"link"}
-			{...props}
-		>
+		<ChakraButton fontSize="sm" colorScheme="green" variant="link" {...props}>
 			{children}
 		</ChakraButton>
 	);

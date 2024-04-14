@@ -36,9 +36,9 @@ export const UpdateIncomeButton = observer((props: UpdateIncomeButtonProps) => {
 		<Button
 			onClick={handleUpdate}
 			isLoading={isLoading}
-			loadingText={t("pages.incomes.updateButtonLoadingText")}
+			loadingText={t("crud.buttons.updateButtonLoadingText")}
 		>
-			{t("pages.incomes.updateButton")}
+			{t("crud.buttons.updateButton")}
 		</Button>
 	);
 });

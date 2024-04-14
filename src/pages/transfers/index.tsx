@@ -1,7 +1,11 @@
 import { Transfer } from "@/shared/api/transfer";
 import { Button } from "@/shared/ui/(button)/button";
 import { Container } from "@/shared/ui/(container)/container";
-import { CreateTransferModal, EditTransferModal, TransferCards } from "@/widgets/(transfer)";
+import {
+	CreateTransferModal,
+	EditTransferModal,
+	TransferCards,
+} from "@/widgets/(transfer)";
 import { Stack, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,11 +19,11 @@ export default function TransfersPage() {
 		onClose();
 		setTransfer(null);
 	};
-	
+
 	return (
 		<Container>
 			<Stack pt={2} gap={6}>
-				<Button onClick={onOpen}>{t("pages.transfers.createButton")}</Button>
+				<Button onClick={onOpen}>{t("crud.buttons.createButton")}</Button>
 				<CreateTransferModal isOpen={isOpen && !transfer} onClose={onClose} />
 				{transfer && (
 					<EditTransferModal

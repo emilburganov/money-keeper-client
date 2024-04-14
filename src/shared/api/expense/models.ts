@@ -18,6 +18,6 @@ export interface ExpenseBody {
 }
 
 export interface ExpensesStats {
-	labels: string[],
-	values: number[],
+	labels: string[];
+	values: number[];
 }

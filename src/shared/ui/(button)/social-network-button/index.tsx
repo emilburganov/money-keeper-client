@@ -17,16 +17,16 @@ export const SocialNetworkButton = ({
 	return (
 		<chakra.button
 			bg={colorMode === "light" ? "blackAlpha.100" : "whiteAlpha.100"}
-			rounded={"full"}
+			rounded="full"
 			w={8}
 			h={8}
-			cursor={"pointer"}
-			as={"a"}
+			cursor="pointer"
+			as="a"
 			href={href}
-			display={"inline-flex"}
-			alignItems={"center"}
-			justifyContent={"center"}
-			transition={"background 0.3s ease"}
+			display="inline-flex"
+			alignItems="center"
+			justifyContent="center"
+			transition="background 0.3s ease"
 			_hover={{
 				bg: colorMode === "light" ? "blackAlpha.200" : "whiteAlpha.200",
 			}}

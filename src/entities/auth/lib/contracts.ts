@@ -122,4 +122,5 @@ export const UpdateUserSchema = Yup.object().shape({
 				field: t("pages.accounts.createModal.form.fields.currency"),
 			}),
 		),
+	avatar: Yup.mixed<File>().nullable(),
 });

@@ -23,11 +23,11 @@ export const DeleteExpenseButton = ({ expense }: DeleteExpenseButtonProps) => {
 	return (
 		<Button
 			onClick={handleDelete}
-			colorScheme={"red"}
+			colorScheme="red"
 			isLoading={isLoading}
-			loadingText={t("pages.expenses.deleteButtonLoadingText")}
+			loadingText={t("crud.buttons.deleteButtonLoadingText")}
 		>
-			<DeleteIcon/>
+			<DeleteIcon />
 		</Button>
 	);
 };

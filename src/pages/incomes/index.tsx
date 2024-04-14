@@ -1,7 +1,11 @@
 import { Income } from "@/shared/api/income";
 import { Button } from "@/shared/ui/(button)/button";
 import { Container } from "@/shared/ui/(container)/container";
-import { CreateIncomeModal, EditIncomeModal, IncomeCards, } from "@/widgets/(income)";
+import {
+	CreateIncomeModal,
+	EditIncomeModal,
+	IncomeCards,
+} from "@/widgets/(income)";
 import { Stack, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -20,7 +24,7 @@ export default function IncomesPage() {
 		<Container>
 			<Stack pt={2} gap={6}>
 				<Button display="flex" gap={2} onClick={onOpen}>
-					{t("pages.incomes.createButton")}
+					{t("crud.buttons.createButton")}
 				</Button>
 				<CreateIncomeModal isOpen={isOpen && !income} onClose={onClose} />
 				{income && (

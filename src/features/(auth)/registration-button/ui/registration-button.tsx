@@ -26,7 +26,7 @@ export const RegistrationButton = observer(
 		return (
 			<Button
 				fontSize="md"
-				w={"100%"}
+				w="100%"
 				onClick={handleRegistration}
 				type="submit"
 				size="lg"

@@ -1,14 +1,16 @@
 import { Container } from "@/shared/ui/(container)/container";
 import { Content, Sidebar } from "@/widgets/(profile)";
-import { Box, } from "@chakra-ui/react";
+import { Box, ScaleFade } from "@chakra-ui/react";
 
 export default function Profile() {
-    return (
-        <Container>
-            <Box display={{base: "block", md: "flex"}} pt={2}>
-                <Sidebar/>
-                <Content/>
-            </Box>
-        </Container>
-    );
+	return (
+		<Container>
+			<ScaleFade initialScale={0.9} in={true}>
+				<Box display={{ base: "block", md: "flex" }} pt={2}>
+					<Sidebar />
+					<Content />
+				</Box>
+			</ScaleFade>
+		</Container>
+	);
 }

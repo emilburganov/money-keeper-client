@@ -1,1 +1,1 @@
-export { EditIncomeModal } from "./ui/edit-income-modal.tsx";
+export { EditIncomeModal } from "./ui/edit-income-modal";

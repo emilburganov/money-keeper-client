@@ -1,1 +1,1 @@
-export { DeleteIncomeButton } from "./ui/delete-income-button.tsx";
+export { DeleteIncomeButton } from "./ui/delete-income-button";

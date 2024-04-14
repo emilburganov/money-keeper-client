@@ -23,7 +23,7 @@ export default function AccountsPage() {
 	return (
 		<Container>
 			<Stack pt={2} gap={6}>
-				<Button onClick={onOpen}>{t("pages.accounts.createButton")}</Button>
+				<Button onClick={onOpen}>{t("crud.buttons.createButton")}</Button>
 				<CreateAccountModal isOpen={isOpen && !account} onClose={onClose} />
 				{account && (
 					<EditAccountModal

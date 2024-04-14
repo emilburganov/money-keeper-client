@@ -47,7 +47,7 @@ export const CreateExpenseModal = observer(
 			register,
 			handleSubmit,
 			reset,
-			formState: { errors, isValid, isLoading },
+			formState: { errors, isValid },
 		} = useForm<ExpenseBody>({
 			resolver: yupResolver(StoreExpenseSchema),
 		});
@@ -69,9 +69,9 @@ export const CreateExpenseModal = observer(
 					<ModalCloseButton top={5} right={5} />
 					<Flex direction="column" gap={4}>
 						<Box
-							rounded={"lg"}
+							rounded="lg"
 							bg={colorMode === "light" ? "gray.50" : "gray.700"}
-							boxShadow={"lg"}
+							boxShadow="lg"
 							p={5}
 						>
 							<Stack spacing={4}>
@@ -98,7 +98,7 @@ export const CreateExpenseModal = observer(
 										{t("pages.expenses.createModal.form.fields.amount")}:
 									</FormLabel>
 									<NumberInput
-										defaultValue={1000.0}
+										defaultValue={1000}
 										precision={2}
 										min={0}
 										max={1000000000}
@@ -130,12 +130,14 @@ export const CreateExpenseModal = observer(
 										}
 									>
 										{categories
-											.filter((category) => category.type !== CategoryType.INCOMES)
+											.filter(
+												category => category.type !== CategoryType.INCOMES,
+											)
 											.map(({ id, title }) => (
-											<option key={id} value={id}>
-												{title}
-											</option>
-										))}
+												<option key={id} value={id}>
+													{title}
+												</option>
+											))}
 									</Select>
 									{errors.category_id && (
 										<FormErrorMessage>
@@ -169,7 +171,6 @@ export const CreateExpenseModal = observer(
 									<CreateExpenseButton
 										reset={reset}
 										isValid={isValid}
-										isLoading={isLoading}
 										handleSubmit={handleSubmit}
 										onSubmit={onClose}
 									/>

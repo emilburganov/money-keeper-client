@@ -21,13 +21,13 @@ export class CurrencyStore {
 
 	async getCurrencies() {
 		try {
-			const currencyResponse = await currencyApi.getCurrencies();
+			const response = await currencyApi.getCurrencies();
 
 			runInAction(() => {
-				this._currencies = currencyResponse;
+				this._currencies = response;
 			});
 
-			return currencyResponse;
+			return response;
 		} catch (error) {
 			console.error(error);
 		}

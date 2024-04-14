@@ -1,1 +1,1 @@
-export { EditExpenseModal } from "./ui/edit-expense-modal.tsx";
+export { EditExpenseModal } from "./ui/edit-expense-modal";

@@ -23,7 +23,7 @@ export default function ExpensesPage() {
 	return (
 		<Container>
 			<Stack pt={2} gap={6}>
-				<Button onClick={onOpen}>{t("pages.expenses.createButton")}</Button>
+				<Button onClick={onOpen}>{t("crud.buttons.createButton")}</Button>
 				<CreateExpenseModal isOpen={isOpen && !expense} onClose={onClose} />
 				{expense && (
 					<EditExpenseModal

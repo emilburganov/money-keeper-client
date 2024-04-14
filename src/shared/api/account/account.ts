@@ -12,7 +12,6 @@ export const getAccountsSummaryStats = (): Promise<AccountsStats> => {
 	return apiInstance.get(`${BASE_URL}/stats`);
 };
 
-
 export const createAccount = (body: AccountBody): Promise<Account> => {
 	return apiInstance.post(`${BASE_URL}`, body);
 };
