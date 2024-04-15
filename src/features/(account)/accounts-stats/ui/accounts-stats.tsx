@@ -11,14 +11,14 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 export const AccountsStats = observer(() => {
 	const { t } = useTranslation();
-	const { accountsSummaryStats, getAccountsSummaryStats } = useAccountStore();
+	const { accountsSummaryStats, getAccountsStats } = useAccountStore();
 	const [isLoading, setLoading] = useState<boolean>(false);
 	const { user } = useAuthStore();
 
 	useEffect(() => {
 		(async () => {
 			setLoading(true);
-			await getAccountsSummaryStats();
+			await getAccountsStats();
 			setLoading(false);
 		})();
 	}, [user.currency]);

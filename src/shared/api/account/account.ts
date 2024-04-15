@@ -8,7 +8,7 @@ export const getAccounts = (): Promise<Account[]> => {
 	return apiInstance.get(BASE_URL);
 };
 
-export const getAccountsSummaryStats = (): Promise<AccountsStats> => {
+export const getAccountsStats = (): Promise<AccountsStats> => {
 	return apiInstance.get(`${BASE_URL}/stats`);
 };
 

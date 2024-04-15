@@ -44,9 +44,9 @@ export class AccountStore {
 		}
 	}
 
-	async getAccountsSummaryStats() {
+	async getAccountsStats() {
 		try {
-			const response = await accountApi.getAccountsSummaryStats();
+			const response = await accountApi.getAccountsStats();
 
 			runInAction(() => {
 				this._accountsSummaryStats = response;
