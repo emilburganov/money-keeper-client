@@ -1,34 +1,34 @@
 {
-	"root": true,
-	"env": {
-		"browser": true,
-		"es2021": true
-	},
-	"extends": [
-		"eslint:recommended",
-		"plugin:@typescript-eslint/recommended",
-		"plugin:react/recommended",
-		"prettier"
-	],
-	"parser": "@typescript-eslint/parser",
-	"parserOptions": {
-		"ecmaVersion": "latest",
-		"ecmaFeatures": {
-			"jsx": true
-		},
-		"sourceType": "module"
-	},
-	"plugins": ["@typescript-eslint", "react", "prettier", "fsd-import"],
-	"rules": {
-		"react/react-in-jsx-scope": "off",
-		"fsd-import/fsd-relative-path": ["error", { "alias": "@" }],
-		"fsd-import/public-api-imports": ["error", { "alias": "@" }],
-		"fsd-import/layer-imports": ["error", { "alias": "@" }],
-		"no-unused-vars": "off"
-	},
-	"settings": {
-		"import/resolver": {
-			"typescript": {}
-		}
-	}
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint", "react", "prettier", "fsd-import"],
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "fsd-import/fsd-relative-path": ["error", { "alias": "@" }],
+    "fsd-import/public-api-imports": ["error", { "alias": "@" }],
+    "fsd-import/layer-imports": ["error", { "alias": "@" }],
+    "no-unused-vars": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  }
 }

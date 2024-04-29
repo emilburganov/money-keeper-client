@@ -5,31 +5,31 @@ import { makeAutoObservable, runInAction } from "mobx";
 type PrivateFields = "_root";
 
 export class CurrencyStore {
-	private _currencies = [] as Currency[];
+  private _currencies = [] as Currency[];
 
-	get currencies(): Currency[] {
-		return this._currencies;
-	}
+  get currencies(): Currency[] {
+    return this._currencies;
+  }
 
-	constructor() {
-		makeAutoObservable<this, PrivateFields>(
-			this,
-			{ _root: false },
-			{ autoBind: true, deep: false },
-		);
-	}
+  constructor() {
+    makeAutoObservable<this, PrivateFields>(
+      this,
+      { _root: false },
+      { autoBind: true, deep: false },
+    );
+  }
 
-	async getCurrencies() {
-		try {
-			const response = await currencyApi.getCurrencies();
+  async getCurrencies() {
+    try {
+      const response = await currencyApi.getCurrencies();
 
-			runInAction(() => {
-				this._currencies = response;
-			});
+      runInAction(() => {
+        this._currencies = response;
+      });
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

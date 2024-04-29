@@ -7,102 +7,102 @@ import { makeAutoObservable, runInAction } from "mobx";
 type PrivateFields = "_root";
 
 export class AccountStore {
-	private _accounts = [] as Account[];
-	private _accountsSummaryStats = {} as AccountsStats;
+  private _accounts = [] as Account[];
+  private _accountsStats = {} as AccountsStats;
 
-	get accounts(): Account[] {
-		return this._accounts;
-	}
+  get accounts(): Account[] {
+    return this._accounts;
+  }
 
-	set accounts(accounts: Account[]) {
-		this._accounts = accounts;
-	}
+  set accounts(accounts: Account[]) {
+    this._accounts = accounts;
+  }
 
-	get accountsSummaryStats() {
-		return this._accountsSummaryStats;
-	}
+  get accountsStats() {
+    return this._accountsStats;
+  }
 
-	constructor() {
-		makeAutoObservable<this, PrivateFields>(
-			this,
-			{ _root: false },
-			{ autoBind: true, deep: false },
-		);
-	}
+  constructor() {
+    makeAutoObservable<this, PrivateFields>(
+      this,
+      { _root: false },
+      { autoBind: true, deep: false },
+    );
+  }
 
-	async getAccounts() {
-		try {
-			const response = await accountApi.getAccounts();
+  async getAccounts() {
+    try {
+      const response = await accountApi.getAccounts();
 
-			runInAction(() => {
-				this._accounts = response;
-			});
+      runInAction(() => {
+        this._accounts = response;
+      });
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-	async getAccountsStats() {
-		try {
-			const response = await accountApi.getAccountsStats();
+  async getAccountsStats() {
+    try {
+      const response = await accountApi.getAccountsStats();
 
-			runInAction(() => {
-				this._accountsSummaryStats = response;
-			});
+      runInAction(() => {
+        this._accountsStats = response;
+      });
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-	async createAccount(body: AccountBody) {
-		try {
-			const response = await accountApi.createAccount(body);
+  async createAccount(body: AccountBody) {
+    try {
+      const response = await accountApi.createAccount(body);
 
-			if (response) {
-				this.accounts = [...this.accounts, response];
-			}
+      if (response) {
+        this.accounts = [...this.accounts, response];
+      }
 
-			return response;
-		} catch (error) {
-			const axiosError = error as AxiosError<ErrorsResponse>;
+      return response;
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorsResponse>;
 
-			sendValidationErrors(axiosError);
-		}
-	}
+      sendValidationErrors(axiosError);
+    }
+  }
 
-	async updateAccount(body: AccountBody, id: number) {
-		try {
-			const response = await accountApi.updateAccount(body, id);
+  async updateAccount(body: AccountBody, id: number) {
+    try {
+      const response = await accountApi.updateAccount(body, id);
 
-			if (response) {
-				this.accounts = this.accounts.map(account =>
-					account.id === id ? response : account,
-				);
-			}
+      if (response) {
+        this.accounts = this.accounts.map(account =>
+          account.id === id ? response : account,
+        );
+      }
 
-			return response;
-		} catch (error) {
-			const axiosError = error as AxiosError<ErrorsResponse>;
+      return response;
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorsResponse>;
 
-			sendValidationErrors(axiosError);
-		}
-	}
+      sendValidationErrors(axiosError);
+    }
+  }
 
-	async deleteAccount({ id }: Account) {
-		try {
-			const response = await accountApi.deleteAccount(id);
+  async deleteAccount({ id }: Account) {
+    try {
+      const response = await accountApi.deleteAccount(id);
 
-			if (response) {
-				this.accounts = this.accounts.filter(account => account.id !== id);
-			}
+      if (response) {
+        this.accounts = this.accounts.filter(account => account.id !== id);
+      }
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

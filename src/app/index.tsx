@@ -7,21 +7,21 @@ import { Suspense } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Providers } from "./providers";
 
-const {ToastContainer} = createStandaloneToast();
+const { ToastContainer } = createStandaloneToast();
 
 const App = () => {
-    return (
-        <Providers>
-            <ToastContainer/>
-            <BrowserRouter>
-                <Header/>
-                <Suspense fallback={<Spinner/>}>
-                    <Routing/>
-                </Suspense>
-                <Footer/>
-            </BrowserRouter>
-        </Providers>
-    );
+  return (
+    <Providers>
+      <ToastContainer />
+      <BrowserRouter>
+        <Header />
+        <Suspense fallback={<Spinner />}>
+          <Routing />
+        </Suspense>
+        <Footer />
+      </BrowserRouter>
+    </Providers>
+  );
 };
 
 export default App;

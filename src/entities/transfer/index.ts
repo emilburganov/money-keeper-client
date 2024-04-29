@@ -4,9 +4,9 @@ import { TransferProvider } from "./lib/provider";
 import { TransferStore } from "./model/store";
 
 export {
-	TransferStore,
-	TransferProvider,
-	useTransferStore,
-	StoreTransferSchema,
-	UpdateTransferSchema,
+  TransferStore,
+  TransferProvider,
+  useTransferStore,
+  StoreTransferSchema,
+  UpdateTransferSchema,
 };

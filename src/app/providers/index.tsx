@@ -12,24 +12,24 @@ type WithChildren = { children: ReactNode };
 type Provider = ({ children }: WithChildren) => ReactElement;
 
 const compose = (...providers: Provider[]) => {
-	return function Composed({ children }: WithChildren) {
-		return (
-			<>
-				{providers.reduce((child, Element) => {
-					return <Element>{child}</Element>;
-				}, children)}
-			</>
-		);
-	};
+  return function Composed({ children }: WithChildren) {
+    return (
+      <>
+        {providers.reduce((child, Element) => {
+          return <Element>{child}</Element>;
+        }, children)}
+      </>
+    );
+  };
 };
 
 export const Providers = compose(
-	ChakraProvider,
-	AuthProvider,
-	CurrencyProvider,
-	AccountProvider,
-	CategoryProvider,
-	IncomeProvider,
-	ExpenseProvider,
-	TransferProvider,
+  ChakraProvider,
+  AuthProvider,
+  CurrencyProvider,
+  AccountProvider,
+  CategoryProvider,
+  IncomeProvider,
+  ExpenseProvider,
+  TransferProvider,
 );

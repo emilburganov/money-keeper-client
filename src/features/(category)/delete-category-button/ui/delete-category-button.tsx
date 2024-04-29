@@ -6,30 +6,30 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface DeleteCategoryButtonProps {
-	category: Category;
+  category: Category;
 }
 
 export const DeleteCategoryButton = ({
-	category,
+  category,
 }: DeleteCategoryButtonProps) => {
-	const { deleteCategory } = useCategoryStore();
-	const { t } = useTranslation();
-	const [isLoading, setLoading] = useState<boolean>(false);
+  const { deleteCategory } = useCategoryStore();
+  const { t } = useTranslation();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
-	const handleDelete = async () => {
-		setLoading(true);
-		await deleteCategory(category);
-		setLoading(false);
-	};
+  const handleDelete = async () => {
+    setLoading(true);
+    await deleteCategory(category);
+    setLoading(false);
+  };
 
-	return (
-		<Button
-			onClick={handleDelete}
-			colorScheme="red"
-			isLoading={isLoading}
-			loadingText={t("crud.buttons.deleteButtonLoadingText")}
-		>
-			<DeleteIcon />
-		</Button>
-	);
+  return (
+    <Button
+      onClick={handleDelete}
+      colorScheme="red"
+      isLoading={isLoading}
+      loadingText={t("crud.buttons.deleteButtonLoadingText")}
+    >
+      <DeleteIcon />
+    </Button>
+  );
 };

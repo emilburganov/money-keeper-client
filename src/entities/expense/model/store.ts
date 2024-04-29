@@ -7,102 +7,102 @@ import { makeAutoObservable, runInAction } from "mobx";
 type PrivateFields = "_root";
 
 export class ExpenseStore {
-	private _expenses = [] as Expense[];
-	private _expensesStats = {} as ExpensesStats;
+  private _expenses = [] as Expense[];
+  private _expensesStats = {} as ExpensesStats;
 
-	get expenses(): Expense[] {
-		return this._expenses;
-	}
+  get expenses(): Expense[] {
+    return this._expenses;
+  }
 
-	set expenses(expenses: Expense[]) {
-		this._expenses = expenses;
-	}
+  set expenses(expenses: Expense[]) {
+    this._expenses = expenses;
+  }
 
-	get expensesStats(): ExpensesStats {
-		return this._expensesStats;
-	}
+  get expensesStats(): ExpensesStats {
+    return this._expensesStats;
+  }
 
-	constructor() {
-		makeAutoObservable<this, PrivateFields>(
-			this,
-			{ _root: false },
-			{ autoBind: true, deep: false },
-		);
-	}
+  constructor() {
+    makeAutoObservable<this, PrivateFields>(
+      this,
+      { _root: false },
+      { autoBind: true, deep: false },
+    );
+  }
 
-	async getExpenses() {
-		try {
-			const response = await expenseApi.getExpenses();
+  async getExpenses() {
+    try {
+      const response = await expenseApi.getExpenses();
 
-			runInAction(() => {
-				this._expenses = response;
-			});
+      runInAction(() => {
+        this._expenses = response;
+      });
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-	async getExpensesStats() {
-		try {
-			const response = await expenseApi.getExpensesStats();
+  async getExpensesStats() {
+    try {
+      const response = await expenseApi.getExpensesStats();
 
-			runInAction(() => {
-				this._expensesStats = response;
-			});
+      runInAction(() => {
+        this._expensesStats = response;
+      });
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-	async createExpense(body: ExpenseBody) {
-		try {
-			const response = await expenseApi.createExpense(body);
+  async createExpense(body: ExpenseBody) {
+    try {
+      const response = await expenseApi.createExpense(body);
 
-			if (response) {
-				this.expenses = [...this.expenses, response];
-			}
+      if (response) {
+        this.expenses = [...this.expenses, response];
+      }
 
-			return response;
-		} catch (error) {
-			const axiosError = error as AxiosError<ErrorsResponse>;
+      return response;
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorsResponse>;
 
-			sendValidationErrors(axiosError);
-		}
-	}
+      sendValidationErrors(axiosError);
+    }
+  }
 
-	async updateExpense(body: ExpenseBody, id: number) {
-		try {
-			const response = await expenseApi.updateExpense(body, id);
+  async updateExpense(body: ExpenseBody, id: number) {
+    try {
+      const response = await expenseApi.updateExpense(body, id);
 
-			if (response) {
-				this.expenses = this.expenses.map(expense =>
-					expense.id === id ? response : expense,
-				);
-			}
+      if (response) {
+        this.expenses = this.expenses.map(expense =>
+          expense.id === id ? response : expense,
+        );
+      }
 
-			return response;
-		} catch (error) {
-			const axiosError = error as AxiosError<ErrorsResponse>;
+      return response;
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorsResponse>;
 
-			sendValidationErrors(axiosError);
-		}
-	}
+      sendValidationErrors(axiosError);
+    }
+  }
 
-	async deleteExpense({ id }: Expense) {
-		try {
-			const response = await expenseApi.deleteExpense(id);
+  async deleteExpense({ id }: Expense) {
+    try {
+      const response = await expenseApi.deleteExpense(id);
 
-			if (response) {
-				this.expenses = this.expenses.filter(expense => expense.id !== id);
-			}
+      if (response) {
+        this.expenses = this.expenses.filter(expense => expense.id !== id);
+      }
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

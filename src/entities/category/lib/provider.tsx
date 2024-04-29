@@ -4,15 +4,15 @@ import { CategoryStore } from "../model/store";
 import { CategoryStoreContext } from "./context";
 
 interface CategoryProviderProps {
-	children: ReactNode;
+  children: ReactNode;
 }
 
 export const CategoryProvider = ({ children }: CategoryProviderProps) => {
-	const store = new CategoryStore();
+  const store = new CategoryStore();
 
-	return (
-		<CategoryStoreContext.Provider value={store}>
-			{children}
-		</CategoryStoreContext.Provider>
-	);
+  return (
+    <CategoryStoreContext.Provider value={store}>
+      {children}
+    </CategoryStoreContext.Provider>
+  );
 };

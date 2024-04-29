@@ -4,9 +4,9 @@ import { IncomeProvider } from "./lib/provider";
 import { IncomeStore } from "./model/store";
 
 export {
-	IncomeStore,
-	IncomeProvider,
-	useIncomeStore,
-	StoreIncomeSchema,
-	UpdateIncomeSchema,
+  IncomeStore,
+  IncomeProvider,
+  useIncomeStore,
+  StoreIncomeSchema,
+  UpdateIncomeSchema,
 };

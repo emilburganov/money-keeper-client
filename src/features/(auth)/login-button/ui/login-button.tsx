@@ -7,31 +7,31 @@ import { UseFormHandleSubmit } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 interface LoginButtonProps {
-	handleSubmit: UseFormHandleSubmit<LoginCredentials>;
+  handleSubmit: UseFormHandleSubmit<LoginCredentials>;
 }
 
 export const LoginButton = observer(({ handleSubmit }: LoginButtonProps) => {
-	const { t } = useTranslation();
-	const { login } = useAuthStore();
-	const [isLoading, setLoading] = useState<boolean>(false);
+  const { t } = useTranslation();
+  const { login } = useAuthStore();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
-	const handleLogin = async (event: MouseEvent<HTMLButtonElement>) => {
-		event.preventDefault();
-		setLoading(true);
-		await handleSubmit(login)();
-		setLoading(false);
-	};
+  const handleLogin = async (event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    await handleSubmit(login)();
+    setLoading(false);
+  };
 
-	return (
-		<Button
-			fontSize="md"
-			w="100%"
-			onClick={handleLogin}
-			type="submit"
-			size="lg"
-			isLoading={isLoading}
-		>
-			{t("pages.login.form.button")}
-		</Button>
-	);
+  return (
+    <Button
+      fontSize="md"
+      w="100%"
+      onClick={handleLogin}
+      type="submit"
+      size="lg"
+      isLoading={isLoading}
+    >
+      {t("pages.login.form.button")}
+    </Button>
+  );
 });

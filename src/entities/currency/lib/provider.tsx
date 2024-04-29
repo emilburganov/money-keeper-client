@@ -4,15 +4,15 @@ import { CurrencyStore } from "../model/store";
 import { CurrencyStoreContext } from "./context";
 
 interface CurrencyProviderProps {
-	children: ReactNode;
+  children: ReactNode;
 }
 
 export const CurrencyProvider = ({ children }: CurrencyProviderProps) => {
-	const store = new CurrencyStore();
+  const store = new CurrencyStore();
 
-	return (
-		<CurrencyStoreContext.Provider value={store}>
-			{children}
-		</CurrencyStoreContext.Provider>
-	);
+  return (
+    <CurrencyStoreContext.Provider value={store}>
+      {children}
+    </CurrencyStoreContext.Provider>
+  );
 };

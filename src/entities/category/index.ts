@@ -4,9 +4,9 @@ import { CategoryProvider } from "./lib/provider";
 import { CategoryStore } from "./model/store";
 
 export {
-	CategoryStore,
-	CategoryProvider,
-	useCategoryStore,
-	StoreCategorySchema,
-	UpdateCategorySchema,
+  CategoryStore,
+  CategoryProvider,
+  useCategoryStore,
+  StoreCategorySchema,
+  UpdateCategorySchema,
 };

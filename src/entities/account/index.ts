@@ -4,9 +4,9 @@ import { AccountProvider } from "./lib/provider";
 import { AccountStore } from "./model/store";
 
 export {
-	AccountStore,
-	AccountProvider,
-	useAccountStore,
-	StoreAccountSchema,
-	UpdateAccountSchema,
+  AccountStore,
+  AccountProvider,
+  useAccountStore,
+  StoreAccountSchema,
+  UpdateAccountSchema,
 };

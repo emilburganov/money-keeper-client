@@ -10,17 +10,17 @@ const { toast } = createStandaloneToast();
  * @param description
  */
 export const sendSuccessNotification = (
-	title: string,
-	description?: string,
+  title: string,
+  description?: string,
 ) => {
-	toast({
-		title: title,
-		description: description ?? title,
-		status: "success",
-		duration: 5000,
-		isClosable: true,
-		position: "bottom-left",
-	});
+  toast({
+    title: title,
+    description: description ?? title,
+    status: "success",
+    duration: 5000,
+    isClosable: true,
+    position: "bottom-left",
+  });
 };
 
 /**
@@ -29,14 +29,14 @@ export const sendSuccessNotification = (
  * @param description
  */
 export const sendErrorNotification = (title: string, description?: string) => {
-	toast({
-		title: title,
-		description: description ?? title,
-		status: "error",
-		duration: 5000,
-		isClosable: true,
-		position: "bottom-left",
-	});
+  toast({
+    title: title,
+    description: description ?? title,
+    status: "error",
+    duration: 5000,
+    isClosable: true,
+    position: "bottom-left",
+  });
 };
 
 /**
@@ -44,20 +44,20 @@ export const sendErrorNotification = (title: string, description?: string) => {
  * @param axiosError
  */
 export const sendValidationErrors = (
-	axiosError: AxiosError<ErrorsResponse>,
+  axiosError: AxiosError<ErrorsResponse>,
 ) => {
-	const message: string = String(axiosError?.response?.data?.message);
-	const errors: string[] | undefined = axiosError.response?.data?.errors;
+  const message: string = String(axiosError?.response?.data?.message);
+  const errors: string[] | undefined = axiosError.response?.data?.errors;
 
-	if (errors) {
-		Object.values(errors).forEach(error => {
-			if (Array.isArray(error)) {
-				sendErrorNotification(message, error[0]);
-			} else {
-				sendErrorNotification(message, error);
-			}
-		});
-	} else {
-		sendErrorNotification(message);
-	}
+  if (errors) {
+    Object.values(errors).forEach(error => {
+      if (Array.isArray(error)) {
+        sendErrorNotification(message, error[0]);
+      } else {
+        sendErrorNotification(message, error);
+      }
+    });
+  } else {
+    sendErrorNotification(message);
+  }
 };

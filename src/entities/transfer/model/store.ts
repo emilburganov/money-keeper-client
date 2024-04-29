@@ -7,102 +7,102 @@ import { makeAutoObservable, runInAction } from "mobx";
 type PrivateFields = "_root";
 
 export class TransferStore {
-	private _transfers = [] as Transfer[];
-	private _transfersStats = {} as TransfersStats;
+  private _transfers = [] as Transfer[];
+  private _transfersStats = {} as TransfersStats;
 
-	get transfers(): Transfer[] {
-		return this._transfers;
-	}
+  get transfers(): Transfer[] {
+    return this._transfers;
+  }
 
-	set transfers(incomes: Transfer[]) {
-		this._transfers = incomes;
-	}
+  set transfers(incomes: Transfer[]) {
+    this._transfers = incomes;
+  }
 
-	get transfersStats(): TransfersStats {
-		return this._transfersStats;
-	}
+  get transfersStats(): TransfersStats {
+    return this._transfersStats;
+  }
 
-	constructor() {
-		makeAutoObservable<this, PrivateFields>(
-			this,
-			{ _root: false },
-			{ autoBind: true, deep: false },
-		);
-	}
+  constructor() {
+    makeAutoObservable<this, PrivateFields>(
+      this,
+      { _root: false },
+      { autoBind: true, deep: false },
+    );
+  }
 
-	async getTransfers() {
-		try {
-			const response = await transferApi.getTransfers();
+  async getTransfers() {
+    try {
+      const response = await transferApi.getTransfers();
 
-			runInAction(() => {
-				this._transfers = response;
-			});
+      runInAction(() => {
+        this._transfers = response;
+      });
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-	async getTransfersStats() {
-		try {
-			const response = await transferApi.getTransfersStats();
+  async getTransfersStats() {
+    try {
+      const response = await transferApi.getTransfersStats();
 
-			runInAction(() => {
-				this._transfersStats = response;
-			});
+      runInAction(() => {
+        this._transfersStats = response;
+      });
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
-	async createTransfer(body: TransferBody) {
-		try {
-			const response = await transferApi.createTransfer(body);
+  async createTransfer(body: TransferBody) {
+    try {
+      const response = await transferApi.createTransfer(body);
 
-			if (response) {
-				this.transfers = [...this.transfers, response];
-			}
+      if (response) {
+        this.transfers = [...this.transfers, response];
+      }
 
-			return response;
-		} catch (error) {
-			const axiosError = error as AxiosError<ErrorsResponse>;
+      return response;
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorsResponse>;
 
-			sendValidationErrors(axiosError);
-		}
-	}
+      sendValidationErrors(axiosError);
+    }
+  }
 
-	async updateTransfer(body: TransferBody, id: number) {
-		try {
-			const response = await transferApi.updateTransfer(body, id);
+  async updateTransfer(body: TransferBody, id: number) {
+    try {
+      const response = await transferApi.updateTransfer(body, id);
 
-			if (response) {
-				this.transfers = this.transfers.map(transfer =>
-					transfer.id === id ? response : transfer,
-				);
-			}
+      if (response) {
+        this.transfers = this.transfers.map(transfer =>
+          transfer.id === id ? response : transfer,
+        );
+      }
 
-			return response;
-		} catch (error) {
-			const axiosError = error as AxiosError<ErrorsResponse>;
+      return response;
+    } catch (error) {
+      const axiosError = error as AxiosError<ErrorsResponse>;
 
-			sendValidationErrors(axiosError);
-		}
-	}
+      sendValidationErrors(axiosError);
+    }
+  }
 
-	async deleteTransfer({ id }: Transfer) {
-		try {
-			const response = await transferApi.deleteTransfer(id);
+  async deleteTransfer({ id }: Transfer) {
+    try {
+      const response = await transferApi.deleteTransfer(id);
 
-			if (response) {
-				this.transfers = this.transfers.filter(transfer => transfer.id !== id);
-			}
+      if (response) {
+        this.transfers = this.transfers.filter(transfer => transfer.id !== id);
+      }
 
-			return response;
-		} catch (error) {
-			console.error(error);
-		}
-	}
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 }

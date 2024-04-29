@@ -7,33 +7,33 @@ import { UseFormHandleSubmit } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 interface RegistrationButtonProps {
-	handleSubmit: UseFormHandleSubmit<RegistrationCredentials>;
+  handleSubmit: UseFormHandleSubmit<RegistrationCredentials>;
 }
 
 export const RegistrationButton = observer(
-	({ handleSubmit }: RegistrationButtonProps) => {
-		const { t } = useTranslation();
-		const { registration } = useAuthStore();
-		const [isLoading, setLoading] = useState<boolean>(false);
+  ({ handleSubmit }: RegistrationButtonProps) => {
+    const { t } = useTranslation();
+    const { registration } = useAuthStore();
+    const [isLoading, setLoading] = useState<boolean>(false);
 
-		const handleRegistration = async (event: MouseEvent<HTMLButtonElement>) => {
-			event.preventDefault();
-			setLoading(true);
-			await handleSubmit(registration)();
-			setLoading(false);
-		};
+    const handleRegistration = async (event: MouseEvent<HTMLButtonElement>) => {
+      event.preventDefault();
+      setLoading(true);
+      await handleSubmit(registration)();
+      setLoading(false);
+    };
 
-		return (
-			<Button
-				fontSize="md"
-				w="100%"
-				onClick={handleRegistration}
-				type="submit"
-				size="lg"
-				isLoading={isLoading}
-			>
-				{t("pages.registration.form.button")}
-			</Button>
-		);
-	},
+    return (
+      <Button
+        fontSize="md"
+        w="100%"
+        onClick={handleRegistration}
+        type="submit"
+        size="lg"
+        isLoading={isLoading}
+      >
+        {t("pages.registration.form.button")}
+      </Button>
+    );
+  },
 );

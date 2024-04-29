@@ -1,8 +1,8 @@
 export interface MessageResponse {
-	message: string;
+  message: string;
 }
 
 export interface ErrorsResponse {
-	errors: string[];
-	message: string;
+  errors: string[];
+  message: string;
 }

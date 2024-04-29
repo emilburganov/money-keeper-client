@@ -6,28 +6,28 @@ import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface DeleteExpenseButtonProps {
-	expense: Expense;
+  expense: Expense;
 }
 
 export const DeleteExpenseButton = ({ expense }: DeleteExpenseButtonProps) => {
-	const { deleteExpense } = useExpenseStore();
-	const { t } = useTranslation();
-	const [isLoading, setLoading] = useState<boolean>(false);
+  const { deleteExpense } = useExpenseStore();
+  const { t } = useTranslation();
+  const [isLoading, setLoading] = useState<boolean>(false);
 
-	const handleDelete = async () => {
-		setLoading(true);
-		await deleteExpense(expense);
-		setLoading(false);
-	};
+  const handleDelete = async () => {
+    setLoading(true);
+    await deleteExpense(expense);
+    setLoading(false);
+  };
 
-	return (
-		<Button
-			onClick={handleDelete}
-			colorScheme="red"
-			isLoading={isLoading}
-			loadingText={t("crud.buttons.deleteButtonLoadingText")}
-		>
-			<DeleteIcon />
-		</Button>
-	);
+  return (
+    <Button
+      onClick={handleDelete}
+      colorScheme="red"
+      isLoading={isLoading}
+      loadingText={t("crud.buttons.deleteButtonLoadingText")}
+    >
+      <DeleteIcon />
+    </Button>
+  );
 };

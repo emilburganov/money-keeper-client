@@ -15,34 +15,34 @@ const TransfersPage = lazy(() => import("./transfers"));
 const ProfilePage = lazy(() => import("./profile"));
 
 export const Routing = observer(() => {
-	const { isAuth } = useAuthStore();
+  const { isAuth } = useAuthStore();
 
-	return (
-		<Routes>
-			{!isAuth ? (
-				<>
-					<Route path={ROUTE_CONSTANTS.HOME} element={<HomePage />} />
-					<Route path={ROUTE_CONSTANTS.LOGIN} element={<LoginPage />} />
-					<Route
-						path={ROUTE_CONSTANTS.REGISTRATION}
-						element={<RegistrationPage />}
-					/>
-					<Route path="*" element={<HomePage />} />
-				</>
-			) : (
-				<>
-					<Route
-						path={ROUTE_CONSTANTS.CATEGORIES}
-						element={<CategoriesPage />}
-					/>
-					<Route path={ROUTE_CONSTANTS.INCOMES} element={<IncomesPage />} />
-					<Route path={ROUTE_CONSTANTS.EXPENSES} element={<ExpensesPage />} />
-					<Route path={ROUTE_CONSTANTS.ACCOUNTS} element={<AccountsPage />} />
-					<Route path={ROUTE_CONSTANTS.TRANSFERS} element={<TransfersPage />} />
-					<Route path={ROUTE_CONSTANTS.PROFILE} element={<ProfilePage />} />
-					<Route path="*" element={<AccountsPage />} />
-				</>
-			)}
-		</Routes>
-	);
+  return (
+    <Routes>
+      {!isAuth ? (
+        <>
+          <Route path={ROUTE_CONSTANTS.HOME} element={<HomePage />} />
+          <Route path={ROUTE_CONSTANTS.LOGIN} element={<LoginPage />} />
+          <Route
+            path={ROUTE_CONSTANTS.REGISTRATION}
+            element={<RegistrationPage />}
+          />
+          <Route path="*" element={<HomePage />} />
+        </>
+      ) : (
+        <>
+          <Route
+            path={ROUTE_CONSTANTS.CATEGORIES}
+            element={<CategoriesPage />}
+          />
+          <Route path={ROUTE_CONSTANTS.INCOMES} element={<IncomesPage />} />
+          <Route path={ROUTE_CONSTANTS.EXPENSES} element={<ExpensesPage />} />
+          <Route path={ROUTE_CONSTANTS.ACCOUNTS} element={<AccountsPage />} />
+          <Route path={ROUTE_CONSTANTS.TRANSFERS} element={<TransfersPage />} />
+          <Route path={ROUTE_CONSTANTS.PROFILE} element={<ProfilePage />} />
+          <Route path="*" element={<AccountsPage />} />
+        </>
+      )}
+    </Routes>
+  );
 });
