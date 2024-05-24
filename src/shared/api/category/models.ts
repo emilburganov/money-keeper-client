@@ -13,3 +13,13 @@ export interface CategoryBody {
   title: string;
   type: string;
 }
+
+export interface CategoriesStatsBody {
+  date_from: string;
+  date_to: string;
+}
+
+export interface CategoriesStats {
+  labels: string[];
+  values: number[];
+}

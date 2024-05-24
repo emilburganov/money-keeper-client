@@ -11,18 +11,15 @@ import {
   Tabs,
   useColorMode,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import {CategoriesStats} from "@/features/(category)/categories-stats";
 
 export const Content = () => {
   const { t } = useTranslation();
   const { colorMode } = useColorMode();
 
-  useEffect(() => {
-    console.log("render");
-  }, []);
-
   const tabs = [
+    t("stats.categories"),
     t("stats.incomes"),
     t("stats.expenses"),
     t("stats.transfers"),
@@ -65,6 +62,9 @@ export const Content = () => {
         </TabList>
 
         <TabPanels>
+          <TabPanel>
+            <CategoriesStats />
+          </TabPanel>
           <TabPanel>
             <IncomesStats />
           </TabPanel>
