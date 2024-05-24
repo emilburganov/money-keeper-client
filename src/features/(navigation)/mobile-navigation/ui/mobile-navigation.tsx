@@ -1,8 +1,8 @@
-import { useAuthStore } from "@/entities/auth";
-import { Box, Stack, Text, useColorMode } from "@chakra-ui/react";
-import { observer } from "mobx-react-lite";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import {useAuthStore} from "@/entities/auth";
+import {Box, Stack, Text, useColorMode} from "@chakra-ui/react";
+import {observer} from "mobx-react-lite";
+import {useTranslation} from "react-i18next";
+import {Link} from "react-router-dom";
 
 interface MobileNavigationProps {
   onToggle: () => void;
@@ -37,13 +37,6 @@ export const MobileNavigation = observer(
       },
     ];
 
-    const PUBLIC_NAVIGATION_ITEMS = [
-      {
-        label: t("header.navigation.home"),
-        to: "/",
-      },
-    ];
-
     return (
       <Stack
         fontSize="sm"
@@ -52,28 +45,6 @@ export const MobileNavigation = observer(
         display={{ xl: "none" }}
       >
         <Stack spacing={0} onClick={onToggle}>
-          {!isAuth &&
-            PUBLIC_NAVIGATION_ITEMS.map(({ label, to }) => (
-              <Box
-                key={label}
-                as={Link}
-                py={2}
-                to={to}
-                justifyContent="space-between"
-                alignItems="center"
-                _hover={{
-                  textDecoration: "none",
-                }}
-              >
-                <Text
-                  fontWeight={600}
-                  color={colorMode === "light" ? "gray.600" : "gray.200"}
-                >
-                  {label}
-                </Text>
-              </Box>
-            ))}
-
           {!isAuth && (
             <Stack spacing={0}>
               <Box

@@ -38,40 +38,8 @@ export const DesktopNavigation = observer(() => {
     },
   ];
 
-  const PUBLIC_NAV_ITEMS = [
-    {
-      label: t("header.navigation.home"),
-      to: "/",
-    },
-  ];
-
   return (
     <Stack direction="row" spacing={2}>
-      {!isAuth &&
-        PUBLIC_NAV_ITEMS.map(({ label, to }) => (
-          <Box key={label}>
-            <Popover trigger="hover" placement="bottom-start">
-              <PopoverTrigger>
-                <Box
-                  key={label}
-                  as={Link}
-                  to={to}
-                  p={2}
-                  fontSize="sm"
-                  fontWeight={500}
-                  color={colorMode === "light" ? "gray.600" : "gray.200"}
-                  _hover={{
-                    textDecoration: "none",
-                    color: colorMode === "light" ? "gray.800" : "gray.50",
-                  }}
-                >
-                  {label}
-                </Box>
-              </PopoverTrigger>
-            </Popover>
-          </Box>
-        ))}
-
       {isAuth &&
         PRIVATE_NAV_ITEMS.map(({ label, to }) => (
           <Box key={label}>
