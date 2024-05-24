@@ -64,6 +64,15 @@
       }
     },
     "categories": {
+      "stats": {
+        "form": {
+          "fields": {
+            "date_from": "Date from",
+            "date_to": "Date to"
+          },
+          "button": "Get statistics"
+        }
+      },
       "createModal": {
         "form": {
           "title": "Create category",
@@ -227,12 +236,14 @@
     }
   },
   "stats": {
+    "categories": "Categories",
     "incomes": "Incomes",
     "expenses": "Expenses",
     "transfers": "Transfers",
     "accounts": "Accounts"
   },
   "validation": {
+    "date": "The {{field}} field must be a valid date.",
     "required": "The {{field}} field is required.",
     "max": "The {{field}} field must not be greater than {{max}} characters.",
     "min": "The {{field}} field must be at least {{min}} characters.",

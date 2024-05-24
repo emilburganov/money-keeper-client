@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { CategoryStoreContext } from "./context.ts";
+import { CategoryStoreContext } from "./context";
 
 export const useCategoryStore = () => {
   const store = useContext(CategoryStoreContext);
