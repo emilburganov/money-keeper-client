@@ -8,7 +8,7 @@ import {
   Box,
   Flex,
   FormControl,
-  FormErrorMessage,
+  FormErrorMessage, FormHelperText,
   FormLabel,
   Input,
   Modal,
@@ -27,9 +27,10 @@ import {
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import {Currency} from "@/shared/api/currency";
 
 interface CreateExpenseModalProps {
   isOpen: boolean;
@@ -42,6 +43,7 @@ export const CreateExpenseModal = observer(
     const { accounts, getAccounts } = useAccountStore();
     const { t } = useTranslation();
     const { colorMode } = useColorMode();
+    const [accountCurrency, setAccountCurrency] = useState<Currency | null>(null);
 
     const {
       register,
@@ -58,6 +60,18 @@ export const CreateExpenseModal = observer(
         await getAccounts();
       })();
     }, []);
+
+    useEffect(() => {
+      updateAccountCurrency(1);
+    }, [accounts]);
+
+    const updateAccountCurrency = (id: number) => {
+      const account = accounts.find((account) => account.id === id);
+
+      if (account) {
+        setAccountCurrency(account.currency)
+      }
+    }
 
     return (
       <Modal isOpen={isOpen} onClose={onClose} isCentered size="sm">
@@ -154,6 +168,7 @@ export const CreateExpenseModal = observer(
                     focusBorderColor={
                       colorMode === "light" ? "green.500" : "green.200"
                     }
+                    onChange={(event) => updateAccountCurrency(Number(event.target.value))}
                   >
                     {accounts.map(({ id, title }) => (
                       <option key={id} value={id}>
@@ -161,6 +176,9 @@ export const CreateExpenseModal = observer(
                       </option>
                     ))}
                   </Select>
+                  {accountCurrency && <FormHelperText>
+                    {t("pages.expenses.createModal.form.accountCurrency")} - {accountCurrency.title} ({accountCurrency.code})
+                  </FormHelperText>}
                   {errors.account_id && (
                     <FormErrorMessage>
                       {errors.account_id?.message}

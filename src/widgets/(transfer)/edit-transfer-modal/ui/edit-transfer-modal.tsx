@@ -6,7 +6,7 @@ import {
   Box,
   Flex,
   FormControl,
-  FormErrorMessage,
+  FormErrorMessage, FormHelperText,
   FormLabel,
   Input,
   Modal,
@@ -25,9 +25,10 @@ import {
 } from "@chakra-ui/react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { observer } from "mobx-react-lite";
-import { useEffect } from "react";
+import {useEffect, useState} from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import {Currency} from "@/shared/api/currency";
 
 interface EditTransferModalProps {
   transfer: Transfer;
@@ -40,6 +41,8 @@ export const EditTransferModal = observer(
     const { accounts, getAccounts } = useAccountStore();
     const { t } = useTranslation();
     const { colorMode } = useColorMode();
+    const [accountFromCurrency, setAccountFromCurrency] = useState<Currency | null>(transfer?.account_from?.currency);
+    const [accountToCurrency, setAccountToCurrency] = useState<Currency | null>(transfer?.account_to?.currency);
 
     const {
       register,
@@ -61,6 +64,22 @@ export const EditTransferModal = observer(
         await getAccounts();
       })();
     }, []);
+
+    const updateAccountFromCurrency = (id: number) => {
+      const account = accounts.find((account) => account.id === id);
+
+      if (account) {
+        setAccountFromCurrency(account.currency)
+      }
+    }
+
+    const updateAccountToCurrency = (id: number) => {
+      const account = accounts.find((account) => account.id === id);
+
+      if (account) {
+        setAccountToCurrency(account.currency)
+      }
+    }
 
     return (
       <Modal isOpen={isOpen} onClose={onClose} isCentered size="sm">
@@ -130,6 +149,7 @@ export const EditTransferModal = observer(
                     focusBorderColor={
                       colorMode === "light" ? "green.500" : "green.200"
                     }
+                    onChange={(event) => updateAccountFromCurrency(Number(event.target.value))}
                   >
                     {accounts.map(({ id, title }) => (
                       <option key={id} value={id}>
@@ -137,6 +157,9 @@ export const EditTransferModal = observer(
                       </option>
                     ))}
                   </Select>
+                  {accountFromCurrency && <FormHelperText>
+                    {t("pages.transfers.editModal.form.accountFromCurrency")} - {accountFromCurrency.title} ({accountFromCurrency.code})
+                  </FormHelperText>}
                   {errors.account_from_id && (
                     <FormErrorMessage>
                       {errors.account_from_id?.message}
@@ -152,6 +175,7 @@ export const EditTransferModal = observer(
                     focusBorderColor={
                       colorMode === "light" ? "green.500" : "green.200"
                     }
+                    onChange={(event) => updateAccountToCurrency(Number(event.target.value))}
                   >
                     {accounts.map(({ id, title }) => (
                       <option key={id} value={id}>
@@ -159,6 +183,9 @@ export const EditTransferModal = observer(
                       </option>
                     ))}
                   </Select>
+                  {accountToCurrency && <FormHelperText>
+                    {t("pages.transfers.editModal.form.accountToCurrency")} - {accountToCurrency.title} ({accountToCurrency.code})
+                  </FormHelperText>}
                   {errors.account_to_id && (
                     <FormErrorMessage>
                       {errors.account_to_id?.message}
