@@ -67,8 +67,8 @@
       "stats": {
         "form": {
           "fields": {
-            "date_from": "Date from",
-            "date_to": "Date to"
+            "start_date": "Start date",
+            "end_date": "End date"
           },
           "button": "Get statistics"
         }
@@ -236,7 +236,8 @@
     }
   },
   "stats": {
-    "categories": "Categories",
+    "income-categories": "Incomes by category",
+    "expense-categories": "Expenses by category",
     "incomes": "Incomes",
     "expenses": "Expenses",
     "transfers": "Transfers",

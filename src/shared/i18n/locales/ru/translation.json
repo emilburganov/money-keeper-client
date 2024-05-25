@@ -67,8 +67,8 @@
       "stats": {
         "form": {
           "fields": {
-            "date_from": "Дата (от)",
-            "date_to": "Дата (до)"
+            "start_date": "Дата начала",
+            "end_date": "Дата окончания"
           },
           "button": "Получить статистику"
         }
@@ -236,7 +236,8 @@
     }
   },
   "stats": {
-    "categories": "Категории",
+    "income-categories": "Доходы по категориям",
+    "expense-categories": "Расходы по категориям",
     "incomes": "Доходы",
     "expenses": "Расходы",
     "transfers": "Переводы",
