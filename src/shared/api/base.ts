@@ -46,8 +46,6 @@ class ApiInstance {
             localStorage.removeItem("token");
           }
         }
-
-        throw error;
       },
     );
 
