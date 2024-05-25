@@ -45,7 +45,7 @@ export const LoginForm = () => {
     >
       <Stack spacing={4}>
         <FormControl isInvalid={!!errors.email?.message}>
-          <FormLabel>{t("pages.login.form.fields.email")}</FormLabel>
+          <FormLabel>{t("pages.login.form.fields.email")}:</FormLabel>
           <Input
             {...register("email")}
             type="text"
@@ -57,7 +57,7 @@ export const LoginForm = () => {
           )}
         </FormControl>
         <FormControl isInvalid={!!errors.password?.message}>
-          <FormLabel>{t("pages.login.form.fields.password")}</FormLabel>
+          <FormLabel>{t("pages.login.form.fields.password")}:</FormLabel>
           <InputGroup>
             <Input
               {...register("password")}
