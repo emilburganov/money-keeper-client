@@ -15,8 +15,8 @@ export interface CategoryBody {
 }
 
 export interface CategoriesStatsBody {
-  date_from: string;
-  date_to: string;
+  start_date: string;
+  end_date: string;
 }
 
 export interface CategoriesStats {

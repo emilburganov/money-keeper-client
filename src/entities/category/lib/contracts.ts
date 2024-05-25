@@ -50,7 +50,7 @@ export const UpdateCategorySchema = Yup.object().shape({
 });
 
 export const GetCategoriesStatsSchema = Yup.object().shape({
-    date_from: Yup.string()
+    start_date: Yup.string()
         .transform(function (value, originalValue) {
             if (this.isType(value)) {
                 return value;
@@ -61,15 +61,15 @@ export const GetCategoriesStatsSchema = Yup.object().shape({
         })
         .typeError(() =>
             t("validation.date", {
-                field: t("pages.categories.stats.form.fields.date_from"),
+                field: t("pages.categories.stats.form.fields.start_date"),
             }),
         )
         .required(() =>
             t("validation.required", {
-                field: t("pages.categories.stats.form.fields.date_from"),
+                field: t("pages.categories.stats.form.fields.end_date"),
             }),
         ),
-    date_to: Yup.string()
+    end_date: Yup.string()
         .transform(function (value, originalValue) {
             if (this.isType(value)) {
                 return value;
@@ -79,12 +79,12 @@ export const GetCategoriesStatsSchema = Yup.object().shape({
         })
         .typeError(() =>
             t("validation.date", {
-                field: t("pages.categories.stats.form.fields.date_to"),
+                field: t("pages.categories.stats.form.fields.end_date"),
             }),
         )
         .required(() =>
             t("validation.required", {
-                field: t("pages.categories.stats.form.fields.date_to"),
+                field: t("pages.categories.stats.form.fields.end_date"),
             }),
         ),
 });
