@@ -30,7 +30,6 @@ export const Content = () => {
 
     return (
         <Card
-            minW={"fit-content"}
             bg={colorMode === "light" ? "gray.50" : "gray.700"}
             flex={3}
             display="flex"
@@ -40,7 +39,7 @@ export const Content = () => {
         >
             <Tabs>
                 <TabList
-                    overflowX={{base: "auto"}}
+                    overflowX="auto"
                     whiteSpace="nowrap"
                     px={4}
                     pb="2px"
