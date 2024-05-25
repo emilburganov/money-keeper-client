@@ -110,7 +110,8 @@
             "amount": "Amount",
             "category": "Category",
             "account": "Account"
-          }
+          },
+          "accountCurrency": "Account currency"
         }
       },
       "editModal": {
@@ -124,7 +125,8 @@
             "amount": "Amount",
             "category": "Category",
             "account": "Account"
-          }
+          },
+          "accountCurrency": "Account currency"
         }
       }
     },
@@ -140,7 +142,8 @@
             "amount": "Amount",
             "category": "Category",
             "account": "Account"
-          }
+          },
+          "accountCurrency": "Account currency"
         }
       },
       "editModal": {
@@ -154,7 +157,8 @@
             "amount": "Amount",
             "category": "Category",
             "account": "Account"
-          }
+          },
+          "accountCurrency": "Account currency"
         }
       }
     },
@@ -196,7 +200,9 @@
             "amount": "Amount",
             "account_from": "Account from",
             "account_to": "Account to"
-          }
+          },
+          "accountFromCurrency": "Account from currency",
+          "accountToCurrency": "Account to currency"
         }
       },
       "editModal": {
@@ -210,7 +216,9 @@
             "amount": "Amount",
             "account_from": "Account from",
             "account_to": "Account to"
-          }
+          },
+          "accountFromCurrency": "Account from currency",
+          "accountToCurrency": "Account to currency"
         }
       }
     },
