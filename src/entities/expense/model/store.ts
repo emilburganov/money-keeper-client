@@ -1,8 +1,9 @@
 import { ErrorsResponse, expenseApi } from "@/shared/api";
 import { Expense, ExpenseBody, ExpensesStats } from "@/shared/api/expense";
-import { sendValidationErrors } from "@/shared/lib/helpers";
+import {sendSuccessNotification, sendValidationErrors} from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import {t} from "i18next";
 
 type PrivateFields = "_root";
 
@@ -64,6 +65,10 @@ export class ExpenseStore {
 
       if (response) {
         this.expenses = [...this.expenses, response];
+
+        sendSuccessNotification(
+            t("notifications.expense.created.title"),
+        );
       }
 
       return response;
@@ -82,6 +87,10 @@ export class ExpenseStore {
         this.expenses = this.expenses.map(expense =>
           expense.id === id ? response : expense,
         );
+
+        sendSuccessNotification(
+            t("notifications.expense.updated.title"),
+        )
       }
 
       return response;
@@ -98,6 +107,10 @@ export class ExpenseStore {
 
       if (response) {
         this.expenses = this.expenses.filter(expense => expense.id !== id);
+
+        sendSuccessNotification(
+            t("notifications.expense.deleted.title"),
+        )
       }
 
       return response;

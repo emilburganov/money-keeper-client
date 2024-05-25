@@ -244,8 +244,8 @@
     }
   },
   "stats": {
-    "income-categories": "Incomes by category",
-    "expense-categories": "Expenses by category",
+    "incomeCategories": "Incomes by category",
+    "expenseCategories": "Expenses by category",
     "incomes": "Incomes",
     "expenses": "Expenses",
     "transfers": "Transfers",
@@ -273,12 +273,67 @@
     },
     "success": {
       "loginSuccess": {
-        "title": "Successful login.",
-        "description": "You have successful login into your account."
+        "title": "Successfully login.",
+        "description": "You have successfully login into your account."
       },
       "registrationSuccess": {
-        "title": "Successful registered.",
-        "description": "You have successful registered your account."
+        "title": "Successfully registered.",
+        "description": "You have successfully registered your account."
+      }
+    },
+    "account": {
+      "created": {
+        "title": "The account has been successfully created."
+      },
+      "updated": {
+        "title": "Account details have been changed."
+      },
+      "deleted": {
+        "title": "The account was successfully deleted."
+      }
+    },
+    "category": {
+      "created": {
+        "title": "The category has been successfully created."
+      },
+      "updated": {
+        "title": "Category information has been changed."
+      },
+      "deleted": {
+        "title": "The category was successfully deleted."
+      }
+    },
+    "income": {
+      "created": {
+        "title": "The income has been successfully created."
+      },
+      "updated": {
+        "title": "Income data has been changed."
+      },
+      "deleted": {
+        "title": "The income was successfully deleted."
+      }
+    },
+    "expense": {
+      "created": {
+        "title": "The expense has been successfully created."
+      },
+      "updated": {
+        "title": "Expense data has been changed."
+      },
+      "deleted": {
+        "title": "The expense was successfully deleted."
+      }
+    },
+    "transfer": {
+      "created": {
+        "title": "The transfer has been successfully created."
+      },
+      "updated": {
+        "title": "The transfer details have been changed."
+      },
+      "deleted": {
+        "title": "The translation was successfully deleted."
       }
     }
   },
@@ -287,5 +342,13 @@
       "Expenses": "Expenses",
       "Incomes": "Incomes"
     }
+  },
+  "advices": {
+    "createAccountAdvice": "You don't have accounts, without them you won't be able to add your income, expenses and transfers. To create, click on the «Create» button.",
+    "createAccountFirstAdvice": "You don't have accounts, without them you won't be able to add your income, expenses and transfers. To create, follow the «Accounts» link.",
+    "createCategoryAdvice": "You don't have categories, without them you won't be able to add your income and expenses. Separate categories are created for income and expenses. To create, click on the «Create» button.",
+    "createIncomeCategoryFirstAdvice": "You do not have categories with the «Income» type, without them you will not be able to add your income and expenses. To create, follow the «Categories» link.",
+    "createExpenseCategoryFirstAdvice": "You do not have categories with the «Expenses» type; without them you will not be able to add your income and expenses. To create, follow the «Categories» link.",
+    "createTwoAccountsAdvice": "To create a transfer, a minimum of two accounts are required. To create them, follow the «Accounts» link."
   }
 }

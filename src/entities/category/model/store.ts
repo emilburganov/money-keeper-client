@@ -1,8 +1,9 @@
 import {categoryApi, ErrorsResponse} from "@/shared/api";
 import {CategoriesStats, CategoriesStatsBody, Category, CategoryBody} from "@/shared/api/category";
-import {sendValidationErrors} from "@/shared/lib/helpers";
+import {sendSuccessNotification, sendValidationErrors} from "@/shared/lib/helpers";
 import {AxiosError} from "axios";
 import {makeAutoObservable, runInAction} from "mobx";
+import {t} from "i18next";
 
 type PrivateFields = "_root";
 
@@ -83,6 +84,10 @@ export class CategoryStore {
 
             if (response) {
                 this.categories = [...this.categories, response];
+
+                sendSuccessNotification(
+                    t("notifications.category.created.title"),
+                );
             }
 
             return response;
@@ -101,6 +106,10 @@ export class CategoryStore {
                 this.categories = this.categories.map(category =>
                     category.id === id ? response : category,
                 );
+
+                sendSuccessNotification(
+                    t("notifications.category.updated.title"),
+                );
             }
 
             return response;
@@ -118,6 +127,10 @@ export class CategoryStore {
             if (response) {
                 this.categories = this.categories.filter(
                     category => category.id !== id,
+                );
+
+                sendSuccessNotification(
+                    t("notifications.category.deleted.title"),
                 );
             }
 
