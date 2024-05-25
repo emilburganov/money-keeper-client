@@ -46,11 +46,13 @@ class ApiInstance {
             localStorage.removeItem("token");
           }
         }
+
+        throw error;
       },
     );
 
     this.axios.interceptors.request.use(
-      config => {
+      (config) => {
         const token = localStorage.getItem("token");
         const lang = localStorage.getItem("lang");
 
@@ -63,8 +65,7 @@ class ApiInstance {
         }
 
         return config;
-      },
-      error => {
+      }, (error) => {
         return Promise.reject(error);
       },
     );

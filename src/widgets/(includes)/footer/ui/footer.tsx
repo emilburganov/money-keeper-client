@@ -2,7 +2,7 @@ import { SocialNetworkButton } from "@/shared/ui/(button)/social-network-button"
 import { Logo } from "@/shared/ui/(logo)/logo";
 import { Box, Flex, Stack, Text, useColorMode } from "@chakra-ui/react";
 import { useTranslation } from "react-i18next";
-import { FaInstagram, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaTelegram, FaYoutube, FaWhatsapp } from "react-icons/fa";
 
 export const Footer = () => {
   const { t } = useTranslation();
@@ -32,14 +32,14 @@ export const Footer = () => {
           {t("footer.copyright")}
         </Text>
         <Stack direction="row" spacing={6}>
-          <SocialNetworkButton label="Twitter" href="#">
-            <FaTwitter />
+          <SocialNetworkButton label="Telegram" href="#">
+            <FaTelegram />
+          </SocialNetworkButton>
+          <SocialNetworkButton label="WhatsApp" href="#">
+            <FaWhatsapp />
           </SocialNetworkButton>
           <SocialNetworkButton label="YouTube" href="#">
             <FaYoutube />
-          </SocialNetworkButton>
-          <SocialNetworkButton label="Instagram" href="#">
-            <FaInstagram />
           </SocialNetworkButton>
         </Stack>
       </Flex>
