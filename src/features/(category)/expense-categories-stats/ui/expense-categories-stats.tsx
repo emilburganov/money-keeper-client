@@ -2,7 +2,7 @@ import {useAuthStore} from "@/entities/auth";
 import {Flex, FormControl, FormErrorMessage, FormLabel, Input, useColorMode} from "@chakra-ui/react";
 import {ArcElement, Chart as ChartJS, Legend, Tooltip} from "chart.js";
 import {observer} from "mobx-react-lite";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {Pie} from "react-chartjs-2";
 import {useTranslation} from "react-i18next";
 import {GetCategoriesStatsSchema, useCategoryStore} from "@/entities/category";
@@ -17,7 +17,6 @@ export const ExpenseCategoriesStats = observer(() => {
     const {t} = useTranslation();
     const {colorMode} = useColorMode();
     const {expenseCategoriesStats, getExpenseCategoriesStats} = useCategoryStore();
-    const [isLoading, setLoading] = useState<boolean>(false);
     const {user} = useAuthStore();
 
     const {
@@ -34,9 +33,7 @@ export const ExpenseCategoriesStats = observer(() => {
 
     useEffect(() => {
         (async () => {
-            setLoading(true);
             await getExpenseCategoriesStats();
-            setLoading(false);
         })();
     }, [user.currency]);
 
@@ -66,10 +63,6 @@ export const ExpenseCategoriesStats = observer(() => {
         ],
     };
 
-    if (isLoading) {
-        return;
-    }
-
     return (
         <Flex direction="column" gap={8}>
             <Flex h={400} justifyContent="center">
@@ -93,7 +86,7 @@ export const ExpenseCategoriesStats = observer(() => {
                 />
             </Flex>
             <Flex direction="column" gap={4}>
-                <Flex gap={4} alignItems={"flex-end"}>
+                <Flex gap={4} alignItems={"flex-end"} wrap="wrap">
                     <FormControl flexGrow={1} w={"fit-content"} isInvalid={!!errors.start_date?.message}>
                         <FormLabel>
                             {t("pages.categories.stats.form.fields.start_date")}:
@@ -124,7 +117,10 @@ export const ExpenseCategoriesStats = observer(() => {
                             <FormErrorMessage>{errors.end_date?.message}</FormErrorMessage>
                         )}
                     </FormControl>
-                    <Button onClick={() => handleSubmit(getExpenseCategoriesStats)()}>
+                    <Button
+                        onClick={() => handleSubmit(getExpenseCategoriesStats)()}
+                        w={{base: "full", lg: "fit-content"}}
+                    >
                         {t("pages.categories.stats.form.button")}
                     </Button>
                 </Flex>
