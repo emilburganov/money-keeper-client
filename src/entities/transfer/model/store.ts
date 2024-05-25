@@ -1,8 +1,9 @@
 import { ErrorsResponse, transferApi } from "@/shared/api";
 import { Transfer, TransferBody, TransfersStats } from "@/shared/api/transfer";
-import { sendValidationErrors } from "@/shared/lib/helpers";
+import {sendSuccessNotification, sendValidationErrors} from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import {t} from "i18next";
 
 type PrivateFields = "_root";
 
@@ -64,6 +65,10 @@ export class TransferStore {
 
       if (response) {
         this.transfers = [...this.transfers, response];
+
+        sendSuccessNotification(
+            t("notifications.transfer.created.title"),
+        )
       }
 
       return response;
@@ -82,6 +87,10 @@ export class TransferStore {
         this.transfers = this.transfers.map(transfer =>
           transfer.id === id ? response : transfer,
         );
+
+        sendSuccessNotification(
+            t("notifications.transfer.updated.title"),
+        )
       }
 
       return response;
@@ -98,6 +107,10 @@ export class TransferStore {
 
       if (response) {
         this.transfers = this.transfers.filter(transfer => transfer.id !== id);
+
+        sendSuccessNotification(
+            t("notifications.transfer.deleted.title"),
+        )
       }
 
       return response;

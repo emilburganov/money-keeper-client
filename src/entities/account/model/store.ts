@@ -1,8 +1,9 @@
 import { accountApi, ErrorsResponse } from "@/shared/api";
 import { Account, AccountBody, AccountsStats } from "@/shared/api/account";
-import { sendValidationErrors } from "@/shared/lib/helpers";
+import {sendSuccessNotification, sendValidationErrors} from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import {t} from "i18next";
 
 type PrivateFields = "_root";
 
@@ -64,6 +65,10 @@ export class AccountStore {
 
       if (response) {
         this.accounts = [...this.accounts, response];
+
+        sendSuccessNotification(
+            t("notifications.account.created.title"),
+        );
       }
 
       return response;
@@ -82,6 +87,10 @@ export class AccountStore {
         this.accounts = this.accounts.map(account =>
           account.id === id ? response : account,
         );
+
+        sendSuccessNotification(
+            t("notifications.account.updated.title"),
+        );
       }
 
       return response;
@@ -98,6 +107,10 @@ export class AccountStore {
 
       if (response) {
         this.accounts = this.accounts.filter(account => account.id !== id);
+
+        sendSuccessNotification(
+            t("notifications.account.deleted.title"),
+        );
       }
 
       return response;

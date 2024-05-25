@@ -1,8 +1,9 @@
 import { ErrorsResponse, incomeApi } from "@/shared/api";
 import { Income, IncomeBody, IncomesStats } from "@/shared/api/income";
-import { sendValidationErrors } from "@/shared/lib/helpers";
+import {sendSuccessNotification, sendValidationErrors} from "@/shared/lib/helpers";
 import { AxiosError } from "axios";
 import { makeAutoObservable, runInAction } from "mobx";
+import {t} from "i18next";
 
 type PrivateFields = "_root";
 
@@ -64,6 +65,10 @@ export class IncomeStore {
 
       if (response) {
         this.incomes = [...this.incomes, response];
+
+        sendSuccessNotification(
+            t("notifications.income.created.title"),
+        )
       }
 
       return response;
@@ -82,6 +87,10 @@ export class IncomeStore {
         this.incomes = this.incomes.map(income =>
           income.id === id ? response : income,
         );
+
+        sendSuccessNotification(
+            t("notifications.income.updated.title"),
+        )
       }
 
       return response;
@@ -98,6 +107,10 @@ export class IncomeStore {
 
       if (response) {
         this.incomes = this.incomes.filter(income => income.id !== id);
+
+        sendSuccessNotification(
+            t("notifications.income.deleted.title"),
+        )
       }
 
       return response;

@@ -15,7 +15,7 @@ export const sendSuccessNotification = (
 ) => {
   toast({
     title: title,
-    description: description ?? title,
+    description: description,
     status: "success",
     duration: 5000,
     isClosable: true,
@@ -31,7 +31,7 @@ export const sendSuccessNotification = (
 export const sendErrorNotification = (title: string, description?: string) => {
   toast({
     title: title,
-    description: description ?? title,
+    description: description,
     status: "error",
     duration: 5000,
     isClosable: true,

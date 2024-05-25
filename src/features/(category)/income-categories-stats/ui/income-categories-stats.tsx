@@ -41,7 +41,7 @@ export const IncomeCategoriesStats = observer(() => {
         labels: incomeCategoriesStats.labels,
         datasets: [
             {
-                label: t("stats.income-categories"),
+                label: t("stats.incomeCategories"),
                 data: incomeCategoriesStats.values,
                 backgroundColor: [
                     "rgba(255, 99, 132, 0.2)",
