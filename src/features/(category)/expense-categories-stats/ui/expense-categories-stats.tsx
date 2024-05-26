@@ -1,8 +1,8 @@
 import {useAuthStore} from "@/entities/auth";
-import {Flex, FormControl, FormErrorMessage, FormLabel, Input, useColorMode} from "@chakra-ui/react";
+import {Alert, AlertIcon, Flex, FormControl, FormErrorMessage, FormLabel, Input, useColorMode} from "@chakra-ui/react";
 import {ArcElement, Chart as ChartJS, Legend, Tooltip} from "chart.js";
 import {observer} from "mobx-react-lite";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {Pie} from "react-chartjs-2";
 import {useTranslation} from "react-i18next";
 import {GetCategoriesStatsSchema, useCategoryStore} from "@/entities/category";
@@ -18,6 +18,7 @@ export const ExpenseCategoriesStats = observer(() => {
     const {colorMode} = useColorMode();
     const {expenseCategoriesStats, getExpenseCategoriesStats} = useCategoryStore();
     const {user} = useAuthStore();
+    const [advices, setAdvices] = useState<string[] | null>();
 
     const {
         register,
@@ -31,11 +32,39 @@ export const ExpenseCategoriesStats = observer(() => {
         }
     });
 
+    const getMaxExpense = () => {
+        let advices: string[] = [];
+        const maxExpenseValue = Math.max(...expenseCategoriesStats.values);
+
+        expenseCategoriesStats.values.forEach((value, index) => {
+            if (value === maxExpenseValue) {
+                let category = expenseCategoriesStats.labels[index];
+                let amount = `${value} ${user.currency.code}`;
+
+                let advice = t("advices.expenseCategoriesAdvice", {
+                    category,
+                    amount,
+                });
+
+                advices = [...advices, advice]
+            }
+        });
+
+        setAdvices(advices);
+    }
+
+    useEffect(() => {
+        if (expenseCategoriesStats.values) {
+            getMaxExpense();
+        }
+    }, [expenseCategoriesStats.values, t]);
+
     useEffect(() => {
         (async () => {
             await getExpenseCategoriesStats();
         })();
     }, [user.currency]);
+
 
     const data = {
         labels: expenseCategoriesStats.labels,
@@ -65,6 +94,12 @@ export const ExpenseCategoriesStats = observer(() => {
 
     return (
         <Flex direction="column" gap={8}>
+            {advices && advices.map((advice, index) =>
+                <Alert key={index} borderRadius="md" status='info'>
+                    <AlertIcon />
+                    {advice}
+                </Alert>
+            )}
             <Flex h={400} justifyContent="center">
                 <Pie
                     data={data}

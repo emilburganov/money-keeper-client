@@ -349,6 +349,7 @@
     "createCategoryAdvice": "You don't have categories, without them you won't be able to add your income and expenses. Separate categories are created for income and expenses. To create, click on the «Create» button.",
     "createIncomeCategoryFirstAdvice": "You do not have categories with the «Income» type, without them you will not be able to add your income and expenses. To create, follow the «Categories» link.",
     "createExpenseCategoryFirstAdvice": "You do not have categories with the «Expenses» type; without them you will not be able to add your income and expenses. To create, follow the «Categories» link.",
-    "createTwoAccountsAdvice": "To create a transfer, a minimum of two accounts are required. To create them, follow the «Accounts» link."
+    "createTwoAccountsAdvice": "To create a transfer, a minimum of two accounts are required. To create them, follow the «Accounts» link.",
+    "expenseCategoriesAdvice": "During the selected period, you spent {{amount}} by category - «{{category}}». You should review your spending in this category."
   }
 }
