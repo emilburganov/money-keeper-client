@@ -39,7 +39,7 @@ export const ExpenseCategoriesStats = observer(() => {
         expenseCategoriesStats.values.forEach((value, index) => {
             if (value === maxExpenseValue) {
                 let category = expenseCategoriesStats.labels[index];
-                let amount = `${value} ${user.currency.code}`;
+                let amount = `${value} ${user?.currency?.code}`;
 
                 let advice = t("advices.expenseCategoriesAdvice", {
                     category,
