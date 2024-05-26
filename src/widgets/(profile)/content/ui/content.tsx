@@ -20,8 +20,8 @@ export const Content = () => {
     const {colorMode} = useColorMode();
 
     const tabs = [
-        t("stats.incomeCategories"),
         t("stats.expenseCategories"),
+        t("stats.incomeCategories"),
         t("stats.incomes"),
         t("stats.expenses"),
         t("stats.transfers"),
@@ -65,10 +65,10 @@ export const Content = () => {
 
                 <TabPanels>
                     <TabPanel>
-                        <IncomeCategoriesStats />
+                        <ExpenseCategoriesStats />
                     </TabPanel>
                     <TabPanel>
-                        <ExpenseCategoriesStats />
+                        <IncomeCategoriesStats />
                     </TabPanel>
                     <TabPanel>
                         <IncomesStats />
