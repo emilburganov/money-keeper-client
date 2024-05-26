@@ -151,7 +151,11 @@ export const Sidebar = observer(() => {
                                 }
                             >
                                 {currencies.map(({id, code, title}) => (
-                                    <option key={id} value={id}>
+                                    <option
+                                        selected={id === user?.currency?.id}
+                                        key={id}
+                                        value={id}
+                                    >
                                         {i18n.language === "ru" ? title : code}
                                     </option>
                                 ))}
