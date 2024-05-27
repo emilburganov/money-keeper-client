@@ -68,7 +68,7 @@ export const ExpensesStats = observer(() => {
           scales: {
             y: {
               ticks: {
-                callback: value => `${value} ${user.currency.code}`,
+                callback: value => `${value} ${user?.currency?.code}`,
               },
             },
           },
@@ -76,7 +76,7 @@ export const ExpensesStats = observer(() => {
             tooltip: {
               callbacks: {
                 label: context =>
-                  `${context.formattedValue} ${user.currency.code}`,
+                  `${context.formattedValue} ${user?.currency?.code}`,
               },
             },
           },
