@@ -27,28 +27,35 @@ import {useTranslation} from "react-i18next";
 export const Sidebar = observer(() => {
     const {t} = useTranslation();
     const {currencies, getCurrencies} = useCurrencyStore();
-    const {user} = useAuthStore();
+    const {user, load} = useAuthStore();
     const {colorMode} = useColorMode();
-
-    useEffect(() => {
-        (async () => {
-            await getCurrencies();
-        })();
-    }, []);
 
     const {
         register,
         handleSubmit,
         formState: {errors},
         setValue,
+        reset,
     } = useForm<UpdateUserCredentials>({
         resolver: yupResolver(UpdateUserSchema),
-        defaultValues: {
-            name: user.name,
-            email: user.email,
-            currency_id: user.currency?.id,
-        },
     });
+
+    useEffect(() => {
+        if (user) {
+            reset({
+                name: user?.name,
+                email: user?.email,
+                currency_id: user?.currency?.id,
+            });
+        }
+    }, [user]);
+
+    useEffect(() => {
+        (async () => {
+            await getCurrencies();
+            await load();
+        })();
+    }, []);
 
     const handleChangeAvatar = (event: ChangeEvent<HTMLInputElement>) => {
         if (event.target.files) {
@@ -152,7 +159,6 @@ export const Sidebar = observer(() => {
                             >
                                 {currencies.map(({id, code, title}) => (
                                     <option
-                                        selected={id === user?.currency?.id}
                                         key={id}
                                         value={id}
                                     >

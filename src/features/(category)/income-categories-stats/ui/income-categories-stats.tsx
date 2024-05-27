@@ -77,7 +77,7 @@ export const IncomeCategoriesStats = observer(() => {
                             tooltip: {
                                 callbacks: {
                                     label: context =>
-                                        `${context.formattedValue} ${user.currency.code}`,
+                                        `${context.formattedValue} ${user?.currency?.code}`,
                                 },
                             },
                         },
